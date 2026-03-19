@@ -596,30 +596,34 @@
 <body>
     
 
-        <div class="glass-card server-status-box">
-            <div style="display: flex; align-items: center; gap: 10px; color: var(--text-muted); font-size: 0.9rem;">
-                <div class="status-dot"></div>
-                <span id="server-status-text">正在连接服务器...</span>
-            </div>
-            
-            <div class="ip-display" onclick="copyIP()" title="点击复制">
-                es912.top:20100
-            </div>
-            <div id="copy-hint" style="font-size: 0.8rem; color: #64748b;">点击上方 IP 复制</div>
-            
-            <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.1); margin: 5px 0;"></div>
-            
-            <div style="display: flex; gap: 30px; justify-content: center;">
-                <div>
-                    <div style="font-size: 1.5rem; font-weight: bold; color: #fff;" id="player-count">--</div>
-                    <div style="font-size: 0.8rem; color: #64748b;">在线人数</div>
-                </div>
-                <div>
-                    <div style="font-size: 1.5rem; font-weight: bold; color: #fff;">20</div>
-                    <div style="font-size: 0.8rem; color: #64748b;">TPS状态</div>
-                </div>
-            </div>
+<div class="glass-card server-status-box" style="text-align: center; width: fit-content; margin-left: auto; margin-right: auto; padding: 20px; border-radius: 16px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);">
+    <!-- 第一行：状态点 + 文字，整体居中 -->
+    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--text-muted, #94a3b8); font-size: 0.9rem;">
+        <div class="status-dot" style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981;"></div>
+        <span id="server-status-text">正在连接服务器...</span>
+    </div>
+    
+    <!-- IP 显示区域（居中） -->
+    <div class="ip-display" onclick="copyIP()" title="点击复制" style="font-size: 1.8rem; font-weight: 600; margin: 10px 0 5px; cursor: pointer; color: #fff; letter-spacing: 1px; background: rgba(0,0,0,0.3); padding: 8px 20px; border-radius: 40px; display: inline-block;">
+        es912.top:20100
+    </div>
+    <div id="copy-hint" style="font-size: 0.8rem; color: #64748b; margin-bottom: 8px;">点击上方 IP 复制</div>
+    
+    <!-- 分隔线（居中） -->
+    <div style="width: 80%; height: 1px; background: rgba(255,255,255,0.1); margin: 12px auto;"></div>
+    
+    <!-- 底部两列数据（居中 flex） -->
+    <div style="display: flex; gap: 40px; justify-content: center; margin-top: 5px;">
+        <div>
+            <div style="font-size: 1.5rem; font-weight: bold; color: #fff;" id="player-count">57</div>
+            <div style="font-size: 0.8rem; color: #64748b;">在线人数</div>
         </div>
+        <div>
+            <div style="font-size: 1.5rem; font-weight: bold; color: #fff;">20</div>
+            <div style="font-size: 0.8rem; color: #64748b;">TPS状态</div>
+        </div>
+    </div>
+</div>
 
         <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
             <a href="https://mc.minebbs.com/" target="_blank" class="btn btn-primary">
