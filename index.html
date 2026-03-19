@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>青沐晞qmxcraft - 你的安心养老之地</title>
+    <style>
+        :root {
+            --primary: #4ade80; /* 荧光绿 */
+            --primary-glow: rgba(74, 222, 128, 0.5);
+            --bg-dark: #0f172a;
+            --glass-bg: rgba(255, 255, 255, 0.03); /* 极度通透的磨砂 */
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #020617 100%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        /* 导航栏 - 恢复 Logo + 链接容器的样式 */
+        nav {
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+            padding: 20px 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: rgba(2, 6, 23, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-main);
+            text-shadow: 0 0 20px var(--primary-glow);
+            letter-spacing: 2px;
+        }
+        
+        .logo span { color: var(--primary); }
+        
+        /* 导航栏链接样式 */
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        
+        /* 导航栏按钮样式 (下载客户端) */
+        .nav-btn {
+            padding: 8px 15px;
+            border-radius: 20px;
+            background: var(--primary);
+            color: #000 !important; 
+            font-weight: bold;
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+            text-shadow: none; 
+            border: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: #22c55e;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--primary);
+            color: #000 !important;
+        }
+        
+        /* 英雄区域 (Hero) */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            text-align: center;
+            padding: 120px 20px 50px 20px; /* 适应固定导航栏高度 */
+            position: relative;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--bg-dark) 100%), url('tp/bj.png'); 
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.7; 
+            background: linear-gradient(to right, #fff, #4ade80, #fff);
+            background-size: 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 5s linear infinite;
+        }
+
+        @keyframes shine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+        
+        /* 玻璃卡片通用样式 */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+            border-color: rgba(74, 222, 128, 0.3);
+        }
+
+        /* 服务器状态 */
+        .server-status-box {
+            padding: 25px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .status-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            background-color: #ef4444; /* 默认红 */
+            box-shadow: 0 0 15px #ef4444;
+            transition: all 0.5s;
+        }
+
+        .ip-display {
+            font-family: 'Consolas', monospace;
+            font-size: 1.5rem;
+            color: #fff;
+            letter-spacing: 1px;
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px dashed rgba(255,255,255,0.2);
+            transition: all 0.3s;
+        }
+        
+        .ip-display:hover {
+            background: rgba(74, 222, 128, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* 按钮样式 */
+        .btn {
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(74, 222, 128, 0.5);
+            background: #22c55e;
+        }
+        
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            background: transparent;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #fff;
+        }
+
+        /* 团队展示 */
+        .team-section {
+            padding: 80px 10%;
+        }
+        
+        .team-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .member-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0,0,0,0));
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            width: 250px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer; /* 添加光标提示可点击 */
+            transition: all 0.4s;
+        }
+        
+        .member-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .avatar-box {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px auto;
+            border-radius: 50%;
+            padding: 3px;
+            position: relative;
+        }
+        
+        /* 服主的金色光环 */
+        .owner-glow {
+            background: linear-gradient(45deg, #ffd700, #ffaa00);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+        }
+        
+        /* 管理的蓝色光环 */
+        .admin-glow {
+            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--bg-dark); /* 与背景融合的内圈 */
+            background-color: #333;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .role-owner { background: rgba(255, 215, 0, 0.2); color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.3); }
+        .role-admin { background: rgba(0, 210, 255, 0.15); color: #00d2ff; border: 1px solid rgba(0, 210, 255, 0.3); }
+
+        /* 内容板块 */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+        .section-title b { font-weight: 700; color: #fff; }
+
+        .features { padding: 80px 10%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
+        .card-content h3 { font-size: 1.5rem; color: var(--primary); margin-bottom: 10px; }
+        .card-content p { color: var(--text-muted); }
+
+        /* 下载板块 */
+        .download-bar {
+            background: linear-gradient(90deg, rgba(74, 222, 128, 0.1), rgba(0,0,0,0));
+            border-top: 1px solid rgba(74,222,128,0.2);
+            border-bottom: 1px solid rgba(74,222,128,0.2);
+            padding: 60px 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        /* 硬件配置 */
+        .specs-section {
+            padding: 80px 10%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+        .specs-list li {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+        }
+        .specs-list li::before {
+            content: '';
+            width: 8px; height: 8px; background: var(--primary);
+            border-radius: 50%; margin-right: 15px;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        /* 截图画廊 */
+        .screenshot-gallery {
+            padding: 80px 5%;
+            background-color: rgba(0,0,0,0.2); 
+            margin-top: 50px;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 20px;
+            justify-content: center; 
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            cursor: pointer; 
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 220px; 
+            object-fit: cover; 
+            display: block;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1); 
+        }
+
+        /* Lightbox Modal 样式 (通用，用于团队和截图) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--bg-dark);
+            border-radius: 16px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.7);
+            position: relative;
+        }
+
+        /* 截图 Lightbox 样式 (保持不变) */
+        #lightbox-modal .modal-content {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            height: 90%;
+            max-height: 800px;
+            overflow: hidden;
+        }
+        .lightbox-image-container {
+            flex: 2;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 60%;
+        }
+        #lightbox-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .lightbox-info {
+            flex: 1;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 1px solid var(--glass-border);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 300px;
+        }
+        .lightbox-info h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .lightbox-info p {
+            margin-bottom: 20px;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        .lightbox-info strong {
+            color: #fff;
+            display: block;
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+
+        /* 团队简介 Modal 样式 - 左右分栏 */
+        #team-modal .team-bio-content {
+            display: flex;
+            flex-direction: row;
+            width: 90%;
+            max-width: 900px; /* 增加宽度 */
+            padding: 0;
+            text-align: left;
+            min-height: 450px; /* 确保有足够的空间展示内容 */
+        }
+
+        .team-info-left {
+            flex: 0 0 300px; /* 左侧固定宽度 */
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.08); /* 略深背景，突出左栏 */
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            text-align: center;
+            border-right: 1px solid var(--glass-border);
+        }
+
+        .team-info-right {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #team-avatar {
+            width: 150px; /* 更大的头像 */
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 5px solid var(--primary);
+            box-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
+            background-color: #333;
+        }
+
+        #team-role {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #00d2ff;
+            margin-bottom: 5px;
+        }
+
+        #team-name {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+        
+        #team-description-area {
+            padding: 0; 
+            background: transparent;
+            border-radius: 0;
+            color: var(--text-muted);
+            white-space: pre-wrap;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: #fff;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+            transition: color 0.2s;
+        }
+        
+        .close-btn:hover {
+            color: #ef4444;
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .footer-disclaimer {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero { padding-top: 100px; } /* 适应固定导航栏 */
+            
+            /* 导航链接在移动端缩小间距 */
+            .nav-links a {
+                margin-left: 15px;
+            }
+
+            /* 团队和截图弹窗在移动端垂直堆叠 */
+            #lightbox-modal .modal-content,
+            #team-modal .team-bio-content {
+                flex-direction: column; 
+                max-width: 95%;
+                height: 95%;
+                min-height: auto;
+                overflow-y: auto; 
+            }
+            .team-info-left {
+                flex: auto;
+                padding: 20px;
+                border-right: none;
+                border-bottom: 1px solid var(--glass-border);
+            }
+            .team-info-right {
+                padding: 20px;
+            }
+            #team-avatar {
+                width: 100px;
+                height: 100px;
+            }
+            .lightbox-image-container {
+                min-height: 250px;
+            }
+            .lightbox-info {
+                min-width: auto;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <nav>
+        <div class="logo">PIXEL <span>FRONTIER</span></div>
+        <div class="nav-links">
+            <a href="https://qm.qq.com/q/wiooxFzNAG" target="_blank">加入 QQ 群</a>
+            <a href="https://mc.minebbs.com/" target="_blank" class="nav-btn">下载客户端</a>
+        </div>
+    </nav>
+
+
+        <div class="glass-card server-status-box">
+            <div style="display: flex; align-items: center; gap: 10px; color: var(--text-muted); font-size: 0.9rem;">
+                <div class="status-dot"></div>
+                <span id="server-status-text">正在连接服务器...</span>
+            </div>
+            
+            <div class="ip-display" onclick="copyIP()" title="点击复制">
+                mc.pixelfrontier.online:3100
+            </div>
+            <div id="copy-hint" style="font-size: 0.8rem; color: #64748b;">点击上方 IP 复制</div>
+            
+            <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.1); margin: 5px 0;"></div>
+            
+            <div style="display: flex; gap: 30px; justify-content: center;">
+                <div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: #fff;" id="player-count">--</div>
+                    <div style="font-size: 0.8rem; color: #64748b;">在线人数</div>
+                </div>
+                <div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: #fff;">20</div>
+                    <div style="font-size: 0.8rem; color: #64748b;">TPS状态</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+            <a href="https://share.weiyun.com/lYSFCm3B" target="_blank" class="btn btn-primary">
+                ⬇ 下载客户端 (Minecraft)
+            </a>
+            <a href="https://mc.minebbs.com/" target="_blank" class="btn btn-outline">
+                加入 QQ 群
+            </a>
+        </div>
+    </div>
+    
+    <section id="team" class="team-section">
+        <h2 class="section-title">核心 <b>团队</b></h2>
+        <div class="team-grid">
+            
+            <div class="member-card" onclick="openTeamModal(0)">
+                <div class="avatar-box owner-glow">
+                    <img src="tp/null1442.jpg" alt="null1442" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=Xiao&background=ffd700&color=fff'">
+                </div>
+                <span class="role-badge role-owner">OWNER / 服主</span>
+                <h3 style="margin-bottom: 5px;">null1442</h3>
+                <p style="font-size: 0.85rem; color: #94a3b8;">服务器的拥有者<br>致力打造稳定环境</p>
+            </div>
+
+            <div class="member-card" onclick="openTeamModal(1)">
+                <div class="avatar-box admin-glow">
+                    <img src="tp/扉.jpg" alt="扉" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=Max&background=00d2ff&color=fff'">
+                </div>
+                <span class="role-badge role-admin">ADMIN / 副服主</span>
+                <h3 style="margin-bottom: 5px;">扉</h3>
+                <p style="font-size: 0.85rem; color: #94a3b8;">社区维护<br>技术支持</p>
+            </div>
+
+            <div class="member-card" onclick="openTeamModal(2)">
+                <div class="avatar-box admin-glow">
+                    <img src="tp/shu_mi.jpg" alt="shu_mi" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=Shu&background=00d2ff&color=fff'">
+                </div>
+                <span class="role-badge role-admin">ADMIN / 管理</span>
+                <h3 style="margin-bottom: 5px;">fw转世</h3>
+                <p style="font-size: 0.85rem; color: #94a3b8;">游戏玩法<br>活动策划</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <h2 class="section-title">为什么选择 <b>我们</b></h2>
+        <div class="grid">
+            <div class="glass-card" style="padding: 30px;">
+                <div class="card-content">
+                    <h3>⚡ 纯粹生存 & 养老</h3>
+                    <p>采用「纯生存 + 养老」模式。无 PVP、无交易税。你可以隐居深山研究红石科技，也可以呼朋引伴建造奇观。</p>
+                </div>
+            </div>
+            <div class="glass-card" style="padding: 30px;">
+                <div class="card-content">
+                    <h3>🏰 永久不删档</h3>
+                    <p>承诺永不换周目。你留下的每一个方块、每一座建筑，都将成为服务器历史的一部分。</p>
+                </div>
+            </div>
+            <div class="glass-card" style="padding: 30px;">
+                <div class="card-content">
+                    <h3>📱 全端互通</h3>
+                    <p>支持离线登录。手机和电脑都能一起玩。无论你身在何处，使用什么设备，家一直都在。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="screenshot-gallery">
+        <h2 class="section-title">服务器 <b>精美截图</b></h2>
+        <p style="text-align: center; color: var(--text-muted); max-width: 800px; margin-left: auto; margin-right: auto;">
+            我们收集了一些来自玩家社区的精彩建筑截图，展示了服务器的创造力和社区精神。
+        </p>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
+            点击图片查看详细信息和建造者。
+        </p>
+        <div class="gallery-grid">
+            <div class="gallery-item" onclick="openLightbox(0)">
+                <img src="tp/jz1.png" alt="宇宙琴弦空间站" onerror="this.src='https://via.placeholder.com/320x220/1e293b/cbd5e1?text=Screenshot+1'">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(1)">
+                <img src="tp/jz2.png" alt="服主雕塑" onerror="this.src='https://via.placeholder.com/320x220/1e293b/cbd5e1?text=Screenshot+2'">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(2)">
+                <img src="tp/jz3.png" alt="粉色小屋" onerror="this.src='https://via.placeholder.com/320x220/1e293b/cbd5e1?text=Screenshot+3'">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(3)">
+                <img src="tp/jz4.png" alt="北欧小屋" onerror="this.src='https://via.placeholder.com/320x220/1e293b/cbd5e1?text=Screenshot+4'">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(4)">
+                <img src="tp/jz5.png" alt="玩家基地全景" onerror="this.src='https://via.placeholder.com/320x220/1e293b/cbd5e1?text=Screenshot+5'">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(5)">
+                <img src="tp/jz6.png" alt="空中漂浮岛" onerror="this.src='https://via.placeholder.com/320x220/1e293b/cbd5e1?text=Screenshot+6'">
+            </div>
+        </div>
+    </section>
+
+
+    <div id="download" class="download-bar">
+        <h2 style="font-size: 2rem; margin-bottom: 20px;">准备好开始冒险了吗？</h2>
+        <p style="color: #cbd5e1; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+            如果你是新手，或者想获得最佳的游戏体验，请下载Minecraft。<br>
+        </p>
+        
+        <a href="https://share.weiyun.com/lYSFCm3B" target="_blank" class="btn btn-primary" style="padding: 15px 40px; font-size: 1.2rem;">
+            立即下载客户端 (Minecraft)
+        </a>
+        <p style="margin-top: 15px; font-size: 0.9rem; color: #64748b;">支持 Windows / MacOS / Linux</p>
+    </div>
+
+    <section id="specs" class="specs-section">
+        <div style="flex: 1; min-width: 300px;">
+            <h2 class="section-title" style="text-align: left; margin-bottom: 30px;">硬核 <b>配置</b></h2>
+            <ul class="specs-list">
+                <li><strong>CPU：：</strong> AMD 9950X (5.7Ghz 超频)</li>
+                <li><strong>内存：：：</strong> 128G DDR5 极速内存</li>
+                <li><strong>网络：：：：</strong> BGP 多线接入，极低延迟</li>
+                <li><strong>硬盘：：：：：</strong> 企业级 NVMe SSD 阵列</li>
+                <li><strong>备份：：：：：：</strong> 每小时全量热备份</li>
+            </ul>
+        </div>
+        <div class="glass-card" style="flex: 1; min-width: 300px; padding: 40px; text-align: center;">
+            <h3 style="font-size: 2rem; color: #fff; margin-bottom: 10px;">QQ 群</h3>
+            <div style="font-size: 3rem; color: var(--primary); font-family: 'Consolas', monospace; margin-bottom: 20px;">1039346494</div>
+            <p style="color: #94a3b8;">进群获取最新公告</p>
+        </div>
+    </section>
+
+    <footer>
+        <p style="margin-bottom: 5px;">Copyright © 2025. 青沐晞</p>
+        <p style="margin-bottom: 15px;">豫ICP备2024041436号-2</p>
+        <p class="footer-disclaimer">
+            "Minecraft" 以及 "我的世界" 为 Mojang Synergies AB 的商标，本站与 Mojang 以及 Microsoft 没有从属关系。
+        </p>
+    </footer>
+
+    <div id="lightbox-modal" class="modal" onclick="closeModal(event, 'lightbox-modal')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="closeModal(null, 'lightbox-modal')">&times;</span>
+            <div class="lightbox-image-container">
+                <img id="lightbox-image" src="" alt="">
+            </div>
+            <div class="lightbox-info">
+                <h2 id="lightbox-title"></h2>
+                <p id="lightbox-description"></p>
+                <div id="lightbox-builder-info">
+                    <strong>建造者/参与者：</strong><span id="lightbox-builder"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="team-modal" class="modal" onclick="closeModal(event, 'team-modal')">
+        <div class="modal-content team-bio-content" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="closeModal(null, 'team-modal')">&times;</span>
+            
+            <div class="team-info-left">
+                <img id="team-avatar" src="" alt="头像">
+                <div id="team-role"></div>
+                <h2 id="team-name"></h2>
+            </div>
+            
+            <div class="team-info-right">
+                <div style="font-weight: bold; margin-bottom: 15px; color: var(--primary); font-size: 1.2rem;">个人简介</div>
+                <div id="team-description-area">
+                    <p id="team-description-text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 服务器截图数据
+        const galleryData = [
+            { src: 'tp/jz1.png', title: '宇宙琴弦空间站', builder: 'Yingkana', desc: '宏伟的环状空间站，充满了科幻与机械美感，是服务器中的标志性建筑，花费了大量心血制作。' },
+            { src: 'tp/jz2.png', title: '服主雕塑', builder: 'shenyuantaixiu', desc: '代表服主形象的巨型像素雕塑，坐落在基地附近，是玩家对服主的致敬和服务器的独特象征。' }, 
+            { src: 'tp/jz3.png', title: 'shi_mi 的粉色小屋', builder: 'shi_mi', desc: '玩家 shi_mi 建造的温馨粉色小屋，在生存环境中增添了一抹亮色，非常具有个人特色。' },
+            { src: 'tp/jz4.png', title: '北欧风格小屋', builder: 'DiresUndewLight', desc: 'DiresUndewLight 的作品，采用经典的木材结构和尖顶设计，充满自然气息和北欧简约风格。' },
+            { src: 'tp/jz5.png', title: '全体玩家制作基地全景', builder: '全体玩家', desc: '玩家们共同努力打造的生存基地，设施完备，展现了集体智慧与纯粹生存的社区精神。' },
+            { src: 'tp/jz6.png', title: '空中漂浮岛', builder: '未知玩家', desc: '一个悬浮在天空中的梦幻小岛，结构精巧，充满想象力，是服务器中的一处奇景。' }
+        ];
+
+        // 团队成员数据 (已更新)
+        const teamData = [
+            { 
+                src: 'tp/xiaoaA0v0.jpg', 
+                role: 'OWNER / 服主', 
+                name: 'null1442', 
+                desc: '我是青沐晞的 服主，null1442。\n\n我的主要职责是 硬件运维、技术架构与重大决策 。我致力于提供一个永不删档、高配置、纯净的服务器环境，确保每一位玩家都能在这里找到真正的“家”。\n\n欢迎大家随时提出建议，让我们一起建设这个自由的方块世界！' 
+            },
+            { 
+                src: 'tp/MaxerS.jpg', 
+                role: 'ADMIN / 管理', 
+                name: '扉', 
+                desc: '我是 扉，服务器的 副服主 。\n\n我主要负责处理日常社区事务、提供 玩家支持 以及维护社区秩序。如果你在游戏内外遇到任何问题，或者对服务器发展有任何想法，都可以随时私信我。' 
+            },
+            { 
+                src: 'tp/shu_mi.jpg', 
+                role: 'ADMIN / 管理', 
+                name: 'fw转世', 
+                desc: '大家好，我是 shu_mi，11111111111111111。\n\n11111111111111。' 
+            }
+        ];
+
+        // 模态框通用关闭函数
+        function closeModal(event, id) {
+            const modal = document.getElementById(id);
+            if (event === null || event.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = ''; 
+            }
+        }
+        
+        // 截图 Lightbox 函数
+        function openLightbox(index) {
+            const data = galleryData[index];
+            const modal = document.getElementById('lightbox-modal');
+            
+            document.getElementById('lightbox-image').src = data.src;
+            document.getElementById('lightbox-title').innerText = data.title;
+            document.getElementById('lightbox-description').innerText = data.desc;
+            document.getElementById('lightbox-builder').innerText = data.builder;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 团队简介 Modal 函数
+        function openTeamModal(index) {
+            const data = teamData[index];
+            const modal = document.getElementById('team-modal');
+            
+            document.getElementById('team-avatar').src = data.src;
+            document.getElementById('team-role').innerText = data.role;
+            document.getElementById('team-name').innerText = data.name;
+            // 注意：因为 desc 里面用了换行符 \n，所以用 innerText 确保正确渲染 pre-wrap
+            document.getElementById('team-description-text').innerText = data.desc; 
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+
+        // 键盘 Esc 关闭
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal(null, 'lightbox-modal');
+                closeModal(null, 'team-modal');
+            }
+        });
+
+
+        // 复制IP
+        function copyIP() {
+            const ip = "mc.pixelfrontier.online:3100";
+            navigator.clipboard.writeText(ip).then(() => {
+                const hint = document.getElementById('copy-hint');
+                const originalText = hint.innerText;
+                hint.innerText = "✅ 复制成功！";
+                hint.style.color = "#4ade80";
+                setTimeout(() => {
+                    hint.innerText = originalText;
+                    hint.style.color = "#64748b";
+                }, 2000);
+            });
+        }
+
+        // 获取服务器状态
+        async function fetchStatus() {
+            const ip = "es912.top";
+            const port = "20100";
+            const apiUrl = `https://api.mcsrvstat.us/2/${ip}:${port}`;
+            
+            const dot = document.querySelector('.status-dot');
+            const text = document.getElementById('server-status-text');
+            const count = document.getElementById('player-count');
+
+            try {
+                const res = await fetch(apiUrl);
+                const data = await res.json();
+                
+                if(data.online) {
+                    dot.style.backgroundColor = "#4ade80"; 
+                    dot.style.boxShadow = "0 0 15px #4ade80";
+                    text.innerText = "服务器运行中";
+                    count.innerText = data.players.online + " / " + data.players.max;
+                } else {
+                    dot.style.backgroundColor = "#ef4444"; 
+                    dot.style.boxShadow = "0 0 15px #ef4444";
+                    text.innerText = "服务器离线";
+                    count.innerText = "0";
+                }
+            } catch (e) {
+                console.error(e);
+                text.innerText = "状态未知";
+            }
+        }
+
+        fetchStatus();
+        setInterval(fetchStatus, 30000);
+    </script>
+</body>
+</html>
