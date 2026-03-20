@@ -595,35 +595,33 @@
 </head>
 <body>
     
-
-<div class="glass-card server-status-box" style="text-align: center; width: fit-content; margin-left: auto; margin-right: auto; padding: 20px; border-radius: 16px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);">
-    <!-- 第一行：状态点 + 文字，整体居中 -->
-    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--text-muted, #94a3b8); font-size: 0.9rem;">
-        <div class="status-dot" style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981;"></div>
-        <span id="server-status-text">正在连接服务器...</span>
-    </div>
-    
-    <!-- IP 显示区域（居中） -->
-    <div class="ip-display" onclick="copyIP()" title="点击复制" style="font-size: 1.8rem; font-weight: 600; margin: 10px 0 5px; cursor: pointer; color: #fff; letter-spacing: 1px; background: rgba(0,0,0,0.3); padding: 8px 20px; border-radius: 40px; display: inline-block;">
-        es912.top:20100
-    </div>
-    <div id="copy-hint" style="font-size: 0.8rem; color: #64748b; margin-bottom: 8px;">点击上方 IP 复制</div>
-    
-    <!-- 分隔线（居中） -->
-    <div style="width: 80%; height: 1px; background: rgba(255,255,255,0.1); margin: 12px auto;"></div>
-    
-    <!-- 底部两列数据（居中 flex） -->
-    <div style="display: flex; gap: 40px; justify-content: center; margin-top: 5px;">
-        <div>
-            <div style="font-size: 1.5rem; font-weight: bold; color: #fff;" id="player-count">57</div>
-            <div style="font-size: 0.8rem; color: #64748b;">在线人数</div>
+   <!-- 新增：顶部标题栏 - 青沐晞服务器 在最上面显示 -->
+    <div class="top-header">
+        <div class="top-header-content">
+            <!-- 左侧：服务器标识 + 名称 -->
+            <div class="server-title-area">
+                <div class="server-badge">✨ 主服务器</div>
+                <div class="server-name">
+                    青沐晞<span>·</span>qmxcraft
+                </div>
+            </div>
+            
+            <!-- 右侧：状态指示 + IP (参考原卡片风格) -->
+            <div class="server-status-mini">
+                <div class="status-item">
+                    <div class="status-dot"></div>
+                    <span>55 人在线</span>
+                </div>
+                <div class="status-item">
+                    <div class="status-dot orange"></div>
+                    <span>TPS 20.0</span>
+                </div>
+                <div class="ip-mini" onclick="copyTopIP()" title="点击复制IP">
+                    es912.top:20100 ⚡
+                </div>
+            </div>
         </div>
-        <div>
-            <div style="font-size: 1.5rem; font-weight: bold; color: #fff;">20</div>
-            <div style="font-size: 0.8rem; color: #64748b;">TPS状态</div>
-        </div>
     </div>
-</div>
 
         <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
             <a href="https://mc.minebbs.com/" target="_blank" class="btn btn-primary">
@@ -660,11 +658,7 @@
             <div class="member-card" onclick="openTeamModal(2)">
                 <div class="avatar-box admin-glow">
                     <img src="tp/shu_mi.jpg" alt="shu_mi" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=Shu&background=00d2ff&color=fff'">
-                </div>
-                <span class="role-badge role-admin">ADMIN / 管理</span>
-                <h3 style="margin-bottom: 5px;">fw转世</h3>
-                <p style="font-size: 0.85rem; color: #94a3b8;">游戏玩法<br>活动策划</p>
-            </div>
+
 
         </div>
     </section>
@@ -724,27 +718,190 @@
     </section>
 
 
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>嵌入示例 · 服务器状态卡片在下载下方</title>
+    <style>
+        /* 仿照原有设计的一些全局变量与基础样式，保持视觉融合 */
+        body {
+            background: linear-gradient(145deg, #0b1120 0%, #192132 100%);
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            color: #e2e8f0;
+        }
+
+        /* 经典卡片容器 —— 模拟下载条区域的背景与风格 */
+        .download-bar {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 48px;
+            padding: 3rem 2.5rem;
+            max-width: 800px;
+            width: 100%;
+            margin: 20px auto;
+            text-align: center;
+            box-shadow: 0 30px 40px -20px rgba(0,0,0,0.8);
+        }
+
+        .download-bar h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            background: linear-gradient(to right, #f0f9ff, #bae6fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(145deg, #2563eb, #1d4ed8);
+            border: none;
+            border-radius: 60px;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 12px 28px -8px #1e3a8a80, 0 0 0 1px rgba(255,255,255,0.1) inset;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            background: linear-gradient(145deg, #3b82f6, #2563eb);
+            box-shadow: 0 18px 32px -8px #1e3a8a;
+        }
+
+        /* 小提示文本颜色适配 */
+        #copy-hint, .server-status-box div[style*="color: #64748b"] {
+            color: #94a3b8 !important;
+        }
+
+        /* 让嵌入的卡片和下面的氛围统一，并自带玻璃效果（已写在style里，但这里保证边距圆润） */
+        .server-status-box {
+            margin-top: 30px !important;   /* 与下载按钮上方的p产生间隔 */
+            margin-bottom: 10px;
+            background: rgba(20, 30, 50, 0.6) !important;
+            border: 1px solid rgba(255,255,255,0.1) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            width: fit-content;
+            border-radius: 48px !important;  /* 加大圆角与下载条呼应 */
+            padding: 24px 40px !important;
+        }
+
+        /* 在线数字等，保持清晰 */
+        .ip-display {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            background: rgba(0,0,0,0.4) !important;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* 复制提示动效 */
+        .ip-display:hover {
+            background: rgba(30, 50, 80, 0.7) !important;
+            border-color: #3b82f6;
+        }
+
+        /* 底部小字 */
+        .download-bar p:last-of-type {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- 这是原有的下载区域 (download-bar) 内容完全保留，仅用于演示 -->
     <div id="download" class="download-bar">
         <h2 style="font-size: 2rem; margin-bottom: 20px;">准备好开始冒险了吗？</h2>
         <p style="color: #cbd5e1; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
-            如果你是新手，或者想获得最佳的游戏体验，请下载Minecraft。<br>
+            喵喵喵<br>
         </p>
         
         <a href="https://mc.minebbs.com/" target="_blank" class="btn btn-primary" style="padding: 15px 40px; font-size: 1.2rem;">
             立即下载客户端 (Minecraft)
         </a>
-        <p style="margin-top: 15px; font-size: 0.9rem; color: #64748b;">支持 Windows / MacOS / Linux</p>
+        <p style="margin-top: 15px; font-size: 0.9rem; color: #64748b;">支持 Windows / IOS / Android </p>
     </div>
+
+    <!-- 将服务器状态卡片放在 download 区域的下方 -->
+    <!-- 完全使用你提供的结构，只做极小调整：确保 id 保持，复制函数稍后定义 -->
+    <div class="glass-card server-status-box" style="text-align: center; width: fit-content; margin-left: auto; margin-right: auto; padding: 20px; border-radius: 16px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);">
+        <!-- 第一行：状态点 + 文字，整体居中 -->
+        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--text-muted, #94a3b8); font-size: 0.9rem;">
+            <div class="status-dot" style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981;"></div>
+            <span id="server-status-text">正在连接服务器...</span>
+        </div>
+        
+        <!-- IP 显示区域（居中） -->
+        <div class="ip-display" onclick="copyIP()" title="点击复制" style="font-size: 1.8rem; font-weight: 600; margin: 10px 0 5px; cursor: pointer; color: #fff; letter-spacing: 1px; background: rgba(0,0,0,0.3); padding: 8px 20px; border-radius: 40px; display: inline-block;">
+            es912.top:20100
+        </div>
+        <div id="copy-hint" style="font-size: 0.8rem; color: #64748b; margin-bottom: 8px;">点击上方 IP 复制</div>
+        
+        <!-- 分隔线（居中） -->
+        <div style="width: 80%; height: 1px; background: rgba(255,255,255,0.1); margin: 12px auto;"></div>
+        
+        <!-- 底部两列数据（居中 flex） -->
+        <div style="display: flex; gap: 40px; justify-content: center; margin-top: 5px;">
+            <div>
+                <div style="font-size: 1.5rem; font-weight: bold; color: #fff;" id="player-count">57</div>
+                <div style="font-size: 0.8rem; color: #64748b;">在线人数</div>
+            </div>
+            <div>
+                <div style="font-size: 1.5rem; font-weight: bold; color: #fff;">20</div>
+                <div style="font-size: 0.8rem; color: #64748b;">TPS状态</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 简单添加复制IP的交互功能 (与卡片内 onclick 挂钩) -->
+    <script>
+        function copyIP() {
+            const ipText = "es912.top:20100";   // 与显示一致
+            navigator.clipboard.writeText(ipText).then(() => {
+                const hintEl = document.getElementById('copy-hint');
+                if (hintEl) {
+                    const originalText = hintEl.innerText;
+                    hintEl.innerText = '✓ 复制成功！';
+                    hintEl.style.color = '#10b981';
+                    setTimeout(() => {
+                        hintEl.innerText = originalText;
+                        hintEl.style.color = '#64748b';
+                    }, 2000);
+                }
+            }).catch(() => {
+                alert('复制失败，请手动复制');
+            });
+        }
+
+        // 模拟动态服务器状态 (仅用于演示。你可以替换成真实API)
+        // 只是为了展示数字变化效果，模仿“正在连接”后更新
+        setTimeout(() => {
+            const statusText = document.getElementById('server-status-text');
+            if (statusText) statusText.innerText = '服务器已连接 · 0 延迟';
+            
+            // 可以顺便微调人数
 
     <section id="specs" class="specs-section">
         <div style="flex: 1; min-width: 300px;">
-            <h2 class="section-title" style="text-align: left; margin-bottom: 30px;">硬核 <b>配置</b></h2>
+            <h2 class="section-title" style="text-align: left; margin-bottom: 30px;"><b>服务器配置</b></h2>
             <ul class="specs-list">
-                <li><strong>CPU：：</strong> AMD 9950X (5.7Ghz 超频)</li>
-                <li><strong>内存：：：</strong> 128G DDR5 极速内存</li>
-                <li><strong>网络：：：：</strong> BGP 多线接入，极低延迟</li>
-                <li><strong>硬盘：：：：：</strong> 企业级 NVMe SSD 阵列</li>
-                <li><strong>备份：：：：：：</strong> 每小时全量热备份</li>
+                <li><strong>CPU：</strong> AMD 9950X (5.7Ghz 超频)</li>
+                <li><strong>内存：</strong> 128G DDR5 极速内存</li>
+                <li><strong>网络：</strong> BGP 多线接入，极低延迟</li>
+                <li><strong>硬盘：</strong> 企业级 NVMe SSD 阵列</li>
+                <li><strong>备份：</strong> 每天全量热备份</li>
             </ul>
         </div>
         <div class="glass-card" style="flex: 1; min-width: 300px; padding: 40px; text-align: center;">
@@ -755,8 +912,8 @@
     </section>
 
     <footer>
-        <p style="margin-bottom: 5px;">Copyright © 2025. 青沐晞</p>
-        <p style="margin-bottom: 15px;">豫ICP备2024041436号-2</p>
+        <p style="margin-bottom: 5px;">Copyright © 2026. 青沐晞</p>
+        <p style="margin-bottom: 15px;">沪ICP备2025041436号-2</p>
         <p class="footer-disclaimer">
             "Minecraft" 以及 "我的世界" 为 Mojang Synergies AB 的商标，本站与 Mojang 以及 Microsoft 没有从属关系。
         </p>
@@ -820,12 +977,7 @@
                 name: '扉', 
                 desc: '我是 扉，服务器的 副服主 。\n\n我主要负责处理日常社区事务、提供 玩家支持 以及维护社区秩序。如果你在游戏内外遇到任何问题，或者对服务器发展有任何想法，都可以随时私信我。' 
             },
-            { 
-                src: 'tp/shu_mi.jpg', 
-                role: 'ADMIN / 管理', 
-                name: 'fw转世', 
-                desc: '大家好，我是 shu_mi，11111111111111111。\n\n11111111111111。' 
-            }
+        
         ];
 
         // 模态框通用关闭函数
