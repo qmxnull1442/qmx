@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>青沐晞 · 安心养老之地 (纯净蓝版·无导航栏)</title>
+    <title>青沐晞 · 湛蓝安宁之所</title>
     <style>
         :root {
             --primary: #3b82f6;          
@@ -31,13 +31,60 @@
             background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #020617 100%);
             background-attachment: fixed;
             overflow-x: hidden;
+            position: relative;  /* 为固定伪元素提供参考 */
         }
 
-        /* 导航栏已被完全移除，所有样式直接从头开始 */
+        /* 左右固定的背景装饰图片 - 使用伪元素实现，固定在视口，不随滚动移动 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;          /* 根据图片尺寸调整，一般装饰图不宜太大 */
+            height: 100vh;
+            background-image: url('tp/left-deco.png');  /* 请将图片命名为 left-deco.png 并放在 tp/ 下 */
+            background-repeat: no-repeat;
+            background-position: left center;
+            background-size: contain;    /* 保证图片完整显示，可根据需要改为 cover 或 auto */
+            pointer-events: none;        /* 让图片不阻挡点击 */
+            z-index: 0;                  /* 置于内容下方，但为了可见性使用半透明或正常 */
+            opacity: 0.5;                 /* 半透明以免喧宾夺主，可根据喜好调整 */
+            filter: drop-shadow(0 0 10px rgba(59,130,246,0.2));
+        }
 
-        /* 最开头大标题 + 服务器状态整合区域 (无导航栏，从顶部开始) */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 280px;
+            height: 100vh;
+            background-image: url('tp/right-deco.png'); /* 请将图片命名为 right-deco.png 并放在 tp/ 下 */
+            background-repeat: no-repeat;
+            background-position: right center;
+            background-size: contain;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.5;
+            filter: drop-shadow(0 0 10px rgba(59,130,246,0.2));
+        }
+
+        /* 主要内容区域需要提升层级，以免被背景图遮住文字 */
+        .header-stats-container,
+        .hero,
+        .team-section,
+        .features,
+        .screenshot-gallery,
+        .download-bar,
+        .specs-section,
+        footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 最开头大标题 + 服务器状态整合区域 (无导航栏，直接从顶部开始) */
         .header-stats-container {
-            padding: 40px 20px 10px 20px;   /* 顶部内边距稍小，因为没有fixed栏了 */
+            padding: 40px 20px 10px 20px;   
             text-align: center;
             background: transparent;
         }
@@ -59,7 +106,7 @@
             letter-spacing: 1px;
         }
 
-        /* 英雄区域 (hero) 紧接标题区 */
+        /* 英雄区域 (hero) 紧接标题区，去除所有空隙 */
         .hero {
             min-height: 70vh;               
             display: flex;
@@ -67,7 +114,7 @@
             justify-content: flex-start;     
             align-items: center;
             text-align: center;
-            padding: 20px 20px 40px 20px;    
+            padding: 10px 20px 40px 20px;    /* 顶部内边距进一步缩小，避免空 */
             position: relative;
             background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--bg-dark) 100%), url('tp/bj.png'); 
             background-size: cover; 
@@ -520,9 +567,14 @@
         }
 
         @media (max-width: 768px) {
+            /* 移动端隐藏或缩小背景装饰图，以免遮挡内容 */
+            body::before, body::after {
+                width: 120px;
+                opacity: 0.3;
+            }
             .page-header-title { font-size: 2.8rem; }
             .hero h1 { font-size: 2.5rem; }
-            .hero { padding-top: 20px; }
+            .hero { padding-top: 10px; }
             #lightbox-modal .modal-content,
             #team-modal .team-bio-content {
                 flex-direction: column; 
@@ -551,7 +603,7 @@
         <div class="page-header-sub">QingMuXi · 湛蓝安宁之所</div>
     </div>
 
-    <!-- Hero区域 无导航栏，直接从标题下方开始 -->
+    <!-- Hero区域 无导航栏，直接从标题下方开始，无空隙 -->
     <div class="hero">
         <!-- 服务器状态卡片直接放在最上面 -->
         <div class="glass-card server-status-box">
