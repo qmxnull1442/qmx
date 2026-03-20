@@ -34,22 +34,22 @@
             position: relative;
         }
 
-        /* 中间固定的背景装饰图片 - 只保留一张，居中显示 */
+        /* 中间固定的背景装饰图片 - 使用本地图片 */
         body::before {
             content: '';
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);  /* 完美居中 */
+            transform: translate(-50%, -50%);
             width: 300px;
-            height: 80vh;                      /* 高度占视口的80%，避免太大 */
-            background-image: url('https://placekitten.com/400/900?image=1');  /* 使用在线图片，您可替换为本地路径 */
+            height: 80vh;
+            background-image: url('tp/left-deco.png');  /* 使用固定的本地图片 */
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.25;                      /* 降低透明度，避免干扰文字 */
+            opacity: 0.25;
             filter: drop-shadow(0 0 20px rgba(59,130,246,0.3));
         }
 
@@ -73,7 +73,7 @@
 
         /* 最开头大标题 - 去掉所有空隙 */
         .header-stats-container {
-            padding: 20px 20px 0 20px;         /* 大幅减少顶部内边距 */
+            padding: 20px 20px 0 20px;
             text-align: center;
             background: transparent;
         }
@@ -86,41 +86,84 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 30px rgba(59,130,246,0.3);
-            margin-bottom: 0;                   /* 移除下边距 */
+            margin-bottom: 0;
             line-height: 1.1;
         }
         
         .page-header-sub {
             color: var(--text-muted);
             font-size: 1.1rem;
-            margin-bottom: 0;                    /* 移除下边距 */
+            margin-bottom: 0;
             letter-spacing: 1px;
         }
 
         /* 英雄区域 - 顶部边距设为0，与标题无缝衔接 */
         .hero {
-            min-height: auto;                    /* 取消最小高度限制 */
+            min-height: auto;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;     
             align-items: center;
             text-align: center;
-            padding: 0 20px 30px 20px;           /* 顶部边距为0，与标题紧贴 */
+            padding: 0 20px 30px 20px;
             position: relative;
-            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--bg-dark) 100%), url('https://picsum.photos/1600/900?random=1');
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--bg-dark) 100%), url('tp/bj.png');  /* 使用本地背景图 */
             background-size: cover; 
             background-position: center; 
             background-repeat: no-repeat;
         }
 
-        /* 服务器状态卡片 - 移除上边距 */
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.7; 
+            background: linear-gradient(to right, #fff, #3b82f6, #fff);
+            background-size: 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 5s linear infinite;
+        }
+
+        @keyframes shine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+        
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+        
+        /* 点击/聚焦边框变为蓝色 */
+        .glass-card:focus-within,
+        .glass-card:active {
+            border-color: var(--accent-blue) !important;
+            box-shadow: 0 0 25px var(--blue-glow) !important;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+            border-color: rgba(37, 99, 235, 0.5);
+        }
+
+        /* 服务器状态 */
         .server-status-box {
             padding: 20px 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;                           /* 减少内部间距 */
-            margin: 0 0 20px 0;                   /* 上边距为0，下边距保留一点 */
+            gap: 10px;
+            margin: 0 0 20px 0;
             width: 100%;
             max-width: 500px;
         }
@@ -138,7 +181,7 @@
             color: #fff;
             letter-spacing: 1px;
             cursor: pointer;
-            padding: 8px 20px;                    /* 减少内边距 */
+            padding: 8px 20px;
             border-radius: 8px;
             border: 1px dashed rgba(255,255,255,0.2);
             transition: all 0.3s;
@@ -151,7 +194,7 @@
         }
 
         .btn {
-            padding: 10px 28px;                    /* 稍微缩小按钮 */
+            padding: 10px 28px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
@@ -185,7 +228,7 @@
 
         /* 团队展示 */
         .team-section {
-            padding: 60px 10%;                     /* 减少顶部内边距 */
+            padding: 60px 10%;
         }
         
         .team-grid {
@@ -193,7 +236,7 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 40px;
-            margin-top: 30px;                      /* 减少顶部间距 */
+            margin-top: 30px;
         }
         
         .member-card {
@@ -261,12 +304,12 @@
         .section-title {
             text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 10px;                    /* 减少下边距 */
+            margin-bottom: 10px;
             font-weight: 300;
         }
         .section-title b { font-weight: 700; color: #fff; }
 
-        .features { padding: 60px 10%; }            /* 减少内边距 */
+        .features { padding: 60px 10%; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
         
         .card-content h3 { font-size: 1.5rem; color: var(--primary); margin-bottom: 10px; }
@@ -277,14 +320,14 @@
             background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), rgba(0,0,0,0));
             border-top: 1px solid rgba(59, 130, 246, 0.2);
             border-bottom: 1px solid rgba(59, 130, 246, 0.2);
-            padding: 40px 20px;                      /* 减少内边距 */
+            padding: 40px 20px;
             text-align: center;
-            margin-top: 30px;                         /* 减少上边距 */
+            margin-top: 30px;
         }
 
         /* 硬件配置 */
         .specs-section {
-            padding: 60px 10%;                        /* 减少内边距 */
+            padding: 60px 10%;
             display: flex;
             flex-wrap: wrap;
             gap: 40px;
@@ -303,11 +346,11 @@
             box-shadow: 0 0 10px var(--primary);
         }
 
-        /* 截图画廊 */
+        /* 截图画廊 - 使用本地图片 */
         .screenshot-gallery {
-            padding: 60px 5%;                         /* 减少内边距 */
+            padding: 60px 5%;
             background-color: rgba(0,0,0,0.2); 
-            margin-top: 30px;                          /* 减少上边距 */
+            margin-top: 30px;
         }
         
         .gallery-grid {
@@ -499,7 +542,7 @@
 
         footer {
             text-align: center;
-            padding: 30px 20px;                      /* 减少内边距 */
+            padding: 30px 20px;
             border-top: 1px solid var(--glass-border);
             color: var(--text-muted);
             font-size: 0.9rem;
@@ -508,7 +551,7 @@
         .footer-disclaimer {
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.4);
-            margin-top: 10px;                         /* 减少上边距 */
+            margin-top: 10px;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
@@ -516,7 +559,7 @@
 
         @media (max-width: 768px) {
             body::before {
-                width: 150px;                          /* 移动端缩小 */
+                width: 150px;
                 opacity: 0.15;
             }
             .page-header-title { font-size: 2.8rem; }
@@ -592,19 +635,19 @@
     <section id="team" class="team-section">
         <h2 class="section-title">核心 <b>团队</b></h2>
         <div class="team-grid">
-            <!-- 服主 null1442 -->
+            <!-- 服主 null1442 使用本地图片 -->
             <div class="member-card" onclick="openTeamModal(0)">
                 <div class="avatar-box owner-glow">
-                    <img src="https://ui-avatars.com/api/?name=null1442&background=ffd700&color=fff&size=128" alt="null1442" class="avatar-img">
+                    <img src="tp/null1442.jpg" alt="null1442" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=null1442&background=ffd700&color=fff&size=128'">
                 </div>
                 <span class="role-badge role-owner">OWNER / 服主</span>
                 <h3 style="margin-bottom: 5px;">null1442</h3>
                 <p style="font-size: 0.85rem; color: #94a3b8;">服务器的拥有者<br>致力打造稳定环境</p>
             </div>
-            <!-- 管理 扉 -->
+            <!-- 管理 扉 使用本地图片 -->
             <div class="member-card" onclick="openTeamModal(1)">
                 <div class="avatar-box admin-glow">
-                    <img src="https://ui-avatars.com/api/?name=扉&background=00d2ff&color=fff&size=128&length=2" alt="扉" class="avatar-img">
+                    <img src="tp/扉.jpg" alt="扉" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=扉&background=00d2ff&color=fff&size=128&length=2'">
                 </div>
                 <span class="role-badge role-admin">ADMIN / 管理</span>
                 <h3 style="margin-bottom: 5px;">扉</h3>
@@ -650,23 +693,24 @@
             点击图片查看详细信息和建造者。
         </p>
         <div class="gallery-grid">
+            <!-- 所有截图使用本地图片，添加onerror备用 -->
             <div class="gallery-item" onclick="openLightbox(0)">
-                <img src="https://picsum.photos/320/220?random=10" alt="宇宙琴弦空间站">
+                <img src="tp/jz1.png" alt="宇宙琴弦空间站" onerror="this.src='https://picsum.photos/320/220?random=10'">
             </div>
             <div class="gallery-item" onclick="openLightbox(1)">
-                <img src="https://picsum.photos/320/220?random=11" alt="服主雕塑">
+                <img src="tp/jz2.png" alt="服主雕塑" onerror="this.src='https://picsum.photos/320/220?random=11'">
             </div>
             <div class="gallery-item" onclick="openLightbox(2)">
-                <img src="https://picsum.photos/320/220?random=12" alt="粉色小屋">
+                <img src="tp/jz3.png" alt="粉色小屋" onerror="this.src='https://picsum.photos/320/220?random=12'">
             </div>
             <div class="gallery-item" onclick="openLightbox(3)">
-                <img src="https://picsum.photos/320/220?random=13" alt="北欧小屋">
+                <img src="tp/jz4.png" alt="北欧小屋" onerror="this.src='https://picsum.photos/320/220?random=13'">
             </div>
             <div class="gallery-item" onclick="openLightbox(4)">
-                <img src="https://picsum.photos/320/220?random=14" alt="玩家基地全景">
+                <img src="tp/jz5.png" alt="玩家基地全景" onerror="this.src='https://picsum.photos/320/220?random=14'">
             </div>
             <div class="gallery-item" onclick="openLightbox(5)">
-                <img src="https://picsum.photos/320/220?random=15" alt="空中漂浮岛">
+                <img src="tp/jz6.png" alt="空中漂浮岛" onerror="this.src='https://picsum.photos/320/220?random=15'">
             </div>
         </div>
     </section>
@@ -748,23 +792,23 @@
 
     <script>
         const galleryData = [
-            { src: 'https://picsum.photos/1200/800?random=10', title: '宇宙琴弦空间站', builder: 'Yingkana', desc: '宏伟的环状空间站，充满了科幻与机械美感，是服务器中的标志性建筑，花费了大量心血制作。' },
-            { src: 'https://picsum.photos/1200/800?random=11', title: '服主雕塑', builder: 'shenyuantaixiu', desc: '代表服主形象的巨型像素雕塑，坐落在基地附近，是玩家对服主的致敬和服务器的独特象征。' }, 
-            { src: 'https://picsum.photos/1200/800?random=12', title: 'shi_mi 的粉色小屋', builder: 'shi_mi', desc: '玩家 shi_mi 建造的温馨粉色小屋，在生存环境中增添了一抹亮色，非常具有个人特色。' },
-            { src: 'https://picsum.photos/1200/800?random=13', title: '北欧风格小屋', builder: 'DiresUndewLight', desc: 'DiresUndewLight 的作品，采用经典的木材结构和尖顶设计，充满自然气息和北欧简约风格。' },
-            { src: 'https://picsum.photos/1200/800?random=14', title: '全体玩家制作基地全景', builder: '全体玩家', desc: '玩家们共同努力打造的生存基地，设施完备，展现了集体智慧与纯粹生存的社区精神。' },
-            { src: 'https://picsum.photos/1200/800?random=15', title: '空中漂浮岛', builder: '未知玩家', desc: '一个悬浮在天空中的梦幻小岛，结构精巧，充满想象力，是服务器中的一处奇景。' }
+            { src: 'tp/jz1.png', title: '宇宙琴弦空间站', builder: 'Yingkana', desc: '宏伟的环状空间站，充满了科幻与机械美感，是服务器中的标志性建筑，花费了大量心血制作。' },
+            { src: 'tp/jz2.png', title: '服主雕塑', builder: 'shenyuantaixiu', desc: '代表服主形象的巨型像素雕塑，坐落在基地附近，是玩家对服主的致敬和服务器的独特象征。' }, 
+            { src: 'tp/jz3.png', title: 'shi_mi 的粉色小屋', builder: 'shi_mi', desc: '玩家 shi_mi 建造的温馨粉色小屋，在生存环境中增添了一抹亮色，非常具有个人特色。' },
+            { src: 'tp/jz4.png', title: '北欧风格小屋', builder: 'DiresUndewLight', desc: 'DiresUndewLight 的作品，采用经典的木材结构和尖顶设计，充满自然气息和北欧简约风格。' },
+            { src: 'tp/jz5.png', title: '全体玩家制作基地全景', builder: '全体玩家', desc: '玩家们共同努力打造的生存基地，设施完备，展现了集体智慧与纯粹生存的社区精神。' },
+            { src: 'tp/jz6.png', title: '空中漂浮岛', builder: '未知玩家', desc: '一个悬浮在天空中的梦幻小岛，结构精巧，充满想象力，是服务器中的一处奇景。' }
         ];
 
         const teamData = [
             { 
-                src: 'https://ui-avatars.com/api/?name=null1442&background=ffd700&color=fff&size=256',
+                src: 'tp/null1442.jpg',
                 role: 'OWNER / 服主', 
                 name: 'null1442', 
                 desc: '我是青沐晞的 服主，null1442。\n\n我的主要职责是 硬件运维、技术架构与重大决策 。我致力于提供一个永不删档、高配置、纯净的服务器环境，确保每一位玩家都能在这里找到真正的“家”。\n\n欢迎大家随时提出建议，让我们一起建设这个自由的方块世界！' 
             },
             { 
-                src: 'https://ui-avatars.com/api/?name=扉&background=00d2ff&color=fff&size=256&length=2', 
+                src: 'tp/扉.jpg', 
                 role: 'ADMIN / 管理', 
                 name: '扉', 
                 desc: '我是 扉，服务器的 管理 。\n\n我主要负责处理日常社区事务、提供 玩家支持 以及维护社区秩序。如果你在游戏内外遇到任何问题，或者对服务器发展有任何想法，都可以随时私信我。' 
@@ -851,7 +895,7 @@
                 }
             } catch (e) {
                 console.error(e);
-                text.innerText = "状态未知";
+                text.innerStatus = "状态未知";
             }
         }
 
