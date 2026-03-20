@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>青沐晞 · 安心养老之地</title>
+    <title>青沐晞 · 安心养老之地 (纯净蓝版·无导航栏)</title>
     <style>
         :root {
-            --primary: #4ade80;
-            --primary-glow: rgba(74, 222, 128, 0.5);
+            --primary: #3b82f6;          
+            --primary-glow: rgba(59, 130, 246, 0.5);
             --bg-dark: #0f172a;
             --glass-bg: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.08);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --accent-blue: #3b82f6;      /* 新增蓝色用于点击边框 */
-            --blue-glow: rgba(59, 130, 246, 0.4);
+            --accent-blue: #2563eb;       
+            --blue-glow: rgba(37, 99, 235, 0.5);
         }
 
         * {
@@ -33,93 +33,41 @@
             overflow-x: hidden;
         }
 
-        /* 导航栏 */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            background: rgba(2, 6, 23, 0.7);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-        }
+        /* 导航栏已被完全移除，所有样式直接从头开始 */
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--text-main);
-            text-shadow: 0 0 20px var(--primary-glow);
-            letter-spacing: 2px;
-        }
-        
-        .logo span { color: var(--primary); }
-        
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-left: 30px;
-            font-weight: 500;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
-        }
-        
-        .nav-btn {
-            padding: 8px 15px;
-            border-radius: 20px;
-            background: var(--primary);
-            color: #000 !important;
-            font-weight: bold;
-            box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
-            border: none;
-            display: inline-block;
-            transition: all 0.3s;
-        }
-        
-        .nav-btn:hover {
-            background: #22c55e;
-            transform: scale(1.05);
-            box-shadow: 0 0 15px var(--primary);
-            color: #000 !important;
-        }
-
-        /* 最开头大标题 (青沐晞服务器) */
-        .page-header-title {
+        /* 最开头大标题 + 服务器状态整合区域 (无导航栏，从顶部开始) */
+        .header-stats-container {
+            padding: 40px 20px 10px 20px;   /* 顶部内边距稍小，因为没有fixed栏了 */
             text-align: center;
-            padding: 100px 20px 20px 20px; /* 避开固定导航 */
-            font-size: 3.5rem;
+            background: transparent;
+        }
+        .page-header-title {
+            font-size: 4rem;
             font-weight: 800;
             letter-spacing: 4px;
-            background: linear-gradient(135deg, #fff 0%, #4ade80 70%);
+            background: linear-gradient(135deg, #fff 0%, #3b82f6 80%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(74,222,128,0.3);
+            text-shadow: 0 0 30px rgba(59,130,246,0.3);
+            margin-bottom: 5px;            
+            line-height: 1.2;
         }
         .page-header-sub {
-            text-align: center;
             color: var(--text-muted);
             font-size: 1.1rem;
-            margin-top: -10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
         }
 
-        /* 英雄区域 (hero) 现在在标题下方 */
+        /* 英雄区域 (hero) 紧接标题区 */
         .hero {
-            min-height: 80vh;
+            min-height: 70vh;               
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
+            justify-content: flex-start;     
             align-items: center;
             text-align: center;
-            padding: 60px 20px 50px 20px;
+            padding: 20px 20px 40px 20px;    
             position: relative;
             background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--bg-dark) 100%), url('tp/bj.png'); 
             background-size: cover; 
@@ -131,7 +79,7 @@
             font-size: 4rem;
             margin-bottom: 20px;
             opacity: 0.7; 
-            background: linear-gradient(to right, #fff, #4ade80, #fff);
+            background: linear-gradient(to right, #fff, #3b82f6, #fff);
             background-size: 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -158,17 +106,16 @@
             transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
         }
         
-        /* 点击后边框变为蓝色 (覆盖之前的效果) */
+        /* 点击/聚焦边框变为蓝色 */
         .glass-card:focus-within,
         .glass-card:active {
             border-color: var(--accent-blue) !important;
             box-shadow: 0 0 25px var(--blue-glow) !important;
         }
-        /* 同时也让普通卡片hover时稍微变蓝倾向，但点击时明确蓝色 */
         .glass-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
-            border-color: rgba(59, 130, 246, 0.5); /* 半透明蓝 */
+            border-color: rgba(37, 99, 235, 0.5);
         }
 
         /* 服务器状态 */
@@ -178,7 +125,7 @@
             flex-direction: column;
             align-items: center;
             gap: 15px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;            
             width: 100%;
             max-width: 500px;
         }
@@ -203,7 +150,7 @@
         }
         
         .ip-display:hover {
-            background: rgba(74, 222, 128, 0.1);
+            background: rgba(59, 130, 246, 0.1);
             border-color: var(--primary);
             color: var(--primary);
         }
@@ -222,12 +169,12 @@
         .btn-primary {
             background: var(--primary);
             color: #000;
-            box-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
         }
         .btn-primary:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(74, 222, 128, 0.5);
-            background: #22c55e;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+            background: #2563eb;
         }
         
         .btn-outline {
@@ -241,7 +188,7 @@
             border-color: #fff;
         }
 
-        /* 团队展示 - 已移除 fw转世 相关卡片 */
+        /* 团队展示 */
         .team-section {
             padding: 80px 10%;
         }
@@ -269,7 +216,7 @@
         
         .member-card:hover {
             transform: translateY(-10px);
-            border-color: var(--accent-blue); /* 团队卡片 hover 也偏蓝但为了统一点击边框再强调 */
+            border-color: var(--accent-blue);
         }
         .member-card:active {
             border-color: var(--accent-blue) !important;
@@ -324,7 +271,6 @@
         }
         .section-title b { font-weight: 700; color: #fff; }
 
-        /* 特性板块：新增第四个卡片“优质原创模组” */
         .features { padding: 80px 10%; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
         
@@ -333,9 +279,9 @@
 
         /* 下载板块 */
         .download-bar {
-            background: linear-gradient(90deg, rgba(74, 222, 128, 0.1), rgba(0,0,0,0));
-            border-top: 1px solid rgba(74,222,128,0.2);
-            border-bottom: 1px solid rgba(74,222,128,0.2);
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), rgba(0,0,0,0));
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
             padding: 60px 20px;
             text-align: center;
             margin-top: 50px;
@@ -478,7 +424,7 @@
             font-size: 0.95rem;
         }
 
-        /* 团队简介弹窗 (现在仅剩两位成员) */
+        /* 团队简介弹窗 */
         #team-modal .team-bio-content {
             display: flex;
             flex-direction: row;
@@ -515,7 +461,7 @@
             object-fit: cover;
             margin-bottom: 20px;
             border: 5px solid var(--primary);
-            box-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
             background-color: #333;
         }
 
@@ -574,10 +520,9 @@
         }
 
         @media (max-width: 768px) {
-            .page-header-title { font-size: 2.5rem; }
+            .page-header-title { font-size: 2.8rem; }
             .hero h1 { font-size: 2.5rem; }
-            .hero { padding-top: 100px; }
-            .nav-links a { margin-left: 15px; }
+            .hero { padding-top: 20px; }
             #lightbox-modal .modal-content,
             #team-modal .team-bio-content {
                 flex-direction: column; 
@@ -600,22 +545,15 @@
     </style>
 </head>
 <body>
-    <!-- 最开头大标题：青沐晞服务器 -->
-    <div class="page-header-title">青沐晞服务器</div>
-    <div class="page-header-sub">QingMuXi · 安心养老之地</div>
+    <!-- 最开头大标题 + 服务器状态 (无导航栏，直接从顶部开始) -->
+    <div class="header-stats-container">
+        <div class="page-header-title">青沐晞服务器</div>
+        <div class="page-header-sub">QingMuXi · 湛蓝安宁之所</div>
+    </div>
 
-    <nav>
-        <div class="logo">青沐晞<span>qmxcraft</span></div>
-        <div class="nav-links">
-            <a href="#features">特色</a>
-            <a href="#team">团队</a>
-            <a href="#gallery">画廊</a>
-            <a href="#specs">配置</a>
-            <a href="#download" class="nav-btn">下载客户端</a>
-        </div>
-    </nav>
-
+    <!-- Hero区域 无导航栏，直接从标题下方开始 -->
     <div class="hero">
+        <!-- 服务器状态卡片直接放在最上面 -->
         <div class="glass-card server-status-box">
             <div style="display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--text-muted); font-size: 0.9rem;">
                 <div class="status-dot" style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981;"></div>
@@ -641,7 +579,8 @@
             </div>
         </div>
 
-        <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+        <!-- 按钮组 -->
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 10px;">
             <a href="https://mc.minebbs.com/" target="_blank" class="btn btn-primary">
                 ⬇ 下载客户端 (Minecraft)
             </a>
@@ -651,7 +590,7 @@
         </div>
     </div>
     
-    <!-- 核心团队 (已移除 fw转世 相关卡片) -->
+    <!-- 核心团队 (两位成员) -->
     <section id="team" class="team-section">
         <h2 class="section-title">核心 <b>团队</b></h2>
         <div class="team-grid">
@@ -664,7 +603,7 @@
                 <h3 style="margin-bottom: 5px;">null1442</h3>
                 <p style="font-size: 0.85rem; color: #94a3b8;">服务器的拥有者<br>致力打造稳定环境</p>
             </div>
-            <!-- 管理 扉 (原副服主，现仅保留管理) -->
+            <!-- 管理 扉 -->
             <div class="member-card" onclick="openTeamModal(1)">
                 <div class="avatar-box admin-glow">
                     <img src="tp/扉.jpg" alt="扉" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=扉&background=00d2ff&color=fff'">
@@ -673,15 +612,14 @@
                 <h3 style="margin-bottom: 5px;">扉</h3>
                 <p style="font-size: 0.85rem; color: #94a3b8;">社区维护<br>技术支持</p>
             </div>
-            <!-- 原 fw转世 卡片已完全删除 -->
         </div>
     </section>
 
-    <!-- 为什么选择我们 新增“优质原创模组”栏目，共4个卡片 -->
+    <!-- 为什么选择我们 (蓝色主调，四个卡片) -->
     <section id="features" class="features">
         <h2 class="section-title">为什么选择 <b>我们</b></h2>
         <div class="grid">
-            <div class="glass-card" style="padding: 30px;" tabindex="0"> <!-- tabindex 使其可聚焦触发点击效果 -->
+            <div class="glass-card" style="padding: 30px;" tabindex="0">
                 <div class="card-content">
                     <h3>⚡ 纯粹生存 & 养老</h3>
                     <p>采用「纯生存 + 养老」模式。无 PVP、无交易税。你可以隐居深山研究红石科技，也可以呼朋引伴建造奇观。</p>
@@ -699,7 +637,7 @@
                     <p>支持离线登录。手机和电脑都能一起玩。无论你身在何处，使用什么设备，家一直都在。</p>
                 </div>
             </div>
-            <!-- 新增 优质原创模组 卡片 -->
+            <!-- 优质原创模组 卡片 -->
             <div class="glass-card" style="padding: 30px;" tabindex="0">
                 <div class="card-content">
                     <h3>🧩 优质原创模组</h3>
@@ -793,7 +731,7 @@
             </div>
         </div>
     </div>
-    <!-- 团队简介弹窗 (仅保留两位成员的数据) -->
+    <!-- 团队简介弹窗 (两位成员) -->
     <div id="team-modal" class="modal" onclick="closeModal(event, 'team-modal')">
         <div class="modal-content team-bio-content" onclick="event.stopPropagation()">
             <span class="close-btn" onclick="closeModal(null, 'team-modal')">&times;</span>
@@ -814,7 +752,6 @@
     </div>
 
     <script>
-        // 截图数据不变
         const galleryData = [
             { src: 'tp/jz1.png', title: '宇宙琴弦空间站', builder: 'Yingkana', desc: '宏伟的环状空间站，充满了科幻与机械美感，是服务器中的标志性建筑，花费了大量心血制作。' },
             { src: 'tp/jz2.png', title: '服主雕塑', builder: 'shenyuantaixiu', desc: '代表服主形象的巨型像素雕塑，坐落在基地附近，是玩家对服主的致敬和服务器的独特象征。' }, 
@@ -824,10 +761,9 @@
             { src: 'tp/jz6.png', title: '空中漂浮岛', builder: '未知玩家', desc: '一个悬浮在天空中的梦幻小岛，结构精巧，充满想象力，是服务器中的一处奇景。' }
         ];
 
-        // 团队数据：仅保留两位 (null1442, 扉) 原 fw转世 已删除
         const teamData = [
             { 
-                src: 'tp/null1442.jpg',   // 原图路径保留，若缺省则 fallback
+                src: 'tp/null1442.jpg',
                 role: 'OWNER / 服主', 
                 name: 'null1442', 
                 desc: '我是青沐晞的 服主，null1442。\n\n我的主要职责是 硬件运维、技术架构与重大决策 。我致力于提供一个永不删档、高配置、纯净的服务器环境，确保每一位玩家都能在这里找到真正的“家”。\n\n欢迎大家随时提出建议，让我们一起建设这个自由的方块世界！' 
@@ -887,7 +823,7 @@
                 const hint = document.getElementById('copy-hint');
                 const originalText = hint.innerText;
                 hint.innerText = "✅ 复制成功！";
-                hint.style.color = "#4ade80";
+                hint.style.color = "#3b82f6";
                 setTimeout(() => {
                     hint.innerText = originalText;
                     hint.style.color = "#64748b";
@@ -908,8 +844,8 @@
                 const res = await fetch(apiUrl);
                 const data = await res.json();
                 if(data.online) {
-                    dot.style.backgroundColor = "#4ade80"; 
-                    dot.style.boxShadow = "0 0 15px #4ade80";
+                    dot.style.backgroundColor = "#10b981"; 
+                    dot.style.boxShadow = "0 0 15px #10b981";
                     text.innerText = "服务器运行中";
                     count.innerText = data.players.online + " / " + data.players.max;
                 } else {
