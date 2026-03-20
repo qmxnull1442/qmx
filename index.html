@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>青沐晞qmxcraft - 你的安心养老之地</title>
+    <title>青沐晞 · 安心养老之地</title>
     <style>
         :root {
-            --primary: #4ade80; /* 荧光绿 */
+            --primary: #4ade80;
             --primary-glow: rgba(74, 222, 128, 0.5);
             --bg-dark: #0f172a;
-            --glass-bg: rgba(255, 255, 255, 0.03); /* 极度通透的磨砂 */
+            --glass-bg: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.08);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
+            --accent-blue: #3b82f6;      /* 新增蓝色用于点击边框 */
+            --blue-glow: rgba(59, 130, 246, 0.4);
         }
 
         * {
@@ -31,10 +33,10 @@
             overflow-x: hidden;
         }
 
-        /* 导航栏 - 恢复 Logo + 链接容器的样式 */
+        /* 导航栏 */
         nav {
             display: flex;
-            justify-content: space-between; 
+            justify-content: space-between;
             align-items: center;
             padding: 20px 5%;
             position: fixed;
@@ -56,7 +58,6 @@
         
         .logo span { color: var(--primary); }
         
-        /* 导航栏链接样式 */
         .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
@@ -71,15 +72,13 @@
             text-shadow: 0 0 10px rgba(255,255,255,0.5);
         }
         
-        /* 导航栏按钮样式 (下载客户端) */
         .nav-btn {
             padding: 8px 15px;
             border-radius: 20px;
             background: var(--primary);
-            color: #000 !important; 
+            color: #000 !important;
             font-weight: bold;
             box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
-            text-shadow: none; 
             border: none;
             display: inline-block;
             transition: all 0.3s;
@@ -91,16 +90,36 @@
             box-shadow: 0 0 15px var(--primary);
             color: #000 !important;
         }
-        
-        /* 英雄区域 (Hero) */
+
+        /* 最开头大标题 (青沐晞服务器) */
+        .page-header-title {
+            text-align: center;
+            padding: 100px 20px 20px 20px; /* 避开固定导航 */
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #fff 0%, #4ade80 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(74,222,128,0.3);
+        }
+        .page-header-sub {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+
+        /* 英雄区域 (hero) 现在在标题下方 */
         .hero {
-            min-height: 100vh;
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             align-items: center;
             text-align: center;
-            padding: 120px 20px 50px 20px; /* 适应固定导航栏高度 */
+            padding: 60px 20px 50px 20px;
             position: relative;
             background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--bg-dark) 100%), url('tp/bj.png'); 
             background-size: cover; 
@@ -131,7 +150,6 @@
             margin-bottom: 40px;
         }
         
-        /* 玻璃卡片通用样式 */
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(12px);
@@ -140,10 +158,17 @@
             transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
         }
         
+        /* 点击后边框变为蓝色 (覆盖之前的效果) */
+        .glass-card:focus-within,
+        .glass-card:active {
+            border-color: var(--accent-blue) !important;
+            box-shadow: 0 0 25px var(--blue-glow) !important;
+        }
+        /* 同时也让普通卡片hover时稍微变蓝倾向，但点击时明确蓝色 */
         .glass-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
-            border-color: rgba(74, 222, 128, 0.3);
+            border-color: rgba(59, 130, 246, 0.5); /* 半透明蓝 */
         }
 
         /* 服务器状态 */
@@ -160,7 +185,7 @@
 
         .status-dot {
             width: 10px; height: 10px; border-radius: 50%;
-            background-color: #ef4444; /* 默认红 */
+            background-color: #ef4444;
             box-shadow: 0 0 15px #ef4444;
             transition: all 0.5s;
         }
@@ -183,7 +208,6 @@
             color: var(--primary);
         }
 
-        /* 按钮样式 */
         .btn {
             padding: 12px 30px;
             border-radius: 30px;
@@ -200,7 +224,6 @@
             color: #000;
             box-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
         }
-        
         .btn-primary:hover {
             transform: scale(1.05);
             box-shadow: 0 0 30px rgba(74, 222, 128, 0.5);
@@ -218,7 +241,7 @@
             border-color: #fff;
         }
 
-        /* 团队展示 */
+        /* 团队展示 - 已移除 fw转世 相关卡片 */
         .team-section {
             padding: 80px 10%;
         }
@@ -240,13 +263,17 @@
             width: 250px;
             position: relative;
             overflow: hidden;
-            cursor: pointer; /* 添加光标提示可点击 */
+            cursor: pointer;
             transition: all 0.4s;
         }
         
         .member-card:hover {
             transform: translateY(-10px);
-            border-color: var(--primary);
+            border-color: var(--accent-blue); /* 团队卡片 hover 也偏蓝但为了统一点击边框再强调 */
+        }
+        .member-card:active {
+            border-color: var(--accent-blue) !important;
+            box-shadow: 0 0 20px var(--blue-glow) !important;
         }
 
         .avatar-box {
@@ -258,13 +285,11 @@
             position: relative;
         }
         
-        /* 服主的金色光环 */
         .owner-glow {
             background: linear-gradient(45deg, #ffd700, #ffaa00);
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
         }
         
-        /* 管理的蓝色光环 */
         .admin-glow {
             background: linear-gradient(45deg, #00d2ff, #3a7bd5);
             box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
@@ -275,7 +300,7 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--bg-dark); /* 与背景融合的内圈 */
+            border: 3px solid var(--bg-dark);
             background-color: #333;
         }
 
@@ -291,7 +316,6 @@
         .role-owner { background: rgba(255, 215, 0, 0.2); color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.3); }
         .role-admin { background: rgba(0, 210, 255, 0.15); color: #00d2ff; border: 1px solid rgba(0, 210, 255, 0.3); }
 
-        /* 内容板块 */
         .section-title {
             text-align: center;
             font-size: 2.5rem;
@@ -300,8 +324,9 @@
         }
         .section-title b { font-weight: 700; color: #fff; }
 
+        /* 特性板块：新增第四个卡片“优质原创模组” */
         .features { padding: 80px 10%; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
         
         .card-content h3 { font-size: 1.5rem; color: var(--primary); margin-bottom: 10px; }
         .card-content p { color: var(--text-muted); }
@@ -377,7 +402,7 @@
             transform: scale(1.1); 
         }
 
-        /* Lightbox Modal 样式 (通用，用于团队和截图) */
+        /* 模态框 */
         .modal {
             display: none;
             position: fixed;
@@ -405,8 +430,6 @@
             box-shadow: 0 10px 50px rgba(0,0,0,0.7);
             position: relative;
         }
-
-        /* 截图 Lightbox 样式 (保持不变) */
         #lightbox-modal .modal-content {
             display: flex;
             width: 90%;
@@ -455,21 +478,21 @@
             font-size: 0.95rem;
         }
 
-        /* 团队简介 Modal 样式 - 左右分栏 */
+        /* 团队简介弹窗 (现在仅剩两位成员) */
         #team-modal .team-bio-content {
             display: flex;
             flex-direction: row;
             width: 90%;
-            max-width: 900px; /* 增加宽度 */
+            max-width: 900px;
             padding: 0;
             text-align: left;
-            min-height: 450px; /* 确保有足够的空间展示内容 */
+            min-height: 450px;
         }
 
         .team-info-left {
-            flex: 0 0 300px; /* 左侧固定宽度 */
+            flex: 0 0 300px;
             padding: 30px;
-            background: rgba(255, 255, 255, 0.08); /* 略深背景，突出左栏 */
+            background: rgba(255, 255, 255, 0.08);
             display: flex;
             flex-direction: column;
             align-items: center; 
@@ -486,7 +509,7 @@
         }
 
         #team-avatar {
-            width: 150px; /* 更大的头像 */
+            width: 150px;
             height: 150px;
             border-radius: 50%;
             object-fit: cover;
@@ -533,7 +556,6 @@
             color: #ef4444;
         }
 
-        /* 页脚 */
         footer {
             text-align: center;
             padding: 50px 20px;
@@ -551,17 +573,11 @@
             margin-right: auto;
         }
 
-        /* 移动端适配 */
         @media (max-width: 768px) {
+            .page-header-title { font-size: 2.5rem; }
             .hero h1 { font-size: 2.5rem; }
-            .hero { padding-top: 100px; } /* 适应固定导航栏 */
-            
-            /* 导航链接在移动端缩小间距 */
-            .nav-links a {
-                margin-left: 15px;
-            }
-
-            /* 团队和截图弹窗在移动端垂直堆叠 */
+            .hero { padding-top: 100px; }
+            .nav-links a { margin-left: 15px; }
             #lightbox-modal .modal-content,
             #team-modal .team-bio-content {
                 flex-direction: column; 
@@ -576,52 +592,54 @@
                 border-right: none;
                 border-bottom: 1px solid var(--glass-border);
             }
-            .team-info-right {
-                padding: 20px;
-            }
-            #team-avatar {
-                width: 100px;
-                height: 100px;
-            }
-            .lightbox-image-container {
-                min-height: 250px;
-            }
-            .lightbox-info {
-                min-width: auto;
-                padding: 20px;
-            }
+            .team-info-right { padding: 20px; }
+            #team-avatar { width: 100px; height: 100px; }
+            .lightbox-image-container { min-height: 250px; }
+            .lightbox-info { min-width: auto; padding: 20px; }
         }
     </style>
 </head>
 <body>
-    
-   <!-- 新增：顶部标题栏 - 青沐晞服务器 在最上面显示 -->
-    <div class="top-header">
-        <div class="top-header-content">
-            <!-- 左侧：服务器标识 + 名称 -->
-            <div class="server-title-area">
-                <div class="server-badge">✨ 主服务器</div>
-                <div class="server-name">
-                    青沐晞<span>·</span>qmxcraft
-                </div>
+    <!-- 最开头大标题：青沐晞服务器 -->
+    <div class="page-header-title">青沐晞服务器</div>
+    <div class="page-header-sub">QingMuXi · 安心养老之地</div>
+
+    <nav>
+        <div class="logo">青沐晞<span>qmxcraft</span></div>
+        <div class="nav-links">
+            <a href="#features">特色</a>
+            <a href="#team">团队</a>
+            <a href="#gallery">画廊</a>
+            <a href="#specs">配置</a>
+            <a href="#download" class="nav-btn">下载客户端</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="glass-card server-status-box">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--text-muted); font-size: 0.9rem;">
+                <div class="status-dot" style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981;"></div>
+                <span id="server-status-text">正在连接服务器...</span>
             </div>
             
-            <!-- 右侧：状态指示 + IP (参考原卡片风格) -->
-            <div class="server-status-mini">
-                <div class="status-item">
-                    <div class="status-dot"></div>
-                    <span>55 人在线</span>
+            <div class="ip-display" onclick="copyIP()" title="点击复制" style="font-size: 1.8rem; font-weight: 600; margin: 10px 0 5px; cursor: pointer; color: #fff; letter-spacing: 1px; background: rgba(0,0,0,0.3); padding: 8px 20px; border-radius: 40px; display: inline-block;">
+                es912.top:20100
+            </div>
+            <div id="copy-hint" style="font-size: 0.8rem; color: #64748b; margin-bottom: 8px;">点击上方 IP 复制</div>
+            
+            <div style="width: 80%; height: 1px; background: rgba(255,255,255,0.1); margin: 12px auto;"></div>
+            
+            <div style="display: flex; gap: 40px; justify-content: center; margin-top: 5px;">
+                <div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: #fff;" id="player-count">57</div>
+                    <div style="font-size: 0.8rem; color: #64748b;">在线人数</div>
                 </div>
-                <div class="status-item">
-                    <div class="status-dot orange"></div>
-                    <span>TPS 20.0</span>
-                </div>
-                <div class="ip-mini" onclick="copyTopIP()" title="点击复制IP">
-                    es912.top:20100 ⚡
+                <div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: #fff;">20</div>
+                    <div style="font-size: 0.8rem; color: #64748b;">TPS状态</div>
                 </div>
             </div>
         </div>
-    </div>
 
         <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
             <a href="https://mc.minebbs.com/" target="_blank" class="btn btn-primary">
@@ -633,55 +651,59 @@
         </div>
     </div>
     
+    <!-- 核心团队 (已移除 fw转世 相关卡片) -->
     <section id="team" class="team-section">
         <h2 class="section-title">核心 <b>团队</b></h2>
         <div class="team-grid">
-            
+            <!-- 服主 null1442 -->
             <div class="member-card" onclick="openTeamModal(0)">
                 <div class="avatar-box owner-glow">
-                    <img src="tp/null1442.jpg" alt="null1442" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=Xiao&background=ffd700&color=fff'">
+                    <img src="tp/null1442.jpg" alt="null1442" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=null1442&background=ffd700&color=fff'">
                 </div>
                 <span class="role-badge role-owner">OWNER / 服主</span>
                 <h3 style="margin-bottom: 5px;">null1442</h3>
                 <p style="font-size: 0.85rem; color: #94a3b8;">服务器的拥有者<br>致力打造稳定环境</p>
             </div>
-
+            <!-- 管理 扉 (原副服主，现仅保留管理) -->
             <div class="member-card" onclick="openTeamModal(1)">
                 <div class="avatar-box admin-glow">
-                    <img src="tp/扉.jpg" alt="扉" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=Max&background=00d2ff&color=fff'">
+                    <img src="tp/扉.jpg" alt="扉" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=扉&background=00d2ff&color=fff'">
                 </div>
-                <span class="role-badge role-admin">ADMIN / 副服主</span>
+                <span class="role-badge role-admin">ADMIN / 管理</span>
                 <h3 style="margin-bottom: 5px;">扉</h3>
                 <p style="font-size: 0.85rem; color: #94a3b8;">社区维护<br>技术支持</p>
             </div>
-
-            <div class="member-card" onclick="openTeamModal(2)">
-                <div class="avatar-box admin-glow">
-                    <img src="tp/shu_mi.jpg" alt="shu_mi" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=Shu&background=00d2ff&color=fff'">
-
-
+            <!-- 原 fw转世 卡片已完全删除 -->
         </div>
     </section>
 
+    <!-- 为什么选择我们 新增“优质原创模组”栏目，共4个卡片 -->
     <section id="features" class="features">
         <h2 class="section-title">为什么选择 <b>我们</b></h2>
         <div class="grid">
-            <div class="glass-card" style="padding: 30px;">
+            <div class="glass-card" style="padding: 30px;" tabindex="0"> <!-- tabindex 使其可聚焦触发点击效果 -->
                 <div class="card-content">
                     <h3>⚡ 纯粹生存 & 养老</h3>
                     <p>采用「纯生存 + 养老」模式。无 PVP、无交易税。你可以隐居深山研究红石科技，也可以呼朋引伴建造奇观。</p>
                 </div>
             </div>
-            <div class="glass-card" style="padding: 30px;">
+            <div class="glass-card" style="padding: 30px;" tabindex="0">
                 <div class="card-content">
                     <h3>🏰 永久不删档</h3>
                     <p>承诺永不换周目。你留下的每一个方块、每一座建筑，都将成为服务器历史的一部分。</p>
                 </div>
             </div>
-            <div class="glass-card" style="padding: 30px;">
+            <div class="glass-card" style="padding: 30px;" tabindex="0">
                 <div class="card-content">
                     <h3>📱 全端互通</h3>
                     <p>支持离线登录。手机和电脑都能一起玩。无论你身在何处，使用什么设备，家一直都在。</p>
+                </div>
+            </div>
+            <!-- 新增 优质原创模组 卡片 -->
+            <div class="glass-card" style="padding: 30px;" tabindex="0">
+                <div class="card-content">
+                    <h3>🧩 优质原创模组</h3>
+                    <p>独家定制轻量模组：更多乐器、家具、装饰，保留原版体验的同时增添养老趣味。由团队精心调校，稳定不卡顿。</p>
                 </div>
             </div>
         </div>
@@ -717,111 +739,6 @@
         </div>
     </section>
 
-
-<!DOCTYPE html>
-<html lang="zh">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>嵌入示例 · 服务器状态卡片在下载下方</title>
-    <style>
-        /* 仿照原有设计的一些全局变量与基础样式，保持视觉融合 */
-        body {
-            background: linear-gradient(145deg, #0b1120 0%, #192132 100%);
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            color: #e2e8f0;
-        }
-
-        /* 经典卡片容器 —— 模拟下载条区域的背景与风格 */
-        .download-bar {
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 48px;
-            padding: 3rem 2.5rem;
-            max-width: 800px;
-            width: 100%;
-            margin: 20px auto;
-            text-align: center;
-            box-shadow: 0 30px 40px -20px rgba(0,0,0,0.8);
-        }
-
-        .download-bar h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            font-weight: 600;
-            background: linear-gradient(to right, #f0f9ff, #bae6fd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.02em;
-        }
-
-        .btn-primary {
-            background: linear-gradient(145deg, #2563eb, #1d4ed8);
-            border: none;
-            border-radius: 60px;
-            color: white;
-            font-weight: 600;
-            box-shadow: 0 12px 28px -8px #1e3a8a80, 0 0 0 1px rgba(255,255,255,0.1) inset;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary:hover {
-            transform: scale(1.02);
-            background: linear-gradient(145deg, #3b82f6, #2563eb);
-            box-shadow: 0 18px 32px -8px #1e3a8a;
-        }
-
-        /* 小提示文本颜色适配 */
-        #copy-hint, .server-status-box div[style*="color: #64748b"] {
-            color: #94a3b8 !important;
-        }
-
-        /* 让嵌入的卡片和下面的氛围统一，并自带玻璃效果（已写在style里，但这里保证边距圆润） */
-        .server-status-box {
-            margin-top: 30px !important;   /* 与下载按钮上方的p产生间隔 */
-            margin-bottom: 10px;
-            background: rgba(20, 30, 50, 0.6) !important;
-            border: 1px solid rgba(255,255,255,0.1) !important;
-            backdrop-filter: blur(12px) !important;
-            -webkit-backdrop-filter: blur(12px) !important;
-            width: fit-content;
-            border-radius: 48px !important;  /* 加大圆角与下载条呼应 */
-            padding: 24px 40px !important;
-        }
-
-        /* 在线数字等，保持清晰 */
-        .ip-display {
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
-            background: rgba(0,0,0,0.4) !important;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        /* 复制提示动效 */
-        .ip-display:hover {
-            background: rgba(30, 50, 80, 0.7) !important;
-            border-color: #3b82f6;
-        }
-
-        /* 底部小字 */
-        .download-bar p:last-of-type {
-            opacity: 0.8;
-        }
-    </style>
-</head>
-<body>
-    <!-- 这是原有的下载区域 (download-bar) 内容完全保留，仅用于演示 -->
     <div id="download" class="download-bar">
         <h2 style="font-size: 2rem; margin-bottom: 20px;">准备好开始冒险了吗？</h2>
         <p style="color: #cbd5e1; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
@@ -834,68 +751,9 @@
         <p style="margin-top: 15px; font-size: 0.9rem; color: #64748b;">支持 Windows / IOS / Android </p>
     </div>
 
-    <!-- 将服务器状态卡片放在 download 区域的下方 -->
-    <!-- 完全使用你提供的结构，只做极小调整：确保 id 保持，复制函数稍后定义 -->
-    <div class="glass-card server-status-box" style="text-align: center; width: fit-content; margin-left: auto; margin-right: auto; padding: 20px; border-radius: 16px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);">
-        <!-- 第一行：状态点 + 文字，整体居中 -->
-        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--text-muted, #94a3b8); font-size: 0.9rem;">
-            <div class="status-dot" style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981;"></div>
-            <span id="server-status-text">正在连接服务器...</span>
-        </div>
-        
-        <!-- IP 显示区域（居中） -->
-        <div class="ip-display" onclick="copyIP()" title="点击复制" style="font-size: 1.8rem; font-weight: 600; margin: 10px 0 5px; cursor: pointer; color: #fff; letter-spacing: 1px; background: rgba(0,0,0,0.3); padding: 8px 20px; border-radius: 40px; display: inline-block;">
-            es912.top:20100
-        </div>
-        <div id="copy-hint" style="font-size: 0.8rem; color: #64748b; margin-bottom: 8px;">点击上方 IP 复制</div>
-        
-        <!-- 分隔线（居中） -->
-        <div style="width: 80%; height: 1px; background: rgba(255,255,255,0.1); margin: 12px auto;"></div>
-        
-        <!-- 底部两列数据（居中 flex） -->
-        <div style="display: flex; gap: 40px; justify-content: center; margin-top: 5px;">
-            <div>
-                <div style="font-size: 1.5rem; font-weight: bold; color: #fff;" id="player-count">57</div>
-                <div style="font-size: 0.8rem; color: #64748b;">在线人数</div>
-            </div>
-            <div>
-                <div style="font-size: 1.5rem; font-weight: bold; color: #fff;">20</div>
-                <div style="font-size: 0.8rem; color: #64748b;">TPS状态</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 简单添加复制IP的交互功能 (与卡片内 onclick 挂钩) -->
-    <script>
-        function copyIP() {
-            const ipText = "es912.top:20100";   // 与显示一致
-            navigator.clipboard.writeText(ipText).then(() => {
-                const hintEl = document.getElementById('copy-hint');
-                if (hintEl) {
-                    const originalText = hintEl.innerText;
-                    hintEl.innerText = '✓ 复制成功！';
-                    hintEl.style.color = '#10b981';
-                    setTimeout(() => {
-                        hintEl.innerText = originalText;
-                        hintEl.style.color = '#64748b';
-                    }, 2000);
-                }
-            }).catch(() => {
-                alert('复制失败，请手动复制');
-            });
-        }
-
-        // 模拟动态服务器状态 (仅用于演示。你可以替换成真实API)
-        // 只是为了展示数字变化效果，模仿“正在连接”后更新
-        setTimeout(() => {
-            const statusText = document.getElementById('server-status-text');
-            if (statusText) statusText.innerText = '服务器已连接 · 0 延迟';
-            
-            // 可以顺便微调人数
-
     <section id="specs" class="specs-section">
         <div style="flex: 1; min-width: 300px;">
-            <h2 class="section-title" style="text-align: left; margin-bottom: 30px;"><b>服务器配置</b></h2>
+            <h2 class="section-title" style="text-align: left; margin-bottom: 30px;">硬核 <b>配置</b></h2>
             <ul class="specs-list">
                 <li><strong>CPU：</strong> AMD 9950X (5.7Ghz 超频)</li>
                 <li><strong>内存：</strong> 128G DDR5 极速内存</li>
@@ -912,13 +770,14 @@
     </section>
 
     <footer>
-        <p style="margin-bottom: 5px;">Copyright © 2026. 青沐晞</p>
-        <p style="margin-bottom: 15px;">沪ICP备2025041436号-2</p>
+        <p style="margin-bottom: 5px;">Copyright © 2025. 青沐晞</p>
+        <p style="margin-bottom: 15px;">沪ICP备2024041436号-2</p>
         <p class="footer-disclaimer">
             "Minecraft" 以及 "我的世界" 为 Mojang Synergies AB 的商标，本站与 Mojang 以及 Microsoft 没有从属关系。
         </p>
     </footer>
 
+    <!-- 截图灯箱 -->
     <div id="lightbox-modal" class="modal" onclick="closeModal(event, 'lightbox-modal')">
         <div class="modal-content" onclick="event.stopPropagation()">
             <span class="close-btn" onclick="closeModal(null, 'lightbox-modal')">&times;</span>
@@ -934,6 +793,7 @@
             </div>
         </div>
     </div>
+    <!-- 团队简介弹窗 (仅保留两位成员的数据) -->
     <div id="team-modal" class="modal" onclick="closeModal(event, 'team-modal')">
         <div class="modal-content team-bio-content" onclick="event.stopPropagation()">
             <span class="close-btn" onclick="closeModal(null, 'team-modal')">&times;</span>
@@ -952,8 +812,9 @@
             </div>
         </div>
     </div>
+
     <script>
-        // 服务器截图数据
+        // 截图数据不变
         const galleryData = [
             { src: 'tp/jz1.png', title: '宇宙琴弦空间站', builder: 'Yingkana', desc: '宏伟的环状空间站，充满了科幻与机械美感，是服务器中的标志性建筑，花费了大量心血制作。' },
             { src: 'tp/jz2.png', title: '服主雕塑', builder: 'shenyuantaixiu', desc: '代表服主形象的巨型像素雕塑，坐落在基地附近，是玩家对服主的致敬和服务器的独特象征。' }, 
@@ -963,24 +824,22 @@
             { src: 'tp/jz6.png', title: '空中漂浮岛', builder: '未知玩家', desc: '一个悬浮在天空中的梦幻小岛，结构精巧，充满想象力，是服务器中的一处奇景。' }
         ];
 
-        // 团队成员数据 (已更新)
+        // 团队数据：仅保留两位 (null1442, 扉) 原 fw转世 已删除
         const teamData = [
             { 
-                src: 'tp/xiaoaA0v0.jpg', 
+                src: 'tp/null1442.jpg',   // 原图路径保留，若缺省则 fallback
                 role: 'OWNER / 服主', 
                 name: 'null1442', 
                 desc: '我是青沐晞的 服主，null1442。\n\n我的主要职责是 硬件运维、技术架构与重大决策 。我致力于提供一个永不删档、高配置、纯净的服务器环境，确保每一位玩家都能在这里找到真正的“家”。\n\n欢迎大家随时提出建议，让我们一起建设这个自由的方块世界！' 
             },
             { 
-                src: 'tp/MaxerS.jpg', 
+                src: 'tp/扉.jpg', 
                 role: 'ADMIN / 管理', 
                 name: '扉', 
-                desc: '我是 扉，服务器的 副服主 。\n\n我主要负责处理日常社区事务、提供 玩家支持 以及维护社区秩序。如果你在游戏内外遇到任何问题，或者对服务器发展有任何想法，都可以随时私信我。' 
-            },
-        
+                desc: '我是 扉，服务器的 管理 。\n\n我主要负责处理日常社区事务、提供 玩家支持 以及维护社区秩序。如果你在游戏内外遇到任何问题，或者对服务器发展有任何想法，都可以随时私信我。' 
+            }
         ];
 
-        // 模态框通用关闭函数
         function closeModal(event, id) {
             const modal = document.getElementById(id);
             if (event === null || event.target === modal) {
@@ -989,7 +848,6 @@
             }
         }
         
-        // 截图 Lightbox 函数
         function openLightbox(index) {
             const data = galleryData[index];
             const modal = document.getElementById('lightbox-modal');
@@ -1003,7 +861,6 @@
             document.body.style.overflow = 'hidden';
         }
 
-        // 团队简介 Modal 函数
         function openTeamModal(index) {
             const data = teamData[index];
             const modal = document.getElementById('team-modal');
@@ -1011,15 +868,12 @@
             document.getElementById('team-avatar').src = data.src;
             document.getElementById('team-role').innerText = data.role;
             document.getElementById('team-name').innerText = data.name;
-            // 注意：因为 desc 里面用了换行符 \n，所以用 innerText 确保正确渲染 pre-wrap
             document.getElementById('team-description-text').innerText = data.desc; 
 
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
-
-        // 键盘 Esc 关闭
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal(null, 'lightbox-modal');
@@ -1027,8 +881,6 @@
             }
         });
 
-
-        // 复制IP
         function copyIP() {
             const ip = "es912.top:20100";
             navigator.clipboard.writeText(ip).then(() => {
@@ -1043,7 +895,6 @@
             });
         }
 
-        // 获取服务器状态
         async function fetchStatus() {
             const ip = "es912.top";
             const port = "20100";
@@ -1056,7 +907,6 @@
             try {
                 const res = await fetch(apiUrl);
                 const data = await res.json();
-                
                 if(data.online) {
                     dot.style.backgroundColor = "#4ade80"; 
                     dot.style.boxShadow = "0 0 15px #4ade80";
