@@ -34,7 +34,7 @@
             position: relative;
         }
 
-        /* 中间固定的背景装饰图片 - 使用本地图片 */
+        /* 中间固定的背景装饰图片 */
         body::before {
             content: '';
             position: fixed;
@@ -66,7 +66,7 @@
             z-index: 2;
         }
 
-        /* 最开头大标题 - 只留服务器标题，无状态栏 */
+        /* 最开头大标题 */
         .header-stats-container {
             padding: 20px 20px 0 20px;
             text-align: center;
@@ -85,14 +85,49 @@
             line-height: 1.1;
         }
         
+        /* 打字机效果副标题容器 */
         .page-header-sub {
             color: var(--text-muted);
             font-size: 1.1rem;
             margin-bottom: 0;
             letter-spacing: 1px;
+            min-height: 2rem;
+            font-family: 'Segoe UI', monospace;
+        }
+        
+        /* 打字机光标闪烁 */
+        .typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            margin-left: 2px;
+            background-color: var(--primary);
+            animation: blink 0.8s step-end infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
-        /* 英雄区域 - 顶部边距0，与标题无缝衔接，移除了原有的服务器状态卡片 */
+        /* 滚动渐现动画基础类 */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 为不同元素添加延迟，错落有致 */
+        .scroll-reveal-delay-1 { transition-delay: 0.1s; }
+        .scroll-reveal-delay-2 { transition-delay: 0.2s; }
+        .scroll-reveal-delay-3 { transition-delay: 0.3s; }
+        .scroll-reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* 英雄区域 */
         .hero {
             min-height: auto;
             display: flex;
@@ -150,7 +185,6 @@
             border-color: rgba(37, 99, 235, 0.5);
         }
 
-        /* 按钮样式 */
         .btn {
             padding: 10px 28px;
             border-radius: 30px;
@@ -231,7 +265,8 @@
         .owner-glow {
             background: linear-gradient(45deg, #ffd700, #ffaa00);
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-        }        .admin-glow {
+        }        
+        .admin-glow {
             background: linear-gradient(45deg, #00d2ff, #3a7bd5);
             box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
         }
@@ -271,7 +306,7 @@
         .card-content h3 { font-size: 1.5rem; color: var(--primary); margin-bottom: 10px; }
         .card-content p { color: var(--text-muted); }
 
-        /* 下载板块 - 原位置，现在放置服务器状态卡片（原有外观） */
+        /* 下载板块 */
         .download-bar {
             background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), rgba(0,0,0,0));
             border-top: 1px solid rgba(59, 130, 246, 0.2);
@@ -281,7 +316,7 @@
             margin-top: 30px;
         }
         
-        /* 保持原有服务器状态卡片样式，完全不变 */
+        /* 服务器状态卡片样式 */
         .server-status-box {
             padding: 20px 40px;
             display: flex;
@@ -416,7 +451,8 @@
             height: 90%;
             max-height: 800px;
             overflow: hidden;
-        }        .lightbox-image-container {
+        }        
+        .lightbox-image-container {
             flex: 2;
             overflow: hidden;
             display: flex;
@@ -550,6 +586,7 @@
             margin-left: auto;
             margin-right: auto;
         }
+        
         @media (max-width: 768px) {
             body::before {
                 width: 150px;
@@ -581,15 +618,15 @@
     </style>
 </head>
 <body>
-    <!-- 最开头大标题 - 只留服务器标题，无状态栏 -->
+    <!-- 最开头大标题 - 只留服务器标题 -->
     <div class="header-stats-container">
         <div class="page-header-title">青沐晞服务器</div>
-        <div class="page-header-sub">QingMuXi · 湛蓝安宁之所</div>
+        <!-- 打字机效果副标题容器 -->
+        <div class="page-header-sub" id="typewriter-sub"></div>
     </div>
 
-    <!-- Hero区域 - 与标题无缝衔接，移除了原有状态栏卡片 -->
+    <!-- Hero区域 -->
     <div class="hero">
-        <!-- 按钮组：QQ群入口等 -->
         <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 20px;">
             <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=VqKYt%2FZyzu9Q1kzmDklt6PbWKpLeQEMopmAaCgcnAvGlO2%2FEer19JXcbKXrfWETZ&busi_data=eyJncm91cENvZGUiOiIxMDU3Mjc5MTU4IiwidG9rZW4iOiIzU1FFakZKVVA2ZGd0N2ZoekZLM3ZPUXVOYkl3SnN5S2VDRVE1dlM5MHZDbEV4aC93ZGE0ZnlhdkxWZmtVSnBVIiwidWluIjoiMzIyNzM3NzI5NSJ9&data=gBUN5EqEJppWUzdrtxVthX27yn8GG1U8CgC3KNCyV4cE2RaZCsCBkzajyAZMaYyCe_zi3bL73Asbd6MuICErtw&svctype=4&tempid=h5_group_info" target="_blank" class="btn btn-outline">
                 加入 QQ 群
@@ -597,20 +634,19 @@
         </div>
     </div>
     
-    <!-- 核心团队 -->
-    <section id="team" class="team-section">
-        <h2 class="section-title">核心团队</b></h2>
+    <!-- 核心团队 - 添加滚动动画类 -->
+    <section id="team" class="team-section scroll-reveal">
+        <h2 class="section-title">核心 <b>团队</b></h2>
         <div class="team-grid">
-            <!-- 服主 null1442 使用本地图片 -->
-            <div class="member-card" onclick="openTeamModal(0)">
+            <div class="member-card scroll-reveal scroll-reveal-delay-1" onclick="openTeamModal(0)">
                 <div class="avatar-box owner-glow">
                     <img src="tp/null1442.jpg" alt="null1442" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=null1442&background=ffd700&color=fff&size=128'">
                 </div>
                 <span class="role-badge role-owner">OWNER / 服主</span>
                 <h3 style="margin-bottom: 5px;">null1442</h3>
-                <p style="font-size: 0.85rem; color: #94a3b8;">服务器的拥有者<br>致力打造稳定环境</p>            </div>
-            <!-- 管理 扉 使用本地图片 -->
-            <div class="member-card" onclick="openTeamModal(1)">
+                <p style="font-size: 0.85rem; color: #94a3b8;">服务器的拥有者<br>致力打造稳定环境</p>
+            </div>
+            <div class="member-card scroll-reveal scroll-reveal-delay-2" onclick="openTeamModal(1)">
                 <div class="avatar-box admin-glow">
                     <img src="tp/扉.jpg" alt="扉" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=扉&background=00d2ff&color=fff&size=128&length=2'">
                 </div>
@@ -621,29 +657,29 @@
         </div>
     </section>
 
-    <!-- 为什么选择我们 -->
-    <section id="features" class="features">
-        <h2 class="section-title">为什么选择我们</b></h2>
+    <!-- 为什么选择我们 - 添加滚动动画 -->
+    <section id="features" class="features scroll-reveal">
+        <h2 class="section-title">为什么选择 <b>我们</b></h2>
         <div class="grid">
-            <div class="glass-card" style="padding: 30px;" tabindex="0">
+            <div class="glass-card scroll-reveal scroll-reveal-delay-1" style="padding: 30px;" tabindex="0">
                 <div class="card-content">
                     <h3>⚡ 纯粹生存 & 养老</h3>
                     <p>采用「纯生存 + 养老」模式。无 PVP、无交易税。你可以隐居深山研究红石科技，也可以呼朋引伴建造奇观。</p>
                 </div>
             </div>
-            <div class="glass-card" style="padding: 30px;" tabindex="0">
+            <div class="glass-card scroll-reveal scroll-reveal-delay-2" style="padding: 30px;" tabindex="0">
                 <div class="card-content">
                     <h3>🏰 永久不删档</h3>
                     <p>承诺永不换周目。你留下的每一个方块、每一座建筑，都将成为服务器历史的一部分。</p>
                 </div>
             </div>
-            <div class="glass-card" style="padding: 30px;" tabindex="0">
+            <div class="glass-card scroll-reveal scroll-reveal-delay-3" style="padding: 30px;" tabindex="0">
                 <div class="card-content">
                     <h3>📱 全端互通</h3>
                     <p>支持离线登录。手机和电脑都能一起玩。无论你身在何处，使用什么设备，家一直都在。</p>
                 </div>
             </div>
-            <div class="glass-card" style="padding: 30px;" tabindex="0">
+            <div class="glass-card scroll-reveal scroll-reveal-delay-4" style="padding: 30px;" tabindex="0">
                 <div class="card-content">
                     <h3>🧩 优质原创模组</h3>
                     <p>独家定制轻量模组：更多乐器、家具、装饰，保留原版体验的同时增添养老趣味。由团队精心调校，稳定不卡顿。</p>
@@ -652,37 +688,36 @@
         </div>
     </section>
 
-    <section id="gallery" class="screenshot-gallery">
-        <h2 class="section-title">服务器精美截图</b></h2>
+    <!-- 截图画廊 - 添加滚动动画 -->
+    <section id="gallery" class="screenshot-gallery scroll-reveal">
+        <h2 class="section-title">服务器 <b>精美截图</b></h2>
         <p style="text-align: center; color: var(--text-muted); max-width: 800px; margin-left: auto; margin-right: auto; margin-bottom: 30px;">
-            点击图片查看详细信息
+            点击图片查看详细信息和建造者。
         </p>
         <div class="gallery-grid">
-            <!-- 所有截图使用本地图片 -->
-            <div class="gallery-item" onclick="openLightbox(0)">
+            <div class="gallery-item scroll-reveal scroll-reveal-delay-1" onclick="openLightbox(0)">
                 <img src="tp/jz1.png" alt="雪黎的玩偶" onerror="this.src='https://picsum.photos/320/220?random=10'">
             </div>
-            <div class="gallery-item" onclick="openLightbox(1)">
+            <div class="gallery-item scroll-reveal scroll-reveal-delay-2" onclick="openLightbox(1)">
                 <img src="tp/jz2.png" alt="天使的摇篮" onerror="this.src='https://picsum.photos/320/220?random=11'">
             </div>
-            <div class="gallery-item" onclick="openLightbox(2)">
+            <div class="gallery-item scroll-reveal scroll-reveal-delay-3" onclick="openLightbox(2)">
                 <img src="tp/jz3.png" alt="玩家合影" onerror="this.src='https://picsum.photos/320/220?random=12'">
             </div>
-            <div class="gallery-item" onclick="openLightbox(3)">
+            <div class="gallery-item scroll-reveal scroll-reveal-delay-4" onclick="openLightbox(3)">
                 <img src="tp/jz4.png" alt="生电基地" onerror="this.src='https://picsum.photos/320/220?random=13'">
             </div>
-            <div class="gallery-item" onclick="openLightbox(4)">
+            <div class="gallery-item scroll-reveal scroll-reveal-delay-1" onclick="openLightbox(4)">
                 <img src="tp/jz5.png" alt="沐晞商业街" onerror="this.src='https://picsum.photos/320/220?random=14'">
             </div>
-            <div class="gallery-item" onclick="openLightbox(5)">
+            <div class="gallery-item scroll-reveal scroll-reveal-delay-2" onclick="openLightbox(5)">
                 <img src="tp/jz6.png" alt="沐晞城" onerror="this.src='https://picsum.photos/320/220?random=15'">
             </div>
         </div>
     </section>
 
-    <!-- 下载板块 - 原本放置下载客户端按钮的位置，现在将服务器状态栏移到这里（保持原有外观） -->
-    <div id="download" class="download-bar">
-        <!-- 服务器状态卡片 - 完全保留原始外观，没有改动样式 -->
+    <!-- 下载板块 - 添加滚动动画 -->
+    <div id="download" class="download-bar scroll-reveal">
         <div class="glass-card server-status-box">
             <div style="display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--text-muted); font-size: 0.9rem;">
                 <div class="status-dot" style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981;"></div>
@@ -708,7 +743,6 @@
             </div>
         </div>
         
-        <!-- 下载客户端按钮仍然保留在下方，作为号召 -->
         <h2 style="font-size: 2rem; margin-bottom: 20px; margin-top: 20px;">准备好开始冒险了吗？</h2>
         <p style="color: #cbd5e1; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
             喵喵喵<br>
@@ -720,9 +754,10 @@
         <p style="margin-top: 15px; font-size: 0.9rem; color: #64748b;">支持 Windows / IOS / Android </p>
     </div>
 
-    <section id="specs" class="specs-section">
+    <!-- 硬件配置 - 添加滚动动画 -->
+    <section id="specs" class="specs-section scroll-reveal">
         <div style="flex: 1; min-width: 300px;">
-            <h2 class="section-title" style="text-align: left; margin-bottom: 30px;">硬核配置</b></h2>
+            <h2 class="section-title" style="text-align: left; margin-bottom: 30px;">硬核 <b>配置</b></h2>
             <ul class="specs-list">
                 <li><strong>CPU：</strong> AMD 9950X (5.7Ghz 超频)</li>
                 <li><strong>内存：</strong> 128G DDR5 极速内存</li>
@@ -731,14 +766,14 @@
                 <li><strong>备份：</strong> 每天全量热备份</li>
             </ul>
         </div>
-        <div class="glass-card" style="flex: 1; min-width: 300px; padding: 40px; text-align: center;">
+        <div class="glass-card scroll-reveal scroll-reveal-delay-2" style="flex: 1; min-width: 300px; padding: 40px; text-align: center;">
             <h3 style="font-size: 2rem; color: #fff; margin-bottom: 10px;">QQ 群</h3>
             <div style="font-size: 3rem; color: var(--primary); font-family: 'Consolas', monospace; margin-bottom: 20px;">1057279158</div>
             <p style="color: #94a3b8;">进群获取最新公告</p>
         </div>
     </section>
 
-    <footer>
+    <footer class="scroll-reveal">
         <p style="margin-bottom: 5px;">Copyright © 2025. 青沐晞</p>
         <p style="margin-bottom: 15px;">沪ICP备2024041436号-2</p>
         <p class="footer-disclaimer">
@@ -762,17 +797,16 @@
             </div>
         </div>
     </div>
-        <!-- 团队简介弹窗 -->
+    
+    <!-- 团队简介弹窗 -->
     <div id="team-modal" class="modal" onclick="closeModal(event, 'team-modal')">
         <div class="modal-content team-bio-content" onclick="event.stopPropagation()">
             <span class="close-btn" onclick="closeModal(null, 'team-modal')">&times;</span>
-            
             <div class="team-info-left">
                 <img id="team-avatar" src="" alt="头像">
                 <div id="team-role"></div>
                 <h2 id="team-name"></h2>
             </div>
-            
             <div class="team-info-right">
                 <div style="font-weight: bold; margin-bottom: 15px; color: var(--primary); font-size: 1.2rem;">个人简介</div>
                 <div id="team-description-area">
@@ -818,12 +852,10 @@
         function openLightbox(index) {
             const data = galleryData[index];
             const modal = document.getElementById('lightbox-modal');
-            
             document.getElementById('lightbox-image').src = data.src;
             document.getElementById('lightbox-title').innerText = data.title;
             document.getElementById('lightbox-description').innerText = data.desc;
             document.getElementById('lightbox-builder').innerText = data.builder;
-
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -831,12 +863,10 @@
         function openTeamModal(index) {
             const data = teamData[index];
             const modal = document.getElementById('team-modal');
-            
             document.getElementById('team-avatar').src = data.src;
             document.getElementById('team-role').innerText = data.role;
             document.getElementById('team-name').innerText = data.name;
             document.getElementById('team-description-text').innerText = data.desc; 
-
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -866,11 +896,9 @@
             const ip = "es912.top";
             const port = "20100";
             const apiUrl = `https://api.mcsrvstat.us/2/${ip}:${port}`;
-            
             const dot = document.querySelector('.status-dot');
             const text = document.getElementById('server-status-text');
             const count = document.getElementById('player-count');
-
             try {
                 const res = await fetch(apiUrl);
                 const data = await res.json();
@@ -893,6 +921,65 @@
 
         fetchStatus();
         setInterval(fetchStatus, 30000);
+        
+        // ==================== 打字机效果 ====================
+        function typewriterEffect(element, text, speed = 80) {
+            let i = 0;
+            element.innerHTML = '';
+            const cursor = document.createElement('span');
+            cursor.className = 'typewriter-cursor';
+            cursor.innerHTML = '▌';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    // 打字完成后，光标继续闪烁一会儿再隐藏
+                    cursor.style.animation = 'blink 0.8s step-end infinite';
+                    element.appendChild(cursor);
+                }
+            }
+            type();
+        }
+        
+        // 页面加载完成后启动打字机效果
+        window.addEventListener('DOMContentLoaded', () => {
+            const subElement = document.getElementById('typewriter-sub');
+            const fullText = 'QingMuXi · 湛蓝安宁之所';
+            typewriterEffect(subElement, fullText, 70);
+        });
+        
+        // ==================== 滚动渐现动画 ====================
+        function initScrollReveal() {
+            const revealElements = document.querySelectorAll('.scroll-reveal');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        observer.unobserve(entry.target); // 只触发一次
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -20px 0px'
+            });
+            
+            revealElements.forEach(el => observer.observe(el));
+        }
+        
+        // 页面加载完成后初始化滚动动画
+        window.addEventListener('load', () => {
+            initScrollReveal();
+            // 确保所有滚动元素初始状态
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+                    el.classList.add('revealed');
+                }
+            });
+        });
     </script>
 </body>
 </html>
