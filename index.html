@@ -34,7 +34,7 @@
             position: relative;
         }
 
-        /* 中间固定的背景装饰图片 - 使用本地图片 */
+        /* 中间固定的背景装饰图片 */
         body::before {
             content: '';
             position: fixed;
@@ -43,7 +43,7 @@
             transform: translate(-50%, -50%);
             width: 300px;
             height: 80vh;
-            background-image: url('tp/left-deco.png');  /* 使用固定的本地图片 */
+            background-image: url('tp/left-deco.png');
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
@@ -58,20 +58,20 @@
             display: none;
         }
 
-        /* 主要内容区域提升层级，不被背景图遮住 */
+        /* 主要内容区域提升层级 */
         .header-stats-container,
         .hero,
         .team-section,
         .features,
         .screenshot-gallery,
-        .download-bar,
+        .download-qq-section,
         .specs-section,
         footer {
             position: relative;
             z-index: 2;
         }
 
-        /* 最开头大标题 - 去掉所有空隙 */
+        /* 最开头大标题 */
         .header-stats-container {
             padding: 20px 20px 0 20px;
             text-align: center;
@@ -97,7 +97,7 @@
             letter-spacing: 1px;
         }
 
-        /* 英雄区域 - 顶部边距设为0，与标题无缝衔接 */
+        /* 英雄区域 */
         .hero {
             min-height: auto;
             display: flex;
@@ -107,35 +107,12 @@
             text-align: center;
             padding: 0 20px 30px 20px;
             position: relative;
-            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--bg-dark) 100%), url('tp/bj.png');  /* 使用本地背景图 */
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--bg-dark) 100%), url('tp/bj.png');
             background-size: cover; 
             background-position: center; 
             background-repeat: no-repeat;
         }
 
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            opacity: 0.7; 
-            background: linear-gradient(to right, #fff, #3b82f6, #fff);
-            background-size: 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 5s linear infinite;
-        }
-
-        @keyframes shine {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: #cbd5e1;
-            max-width: 600px;
-            margin-bottom: 40px;
-        }
-        
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(12px);
@@ -144,7 +121,6 @@
             transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
         }
         
-        /* 点击/聚焦边框变为蓝色 */
         .glass-card:focus-within,
         .glass-card:active {
             border-color: var(--accent-blue) !important;
@@ -156,7 +132,7 @@
             border-color: rgba(37, 99, 235, 0.5);
         }
 
-        /* 服务器状态 */
+        /* 服务器状态卡片 */
         .server-status-box {
             padding: 20px 40px;
             display: flex;
@@ -315,14 +291,82 @@
         .card-content h3 { font-size: 1.5rem; color: var(--primary); margin-bottom: 10px; }
         .card-content p { color: var(--text-muted); }
 
-        /* 下载板块 */
-        .download-bar {
-            background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), rgba(0,0,0,0));
-            border-top: 1px solid rgba(59, 130, 246, 0.2);
-            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
-            padding: 40px 20px;
-            text-align: center;
+        /* 下载 + QQ群 合并板块 (替换原来的准备好开始冒险) */
+        .download-qq-section {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(0, 0, 0, 0.3));
+            border-top: 1px solid rgba(59, 130, 246, 0.3);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 50px 20px;
             margin-top: 30px;
+        }
+        
+        .download-qq-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .download-box, .qq-box {
+            flex: 1;
+            min-width: 260px;
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .download-box:hover, .qq-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+        }
+        
+        .download-icon, .qq-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .download-box h3, .qq-box h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .download-box p, .qq-box p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .qq-number {
+            font-size: 1.5rem;
+            font-family: 'Consolas', monospace;
+            color: #fff;
+            background: rgba(59, 130, 246, 0.2);
+            padding: 10px 20px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .btn-qq {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-qq:hover {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
         }
 
         /* 硬件配置 */
@@ -346,7 +390,7 @@
             box-shadow: 0 0 10px var(--primary);
         }
 
-        /* 截图画廊 - 使用本地图片 */
+        /* 截图画廊 */
         .screenshot-gallery {
             padding: 60px 5%;
             background-color: rgba(0,0,0,0.2); 
@@ -564,6 +608,10 @@
             }
             .page-header-title { font-size: 2.8rem; }
             .hero { padding-top: 0; }
+            .download-qq-container {
+                flex-direction: column;
+                gap: 30px;
+            }
             #lightbox-modal .modal-content,
             #team-modal .team-bio-content {
                 flex-direction: column; 
@@ -586,13 +634,13 @@
     </style>
 </head>
 <body>
-    <!-- 最开头大标题 - 无空隙 -->
+    <!-- 最开头大标题 -->
     <div class="header-stats-container">
         <div class="page-header-title">青沐晞服务器</div>
         <div class="page-header-sub">QingMuXi · 湛蓝安宁之所</div>
     </div>
 
-    <!-- Hero区域 - 与标题无缝衔接 -->
+    <!-- Hero区域 -->
     <div class="hero">
         <!-- 服务器状态卡片 -->
         <div class="glass-card server-status-box">
@@ -635,7 +683,6 @@
     <section id="team" class="team-section">
         <h2 class="section-title">核心 <b>团队</b></h2>
         <div class="team-grid">
-            <!-- 服主 null1442 使用本地图片 -->
             <div class="member-card" onclick="openTeamModal(0)">
                 <div class="avatar-box owner-glow">
                     <img src="tp/null1442.jpg" alt="null1442" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=null1442&background=ffd700&color=fff&size=128'">
@@ -644,7 +691,6 @@
                 <h3 style="margin-bottom: 5px;">null1442</h3>
                 <p style="font-size: 0.85rem; color: #94a3b8;">服务器的拥有者<br>致力打造稳定环境</p>
             </div>
-            <!-- 管理 扉 使用本地图片 -->
             <div class="member-card" onclick="openTeamModal(1)">
                 <div class="avatar-box admin-glow">
                     <img src="tp/扉.jpg" alt="扉" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=扉&background=00d2ff&color=fff&size=128&length=2'">
@@ -693,38 +739,51 @@
             点击图片查看详细信息和建造者。
         </p>
         <div class="gallery-grid">
-            <!-- 所有截图使用本地图片，添加onerror备用 -->
             <div class="gallery-item" onclick="openLightbox(0)">
-                <img src="tp/jz1.png" alt="雪黎的玩偶" onerror="this.src='https://picsum.photos/320/220?random=10'">
+                <img src="tp/jz1.png" alt="宇宙琴弦空间站" onerror="this.src='https://picsum.photos/320/220?random=10'">
             </div>
             <div class="gallery-item" onclick="openLightbox(1)">
-                <img src="tp/jz2.png" alt="天使的摇篮" onerror="this.src='https://picsum.photos/320/220?random=11'">
+                <img src="tp/jz2.png" alt="服主雕塑" onerror="this.src='https://picsum.photos/320/220?random=11'">
             </div>
             <div class="gallery-item" onclick="openLightbox(2)">
-                <img src="tp/jz3.png" alt="玩家合影" onerror="this.src='https://picsum.photos/320/220?random=12'">
+                <img src="tp/jz3.png" alt="粉色小屋" onerror="this.src='https://picsum.photos/320/220?random=12'">
             </div>
             <div class="gallery-item" onclick="openLightbox(3)">
-                <img src="tp/jz4.png" alt="生电基地" onerror="this.src='https://picsum.photos/320/220?random=13'">
+                <img src="tp/jz4.png" alt="北欧小屋" onerror="this.src='https://picsum.photos/320/220?random=13'">
             </div>
             <div class="gallery-item" onclick="openLightbox(4)">
-                <img src="tp/jz5.png" alt="沐晞商业街" onerror="this.src='https://picsum.photos/320/220?random=14'">
+                <img src="tp/jz5.png" alt="玩家基地全景" onerror="this.src='https://picsum.photos/320/220?random=14'">
             </div>
             <div class="gallery-item" onclick="openLightbox(5)">
-                <img src="tp/jz6.png" alt="沐晞城" onerror="this.src='https://picsum.photos/320/220?random=15'">
+                <img src="tp/jz6.png" alt="空中漂浮岛" onerror="this.src='https://picsum.photos/320/220?random=15'">
             </div>
         </div>
     </section>
 
-    <div id="download" class="download-bar">
-        <h2 style="font-size: 2rem; margin-bottom: 20px;">准备好开始冒险了吗？</h2>
-        <p style="color: #cbd5e1; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
-            喵喵喵<br>
-        </p>
-        
-        <a href="https://mc.minebbs.com/" target="_blank" class="btn btn-primary" style="padding: 15px 40px; font-size: 1.2rem;">
-            立即下载客户端 (Minecraft)
-        </a>
-        <p style="margin-top: 15px; font-size: 0.9rem; color: #64748b;">支持 Windows / IOS / Android </p>
+    <!-- 替换后的板块：下载客户端 + QQ群 双卡片设计 -->
+    <div class="download-qq-section">
+        <div class="download-qq-container">
+            <!-- 下载客户端卡片 -->
+            <div class="download-box">
+                <div class="download-icon">⬇️</div>
+                <h3>下载客户端</h3>
+                <p>支持 Windows / macOS / iOS / Android<br>全平台畅玩，手机电脑互通</p>
+                <a href="https://mc.minebbs.com/" target="_blank" class="btn btn-primary" style="margin-top: 10px;">
+                    立即下载 Minecraft
+                </a>
+            </div>
+            
+            <!-- QQ群卡片 -->
+            <div class="qq-box">
+                <div class="qq-icon">💬</div>
+                <h3>加入玩家社群</h3>
+                <p>获取最新公告、活动资讯<br>与小伙伴们一起交流</p>
+                <div class="qq-number">1057279158</div>
+                <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=VqKYt%2FZyzu9Q1kzmDklt6PbWKpLeQEMopmAaCgcnAvGlO2%2FEer19JXcbKXrfWETZ&busi_data=eyJncm91cENvZGUiOiIxMDU3Mjc5MTU4IiwidG9rZW4iOiIzU1FFakZKVVA2ZGd0N2ZoekZLM3ZPUXVOYkl3SnN5S2VDRVE1dlM5MHZDbEV4aC93ZGE0ZnlhdkxWZmtVSnBVIiwidWluIjoiMzIyNzM3NzI5NSJ9&data=gBUN5EqEJppWUzdrtxVthX27yn8GG1U8CgC3KNCyV4cE2RaZCsCBkzajyAZMaYyCe_zi3bL73Asbd6MuICErtw&svctype=4&tempid=h5_group_info" target="_blank" class="btn btn-outline btn-qq">
+                    点击加入 QQ 群
+                </a>
+            </div>
+        </div>
     </div>
 
     <section id="specs" class="specs-section">
@@ -792,12 +851,12 @@
 
     <script>
         const galleryData = [
-            { src: 'tp/jz1.png', title: '雪黎的玩偶', builder: 'null1442', desc: '玩偶不仅可佩戴于头顶、抱在怀中，还具有右键粒子互动效果，赋予装饰性物品生动的陪伴功能，提升游戏体验。支持通过替换皮肤文件自由更改玩偶外观，方便玩家与整合包作者进行个性化适配。支持 1.21.20 及以上主流版本，不依赖其他模组，性能友好，适合各类生存服务器与整合包。可爱治愈的风格符合当前模组社区流行趋势，同时具备实用性，适合录制视频、截图分享。' },
-            { src: 'tp/jz2.png', title: '天使的摇篮', builder: 'OORT', desc: '服务器主城，作者是OORT,是服务器的独特象征。' }, 
-            { src: 'tp/jz3.png', title: '玩家合影', builder: '全体玩家', desc: '非常具有个人特色。' },
-            { src: 'tp/jz4.png', title: '生电基地', builder: 'null1442', desc: '肝~' },
-            { src: 'tp/jz5.png', title: '沐晞商业街', builder: '全体玩家', desc: '玩家们共同努力打造的商业街，设施完备，展现了集体智慧与纯粹生存的社区精神。' },
-            { src: 'tp/jz6.png', title: '沐晞城', builder: 'null1442', desc: '结构精巧，充满想象力，是服务器中的一处奇景。' }
+            { src: 'tp/jz1.png', title: '宇宙琴弦空间站', builder: 'Yingkana', desc: '宏伟的环状空间站，充满了科幻与机械美感，是服务器中的标志性建筑，花费了大量心血制作。' },
+            { src: 'tp/jz2.png', title: '服主雕塑', builder: 'shenyuantaixiu', desc: '代表服主形象的巨型像素雕塑，坐落在基地附近，是玩家对服主的致敬和服务器的独特象征。' }, 
+            { src: 'tp/jz3.png', title: 'shi_mi 的粉色小屋', builder: 'shi_mi', desc: '玩家 shi_mi 建造的温馨粉色小屋，在生存环境中增添了一抹亮色，非常具有个人特色。' },
+            { src: 'tp/jz4.png', title: '北欧风格小屋', builder: 'DiresUndewLight', desc: 'DiresUndewLight 的作品，采用经典的木材结构和尖顶设计，充满自然气息和北欧简约风格。' },
+            { src: 'tp/jz5.png', title: '全体玩家制作基地全景', builder: '全体玩家', desc: '玩家们共同努力打造的生存基地，设施完备，展现了集体智慧与纯粹生存的社区精神。' },
+            { src: 'tp/jz6.png', title: '空中漂浮岛', builder: '未知玩家', desc: '一个悬浮在天空中的梦幻小岛，结构精巧，充满想象力，是服务器中的一处奇景。' }
         ];
 
         const teamData = [
@@ -895,7 +954,7 @@
                 }
             } catch (e) {
                 console.error(e);
-                text.innerStatus = "状态未知";
+                text.innerText = "状态未知";
             }
         }
 
