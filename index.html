@@ -66,7 +66,7 @@
             z-index: 2;
         }
 
-        /* 最开头大标题 */
+        /* 最开头大标题 - 只留服务器标题，无状态栏 */
         .header-stats-container {
             padding: 20px 20px 0 20px;
             text-align: center;
@@ -92,7 +92,7 @@
             letter-spacing: 1px;
         }
 
-        /* 英雄区域 - 顶部边距0，与标题无缝衔接 */
+        /* 英雄区域 - 顶部边距0，与标题无缝衔接，移除了原有的服务器状态卡片 */
         .hero {
             min-height: auto;
             display: flex;
@@ -150,163 +150,7 @@
             border-color: rgba(37, 99, 235, 0.5);
         }
 
-        /* 全新替换后的服务器状态 + 下载二合一卡片 */
-        .status-download-combo {
-            padding: 24px 32px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 18px;
-            margin: 0 0 20px 0;
-            width: 100%;
-            max-width: 580px;
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(12px);
-            border-radius: 28px;
-            border: 1px solid rgba(59,130,246,0.3);
-            transition: all 0.3s;
-        }
-
-        .status-download-combo:hover {
-            border-color: rgba(59,130,246,0.8);
-            box-shadow: 0 0 25px rgba(59,130,246,0.2);
-        }
-
-        /* 状态行（左侧指示灯+右侧人数） */
-        .combo-status-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .server-live-badge {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(0,0,0,0.4);
-            padding: 8px 20px;
-            border-radius: 60px;
-            backdrop-filter: blur(4px);
-        }
-        
-        .status-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: #ef4444;
-            box-shadow: 0 0 12px #ef4444;
-            transition: all 0.2s;
-        }
-        
-        #server-status-text {
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-        
-        .online-count-badge {
-            display: flex;
-            align-items: baseline;
-            gap: 6px;
-            background: rgba(0,0,0,0.4);
-            padding: 8px 20px;
-            border-radius: 60px;
-        }
-        
-        .online-count-badge span:first-child {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #fff;
-        }
-        
-        .online-count-badge span:last-child {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-        
-        /* IP 复制区块 */
-        .combo-ip-area {
-            background: rgba(0,0,0,0.5);
-            border-radius: 48px;
-            padding: 6px 8px 6px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            gap: 12px;
-            flex-wrap: wrap;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.2s;
-        }
-        
-        .ip-display-text {
-            font-family: 'Consolas', monospace;
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #e2e8f0;
-            letter-spacing: 1px;
-            word-break: break-all;
-        }
-        
-        .copy-ip-btn {
-            background: rgba(59, 130, 246, 0.2);
-            border: 1px solid rgba(59,130,246,0.5);
-            padding: 8px 20px;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--primary);
-            cursor: pointer;
-            transition: all 0.2s;
-            backdrop-filter: blur(4px);
-        }
-        
-        .copy-ip-btn:hover {
-            background: var(--primary);
-            color: #fff;
-            border-color: var(--primary);
-            box-shadow: 0 0 12px rgba(59,130,246,0.5);
-        }
-        
-        #copy-hint {
-            font-size: 0.7rem;
-            color: #5b6e8c;
-            text-align: center;
-            margin-top: 0;
-        }
-        
-        /* 下载大按钮 */
-        .combo-download-btn {
-            background: linear-gradient(105deg, #3b82f6 0%, #1e40af 100%);
-            border: none;
-            width: 100%;
-            padding: 14px 0;
-            border-radius: 48px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            box-shadow: 0 8px 20px rgba(59,130,246,0.3);
-            text-decoration: none;
-        }
-        
-        .combo-download-btn:hover {
-            transform: translateY(-3px);
-            background: linear-gradient(105deg, #2563eb, #1e3a8a);
-            box-shadow: 0 15px 30px rgba(59,130,246,0.5);
-        }
-        
-        .combo-download-btn:active {
-            transform: translateY(1px);
-        }
-
+        /* 按钮样式 */
         .btn {
             padding: 10px 28px;
             border-radius: 30px;
@@ -427,7 +271,7 @@
         .card-content h3 { font-size: 1.5rem; color: var(--primary); margin-bottom: 10px; }
         .card-content p { color: var(--text-muted); }
 
-        /* 原下载栏保留但隐藏原本的按钮区？为了符合需求，但为了界面整洁保留原结构但视觉上无需重复，不过为了保留其他链接，将原来的 .download-bar 稍作样式微调，但主要入口已经在英雄区了 */
+        /* 下载板块 - 原位置，现在放置服务器状态卡片（原有外观） */
         .download-bar {
             background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), rgba(0,0,0,0));
             border-top: 1px solid rgba(59, 130, 246, 0.2);
@@ -435,6 +279,45 @@
             padding: 40px 20px;
             text-align: center;
             margin-top: 30px;
+        }
+        
+        /* 保持原有服务器状态卡片样式，完全不变 */
+        .server-status-box {
+            padding: 20px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin: 0 auto 20px auto;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .status-dot {
+            width: 10px; 
+            height: 10px; 
+            border-radius: 50%;
+            background-color: #ef4444;
+            box-shadow: 0 0 15px #ef4444;
+            transition: all 0.5s;
+        }
+        
+        .ip-display {
+            font-family: 'Consolas', monospace;
+            font-size: 1.5rem;
+            color: #fff;
+            letter-spacing: 1px;
+            cursor: pointer;
+            padding: 8px 20px;
+            border-radius: 8px;
+            border: 1px dashed rgba(255,255,255,0.2);
+            transition: all 0.3s;
+        }
+        
+        .ip-display:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
         }
 
         /* 硬件配置 */
@@ -692,49 +575,22 @@
             #team-avatar { width: 100px; height: 100px; }
             .lightbox-image-container { min-height: 250px; }
             .lightbox-info { min-width: auto; padding: 20px; }
-            .status-download-combo { padding: 20px; max-width: 95%; }
-            .ip-display-text { font-size: 1rem; }
-            .copy-ip-btn { padding: 6px 14px; }
+            .server-status-box { padding: 15px 20px; max-width: 95%; }
+            .ip-display { font-size: 1.2rem; padding: 6px 16px; }
         }
     </style>
 </head>
 <body>
+    <!-- 最开头大标题 - 只留服务器标题，无状态栏 -->
     <div class="header-stats-container">
         <div class="page-header-title">青沐晞服务器</div>
         <div class="page-header-sub">QingMuXi · 湛蓝安宁之所</div>
     </div>
 
+    <!-- Hero区域 - 与标题无缝衔接，移除了原有状态栏卡片 -->
     <div class="hero">
-        <!-- 新服务器状态+下载一体化模块，完全替换原有服务器状态卡片 -->
-        <div class="status-download-combo glass-card">
-            <!-- 第一行：运行状态 + 在线人数 -->
-            <div class="combo-status-row">
-                <div class="server-live-badge">
-                    <div class="status-dot" id="status-dot" style="background-color:#ef4444;"></div>
-                    <span id="server-status-text">获取状态中...</span>
-                </div>
-                <div class="online-count-badge">
-                    <span id="player-count">--</span>
-                    <span>在线人数</span>
-                </div>
-            </div>
-            
-            <!-- IP 地址与复制区域 -->
-            <div class="combo-ip-area">
-                <span class="ip-display-text">es912.top:20100</span>
-                <button class="copy-ip-btn" id="copyIpBtn">📋 复制 IP</button>
-            </div>
-            <div id="copy-hint" style="margin-top: -8px;">点击上方按钮复制服务器地址</div>
-            
-            <!-- 下载客户端大按钮 (将原有准备就绪部分融合) -->
-            <a href="https://mc.minebbs.com/" target="_blank" class="combo-download-btn" id="mainDownloadBtn">
-                ⬇ 立即下载客户端 (Minecraft)
-            </a>
-            <div style="font-size: 0.75rem; color: #5b6e8c;">支持 Windows / macOS / iOS / Android</div>
-        </div>
-
-        <!-- 按钮组保留QQ群等 -->
-        <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 5px;">
+        <!-- 按钮组：QQ群入口等 -->
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 20px;">
             <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=VqKYt%2FZyzu9Q1kzmDklt6PbWKpLeQEMopmAaCgcnAvGlO2%2FEer19JXcbKXrfWETZ&busi_data=eyJncm91cENvZGUiOiIxMDU3Mjc5MTU4IiwidG9rZW4iOiIzU1FFakZKVVA2ZGd0N2ZoekZLM3ZPUXVOYkl3SnN5S2VDRVE1dlM5MHZDbEV4aC93ZGE0ZnlhdkxWZmtVSnBVIiwidWluIjoiMzIyNzM3NzI5NSJ9&data=gBUN5EqEJppWUzdrtxVthX27yn8GG1U8CgC3KNCyV4cE2RaZCsCBkzajyAZMaYyCe_zi3bL73Asbd6MuICErtw&svctype=4&tempid=h5_group_info" target="_blank" class="btn btn-outline">
                 加入 QQ 群
             </a>
@@ -743,16 +599,17 @@
     
     <!-- 核心团队 -->
     <section id="team" class="team-section">
-        <h2 class="section-title">核心 <b>团队</b></h2>
+        <h2 class="section-title">核心团队</b></h2>
         <div class="team-grid">
+            <!-- 服主 null1442 使用本地图片 -->
             <div class="member-card" onclick="openTeamModal(0)">
                 <div class="avatar-box owner-glow">
                     <img src="tp/null1442.jpg" alt="null1442" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=null1442&background=ffd700&color=fff&size=128'">
                 </div>
                 <span class="role-badge role-owner">OWNER / 服主</span>
                 <h3 style="margin-bottom: 5px;">null1442</h3>
-                <p style="font-size: 0.85rem; color: #94a3b8;">服务器的拥有者<br>致力打造稳定环境</p>
-            </div>
+                <p style="font-size: 0.85rem; color: #94a3b8;">服务器的拥有者<br>致力打造稳定环境</p>            </div>
+            <!-- 管理 扉 使用本地图片 -->
             <div class="member-card" onclick="openTeamModal(1)">
                 <div class="avatar-box admin-glow">
                     <img src="tp/扉.jpg" alt="扉" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=扉&background=00d2ff&color=fff&size=128&length=2'">
@@ -764,8 +621,9 @@
         </div>
     </section>
 
+    <!-- 为什么选择我们 -->
     <section id="features" class="features">
-        <h2 class="section-title">为什么选择 <b>我们</b></h2>
+        <h2 class="section-title">为什么选择我们</b></h2>
         <div class="grid">
             <div class="glass-card" style="padding: 30px;" tabindex="0">
                 <div class="card-content">
@@ -795,11 +653,12 @@
     </section>
 
     <section id="gallery" class="screenshot-gallery">
-        <h2 class="section-title">服务器 <b>精美截图</b></h2>
+        <h2 class="section-title">服务器精美截图</b></h2>
         <p style="text-align: center; color: var(--text-muted); max-width: 800px; margin-left: auto; margin-right: auto; margin-bottom: 30px;">
-            点击图片查看详细信息和建造者。
+            点击图片查看详细信息
         </p>
         <div class="gallery-grid">
+            <!-- 所有截图使用本地图片 -->
             <div class="gallery-item" onclick="openLightbox(0)">
                 <img src="tp/jz1.png" alt="雪黎的玩偶" onerror="this.src='https://picsum.photos/320/220?random=10'">
             </div>
@@ -821,19 +680,49 @@
         </div>
     </section>
 
+    <!-- 下载板块 - 原本放置下载客户端按钮的位置，现在将服务器状态栏移到这里（保持原有外观） -->
     <div id="download" class="download-bar">
-        <h2 style="font-size: 2rem; margin-bottom: 20px;">更多玩法 & 社区动态</h2>
+        <!-- 服务器状态卡片 - 完全保留原始外观，没有改动样式 -->
+        <div class="glass-card server-status-box">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--text-muted); font-size: 0.9rem;">
+                <div class="status-dot" style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981;"></div>
+                <span id="server-status-text">正在连接服务器...</span>
+            </div>
+            
+            <div class="ip-display" onclick="copyIP()" title="点击复制" style="font-size: 1.8rem; font-weight: 600; margin: 5px 0 5px; cursor: pointer; color: #fff; letter-spacing: 1px; background: rgba(0,0,0,0.3); padding: 8px 20px; border-radius: 40px; display: inline-block;">
+                es912.top:20100
+            </div>
+            <div id="copy-hint" style="font-size: 0.8rem; color: #64748b; margin-bottom: 5px;">点击上方 IP 复制</div>
+            
+            <div style="width: 80%; height: 1px; background: rgba(255,255,255,0.1); margin: 8px auto;"></div>
+            
+            <div style="display: flex; gap: 40px; justify-content: center; margin-top: 0;">
+                <div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: #fff;" id="player-count">57</div>
+                    <div style="font-size: 0.8rem; color: #64748b;">在线人数</div>
+                </div>
+                <div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: #fff;">20</div>
+                    <div style="font-size: 0.8rem; color: #64748b;">TPS状态</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 下载客户端按钮仍然保留在下方，作为号召 -->
+        <h2 style="font-size: 2rem; margin-bottom: 20px; margin-top: 20px;">准备好开始冒险了吗？</h2>
         <p style="color: #cbd5e1; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
-            欢迎加入青沐晞，一起创造属于我们的世界<br>喵喵喵~
+            喵喵喵<br>
         </p>
-        <a href="https://mc.minebbs.com/" target="_blank" class="btn btn-primary" style="padding: 12px 35px;">
-            🎮 备选下载通道
+        
+        <a href="https://mc.minebbs.com/" target="_blank" class="btn btn-primary" style="padding: 15px 40px; font-size: 1.2rem;">
+            立即下载客户端 (Minecraft)
         </a>
+        <p style="margin-top: 15px; font-size: 0.9rem; color: #64748b;">支持 Windows / IOS / Android </p>
     </div>
 
     <section id="specs" class="specs-section">
         <div style="flex: 1; min-width: 300px;">
-            <h2 class="section-title" style="text-align: left; margin-bottom: 30px;">硬核 <b>配置</b></h2>
+            <h2 class="section-title" style="text-align: left; margin-bottom: 30px;">硬核配置</b></h2>
             <ul class="specs-list">
                 <li><strong>CPU：</strong> AMD 9950X (5.7Ghz 超频)</li>
                 <li><strong>内存：</strong> 128G DDR5 极速内存</li>
@@ -850,40 +739,74 @@
     </section>
 
     <footer>
-        <p>Copyright © 2025. 青沐晞</p>
-        <p>沪ICP备2024041436号-2</p>
-        <p class="footer-disclaimer">"Minecraft" 以及 "我的世界" 为 Mojang Synergies AB 的商标，本站与 Mojang 以及 Microsoft 没有从属关系。</p>
+        <p style="margin-bottom: 5px;">Copyright © 2025. 青沐晞</p>
+        <p style="margin-bottom: 15px;">沪ICP备2024041436号-2</p>
+        <p class="footer-disclaimer">
+            "Minecraft" 以及 "我的世界" 为 Mojang Synergies AB 的商标，本站与 Mojang 以及 Microsoft 没有从属关系。
+        </p>
     </footer>
 
-    <!-- 灯箱模态框 -->
+    <!-- 截图灯箱 -->
     <div id="lightbox-modal" class="modal" onclick="closeModal(event, 'lightbox-modal')">
         <div class="modal-content" onclick="event.stopPropagation()">
             <span class="close-btn" onclick="closeModal(null, 'lightbox-modal')">&times;</span>
-            <div class="lightbox-image-container"><img id="lightbox-image" src="" alt=""></div>
-            <div class="lightbox-info"><h2 id="lightbox-title"></h2><p id="lightbox-description"></p><strong>建造者/参与者：</strong><span id="lightbox-builder"></span></div>
+            <div class="lightbox-image-container">
+                <img id="lightbox-image" src="" alt="">
+            </div>
+            <div class="lightbox-info">
+                <h2 id="lightbox-title"></h2>
+                <p id="lightbox-description"></p>
+                <div id="lightbox-builder-info">
+                    <strong>建造者/参与者：</strong><span id="lightbox-builder"></span>
+                </div>
+            </div>
         </div>
     </div>
+        <!-- 团队简介弹窗 -->
     <div id="team-modal" class="modal" onclick="closeModal(event, 'team-modal')">
         <div class="modal-content team-bio-content" onclick="event.stopPropagation()">
             <span class="close-btn" onclick="closeModal(null, 'team-modal')">&times;</span>
-            <div class="team-info-left"><img id="team-avatar" src=""><div id="team-role"></div><h2 id="team-name"></h2></div>
-            <div class="team-info-right"><div style="font-weight: bold; margin-bottom: 15px; color: var(--primary);">个人简介</div><div id="team-description-area"><p id="team-description-text"></p></div></div>
+            
+            <div class="team-info-left">
+                <img id="team-avatar" src="" alt="头像">
+                <div id="team-role"></div>
+                <h2 id="team-name"></h2>
+            </div>
+            
+            <div class="team-info-right">
+                <div style="font-weight: bold; margin-bottom: 15px; color: var(--primary); font-size: 1.2rem;">个人简介</div>
+                <div id="team-description-area">
+                    <p id="team-description-text"></p>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
         const galleryData = [
-            { src: 'tp/jz1.png', title: '雪黎的玩偶', builder: 'null1442', desc: '玩偶不仅可佩戴于头顶、抱在怀中，还具有右键粒子互动效果，赋予装饰性物品生动的陪伴功能。支持 1.21.20+ 版本，性能友好。' },
+            { src: 'tp/jz1.png', title: '雪黎的玩偶', builder: 'null1442', desc: '玩偶不仅可佩戴于头顶、抱在怀中，还具有右键粒子互动效果，赋予装饰性物品生动的陪伴功能，提升游戏体验。支持通过替换皮肤文件自由更改玩偶外观，方便玩家与整合包作者进行个性化适配。支持 1.21.20 及以上主流版本，不依赖其他模组，性能友好，适合各类生存服务器与整合包。可爱治愈的风格符合当前模组社区流行趋势，同时具备实用性，适合录制视频、截图分享。' },
             { src: 'tp/jz2.png', title: '天使的摇篮', builder: 'OORT', desc: '服务器主城，作者是OORT,是服务器的独特象征。' }, 
             { src: 'tp/jz3.png', title: '玩家合影', builder: '全体玩家', desc: '非常具有个人特色。' },
             { src: 'tp/jz4.png', title: '生电基地', builder: 'null1442', desc: '肝~' },
-            { src: 'tp/jz5.png', title: '沐晞商业街', builder: '全体玩家', desc: '玩家们共同努力打造的商业街，设施完备。' },
+            { src: 'tp/jz5.png', title: '沐晞商业街', builder: '全体玩家', desc: '玩家们共同努力打造的商业街，设施完备，展现了集体智慧与纯粹生存的社区精神。' },
             { src: 'tp/jz6.png', title: '沐晞城', builder: 'null1442', desc: '结构精巧，充满想象力，是服务器中的一处奇景。' }
         ];
+
         const teamData = [
-            { src: 'tp/null1442.jpg', role: 'OWNER / 服主', name: 'null1442', desc: '我是青沐晞的 服主，null1442。\n\n我的主要职责是 硬件运维、技术架构与重大决策 。我致力于提供一个永不删档、高配置、纯净的服务器环境，确保每一位玩家都能在这里找到真正的“家”。\n\n欢迎大家随时提出建议，让我们一起建设这个自由的方块世界！' },
-            { src: 'tp/扉.jpg', role: 'ADMIN / 管理', name: '扉', desc: '我是 扉，服务器的 管理 。\n\n我主要负责处理日常社区事务、提供 玩家支持 以及维护社区秩序。如果你在游戏内外遇到任何问题，或者对服务器发展有任何想法，都可以随时私信我。' }
+            { 
+                src: 'tp/null1442.jpg',
+                role: 'OWNER / 服主', 
+                name: 'null1442', 
+                desc: '我是青沐晞的 服主，null1442。\n\n我的主要职责是 硬件运维、技术架构与重大决策 。我致力于提供一个永不删档、高配置、纯净的服务器环境，确保每一位玩家都能在这里找到真正的“家”。\n\n欢迎大家随时提出建议，让我们一起建设这个自由的方块世界！' 
+            },
+            { 
+                src: 'tp/扉.jpg', 
+                role: 'ADMIN / 管理', 
+                name: '扉', 
+                desc: '我是 扉，服务器的 管理 。\n\n我主要负责处理日常社区事务、提供 玩家支持 以及维护社区秩序。如果你在游戏内外遇到任何问题，或者对服务器发展有任何想法，都可以随时私信我。' 
+            }
         ];
+
         function closeModal(event, id) {
             const modal = document.getElementById(id);
             if (event === null || event.target === modal) {
@@ -891,70 +814,83 @@
                 document.body.style.overflow = ''; 
             }
         }
+        
         function openLightbox(index) {
             const data = galleryData[index];
+            const modal = document.getElementById('lightbox-modal');
+            
             document.getElementById('lightbox-image').src = data.src;
             document.getElementById('lightbox-title').innerText = data.title;
             document.getElementById('lightbox-description').innerText = data.desc;
             document.getElementById('lightbox-builder').innerText = data.builder;
-            document.getElementById('lightbox-modal').classList.add('active');
+
+            modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
+
         function openTeamModal(index) {
             const data = teamData[index];
+            const modal = document.getElementById('team-modal');
+            
             document.getElementById('team-avatar').src = data.src;
             document.getElementById('team-role').innerText = data.role;
             document.getElementById('team-name').innerText = data.name;
-            document.getElementById('team-description-text').innerText = data.desc;
-            document.getElementById('team-modal').classList.add('active');
+            document.getElementById('team-description-text').innerText = data.desc; 
+
+            modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
-        document.addEventListener('keydown', (e) => { if(e.key === 'Escape'){ closeModal(null,'lightbox-modal'); closeModal(null,'team-modal'); } });
-        
-        // 复制IP功能 (新)
-        function copyServerIP() {
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal(null, 'lightbox-modal');
+                closeModal(null, 'team-modal');
+            }
+        });
+
+        function copyIP() {
             const ip = "es912.top:20100";
             navigator.clipboard.writeText(ip).then(() => {
-                const hintDiv = document.getElementById('copy-hint');
-                const original = hintDiv.innerText;
-                hintDiv.innerText = "✅ 复制成功！";
-                hintDiv.style.color = "#3b82f6";
+                const hint = document.getElementById('copy-hint');
+                const originalText = hint.innerText;
+                hint.innerText = "✅ 复制成功！";
+                hint.style.color = "#3b82f6";
                 setTimeout(() => {
-                    hintDiv.innerText = original;
-                    hintDiv.style.color = "#5b6e8c";
-                }, 1800);
+                    hint.innerText = originalText;
+                    hint.style.color = "#64748b";
+                }, 2000);
             });
         }
-        document.getElementById('copyIpBtn').addEventListener('click', copyServerIP);
-        
-        // 服务器状态获取
+
         async function fetchStatus() {
             const ip = "es912.top";
             const port = "20100";
             const apiUrl = `https://api.mcsrvstat.us/2/${ip}:${port}`;
-            const dot = document.getElementById('status-dot');
-            const textSpan = document.getElementById('server-status-text');
-            const countSpan = document.getElementById('player-count');
+            
+            const dot = document.querySelector('.status-dot');
+            const text = document.getElementById('server-status-text');
+            const count = document.getElementById('player-count');
+
             try {
                 const res = await fetch(apiUrl);
                 const data = await res.json();
                 if(data.online) {
-                    dot.style.backgroundColor = "#10b981";
+                    dot.style.backgroundColor = "#10b981"; 
                     dot.style.boxShadow = "0 0 15px #10b981";
-                    textSpan.innerText = "✨ 服务器运行中";
-                    countSpan.innerText = (data.players?.online ?? 0) + " / " + (data.players?.max ?? 20);
+                    text.innerText = "服务器运行中";
+                    count.innerText = data.players.online + " / " + data.players.max;
                 } else {
-                    dot.style.backgroundColor = "#ef4444";
-                    dot.style.boxShadow = "0 0 12px #ef4444";
-                    textSpan.innerText = "⚡ 服务器离线";
-                    countSpan.innerText = "0 / 0";
+                    dot.style.backgroundColor = "#ef4444"; 
+                    dot.style.boxShadow = "0 0 15px #ef4444";
+                    text.innerText = "服务器离线";
+                    count.innerText = "0";
                 }
-            } catch(e) {
-                console.warn(e);
-                textSpan.innerText = "🌐 状态获取失败";
-                dot.style.backgroundColor = "#f59e0b";
+            } catch (e) {
+                console.error(e);
+                text.innerText = "状态未知";
             }
         }
+
         fetchStatus();
         setInterval(fetchStatus, 30000);
     </script>
