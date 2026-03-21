@@ -15,6 +15,9 @@
             --text-muted: #94a3b8;
             --accent-blue: #2563eb;       
             --blue-glow: rgba(37, 99, 235, 0.5);
+            --rule-warning: #f59e0b;
+            --rule-danger: #ef4444;
+            --rule-success: #10b981;
         }
 
         * {
@@ -56,6 +59,7 @@
         /* 主要内容区域提升层级 */
         .header-stats-container,
         .hero,
+        .rules-section,
         .team-section,
         .features,
         .screenshot-gallery,
@@ -85,7 +89,7 @@
             line-height: 1.1;
         }
         
-        /* 打字机效果副标题容器 */
+        /* 打字机效果副标题 */
         .page-header-sub {
             color: var(--text-muted);
             font-size: 1.1rem;
@@ -121,13 +125,11 @@
             transform: translateY(0);
         }
         
-        /* 为不同元素添加延迟，错落有致 */
         .scroll-reveal-delay-1 { transition-delay: 0.1s; }
         .scroll-reveal-delay-2 { transition-delay: 0.2s; }
         .scroll-reveal-delay-3 { transition-delay: 0.3s; }
         .scroll-reveal-delay-4 { transition-delay: 0.4s; }
 
-        /* 英雄区域 */
         .hero {
             min-height: auto;
             display: flex;
@@ -143,29 +145,6 @@
             background-repeat: no-repeat;
         }
 
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            opacity: 0.7; 
-            background: linear-gradient(to right, #fff, #3b82f6, #fff);
-            background-size: 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 5s linear infinite;
-        }
-
-        @keyframes shine {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: #cbd5e1;
-            max-width: 600px;
-            margin-bottom: 40px;
-        }
-        
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(12px);
@@ -218,6 +197,149 @@
             border-color: #fff;
         }
 
+        /* ==================== 规则模块样式 ==================== */
+        .rules-section {
+            padding: 60px 8%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(59,130,246,0.05) 100%);
+            margin-top: 20px;
+        }
+        
+        .rules-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .rule-category {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .rule-category:hover {
+            border-color: rgba(59,130,246,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .category-header {
+            padding: 18px 28px;
+            background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(0,0,0,0.2));
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .category-icon {
+            font-size: 1.8rem;
+        }
+        
+        .category-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .category-title span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-left: 10px;
+        }
+        
+        .rules-list {
+            padding: 20px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        
+        .rule-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.2s;
+        }
+        
+        .rule-item:last-child {
+            border-bottom: none;
+        }
+        
+        .rule-number {
+            min-width: 36px;
+            height: 36px;
+            background: rgba(59,130,246,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+        
+        .rule-content {
+            flex: 1;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        
+        .rule-content strong {
+            color: var(--text-main);
+        }
+        
+        .rule-highlight {
+            background: linear-gradient(120deg, rgba(245,158,11,0.15), transparent);
+            border-left: 3px solid var(--rule-warning);
+            padding-left: 12px;
+            margin-left: -15px;
+        }
+        
+        .rule-highlight .rule-number {
+            background: rgba(245,158,11,0.3);
+            color: var(--rule-warning);
+        }
+        
+        .rule-danger {
+            border-left-color: var(--rule-danger);
+        }
+        
+        .rule-badge {
+            display: inline-block;
+            background: rgba(239,68,68,0.2);
+            color: #ef4444;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-left: 8px;
+            font-weight: normal;
+        }
+        
+        .reward-badge {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #000;
+            font-weight: bold;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            margin-left: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .rules-section { padding: 40px 5%; }
+            .category-header { padding: 14px 20px; }
+            .category-title { font-size: 1.3rem; }
+            .rules-list { padding: 16px 20px; }
+            .rule-item { gap: 10px; }
+            .rule-number { min-width: 28px; height: 28px; font-size: 0.8rem; }
+        }
+
         /* 团队展示 */
         .team-section {
             padding: 60px 10%;
@@ -238,8 +360,6 @@
             border-radius: 20px;
             text-align: center;
             width: 250px;
-            position: relative;
-            overflow: hidden;
             cursor: pointer;
             transition: all 0.4s;
         }
@@ -248,10 +368,6 @@
             transform: translateY(-10px);
             border-color: var(--accent-blue);
         }
-        .member-card:active {
-            border-color: var(--accent-blue) !important;
-            box-shadow: 0 0 20px var(--blue-glow) !important;
-        }
 
         .avatar-box {
             width: 100px;
@@ -259,7 +375,6 @@
             margin: 0 auto 20px auto;
             border-radius: 50%;
             padding: 3px;
-            position: relative;
         }
         
         .owner-glow {
@@ -277,7 +392,6 @@
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--bg-dark);
-            background-color: #333;
         }
 
         .role-badge {
@@ -289,8 +403,8 @@
             font-weight: bold;
         }
         
-        .role-owner { background: rgba(255, 215, 0, 0.2); color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.3); }
-        .role-admin { background: rgba(0, 210, 255, 0.15); color: #00d2ff; border: 1px solid rgba(0, 210, 255, 0.3); }
+        .role-owner { background: rgba(255, 215, 0, 0.2); color: #ffd700; }
+        .role-admin { background: rgba(0, 210, 255, 0.15); color: #00d2ff; }
 
         .section-title {
             text-align: center;
@@ -316,7 +430,6 @@
             margin-top: 30px;
         }
         
-        /* 服务器状态卡片样式 */
         .server-status-box {
             padding: 20px 40px;
             display: flex;
@@ -329,11 +442,7 @@
         }
 
         .status-dot {
-            width: 10px; 
-            height: 10px; 
-            border-radius: 50%;
-            background-color: #ef4444;
-            box-shadow: 0 0 15px #ef4444;
+            width: 10px; height: 10px; border-radius: 50%;
             transition: all 0.5s;
         }
         
@@ -341,7 +450,6 @@
             font-family: 'Consolas', monospace;
             font-size: 1.5rem;
             color: #fff;
-            letter-spacing: 1px;
             cursor: pointer;
             padding: 8px 20px;
             border-radius: 8px;
@@ -352,7 +460,6 @@
         .ip-display:hover {
             background: rgba(59, 130, 246, 0.1);
             border-color: var(--primary);
-            color: var(--primary);
         }
 
         /* 硬件配置 */
@@ -387,21 +494,17 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
             gap: 20px;
-            justify-content: center; 
         }
         
         .gallery-item {
-            position: relative;
             overflow: hidden;
             border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-            cursor: pointer; 
-            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            transition: transform 0.3s;
         }
         
         .gallery-item:hover {
             transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
         }
         
         .gallery-item img {
@@ -409,7 +512,7 @@
             height: 220px; 
             object-fit: cover; 
             display: block;
-            transition: transform 0.4s ease-in-out;
+            transition: transform 0.4s;
         }
 
         .gallery-item:hover img {
@@ -441,7 +544,6 @@
         .modal-content {
             background: var(--bg-dark);
             border-radius: 16px;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.7);
             position: relative;
         }
         #lightbox-modal .modal-content {
@@ -449,16 +551,13 @@
             width: 90%;
             max-width: 1200px;
             height: 90%;
-            max-height: 800px;
             overflow: hidden;
         }        
         .lightbox-image-container {
             flex: 2;
-            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-width: 60%;
         }
         #lightbox-image {
             max-width: 100%;
@@ -470,46 +569,18 @@
             padding: 30px;
             background: rgba(255, 255, 255, 0.05);
             border-left: 1px solid var(--glass-border);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-width: 300px;
-        }
-        .lightbox-info h2 {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        .lightbox-info p {
-            margin-bottom: 20px;
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-        .lightbox-info strong {
-            color: #fff;
-            display: block;
-            margin-top: 10px;
-            font-size: 0.95rem;
         }
 
-        /* 团队简介弹窗 */
         #team-modal .team-bio-content {
             display: flex;
-            flex-direction: row;
             width: 90%;
             max-width: 900px;
-            padding: 0;
-            text-align: left;
             min-height: 450px;
         }
 
         .team-info-left {
             flex: 0 0 300px;
             padding: 30px;
-            background: rgba(255, 255, 255, 0.08);
-            display: flex;
-            flex-direction: column;
-            align-items: center; 
             text-align: center;
             border-right: 1px solid var(--glass-border);
         }
@@ -517,9 +588,6 @@
         .team-info-right {
             flex: 1;
             padding: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
 
         #team-avatar {
@@ -527,31 +595,7 @@
             height: 150px;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 20px;
             border: 5px solid var(--primary);
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
-            background-color: #333;
-        }
-
-        #team-role {
-            font-size: 1rem;
-            font-weight: bold;
-            color: #00d2ff;
-            margin-bottom: 5px;
-        }
-
-        #team-name {
-            font-size: 2rem;
-            color: #fff;
-            margin-bottom: 15px;
-        }
-        
-        #team-description-area {
-            padding: 0; 
-            background: transparent;
-            border-radius: 0;
-            color: var(--text-muted);
-            white-space: pre-wrap;
         }
 
         .close-btn {
@@ -560,72 +604,43 @@
             right: 25px;
             color: #fff;
             font-size: 2rem;
-            font-weight: bold;
             cursor: pointer;
             z-index: 10;
-            transition: color 0.2s;
         }
         
-        .close-btn:hover {
-            color: #ef4444;
-        }
+        .close-btn:hover { color: #ef4444; }
 
         footer {
             text-align: center;
             padding: 30px 20px;
             border-top: 1px solid var(--glass-border);
             color: var(--text-muted);
-            font-size: 0.9rem;
         }
         
         .footer-disclaimer {
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.4);
             margin-top: 10px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
         }
         
         @media (max-width: 768px) {
-            body::before {
-                width: 150px;
-                opacity: 0.15;
-            }
             .page-header-title { font-size: 2.8rem; }
-            .hero { padding-top: 0; }
             #lightbox-modal .modal-content,
             #team-modal .team-bio-content {
-                flex-direction: column; 
+                flex-direction: column;
                 max-width: 95%;
-                height: 95%;
-                min-height: auto;
-                overflow-y: auto; 
             }
-            .team-info-left {
-                flex: auto;
-                padding: 20px;
-                border-right: none;
-                border-bottom: 1px solid var(--glass-border);
-            }
-            .team-info-right { padding: 20px; }
+            .team-info-left { flex: auto; border-right: none; border-bottom: 1px solid var(--glass-border); }
             #team-avatar { width: 100px; height: 100px; }
-            .lightbox-image-container { min-height: 250px; }
-            .lightbox-info { min-width: auto; padding: 20px; }
-            .server-status-box { padding: 15px 20px; max-width: 95%; }
-            .ip-display { font-size: 1.2rem; padding: 6px 16px; }
         }
     </style>
 </head>
 <body>
-    <!-- 最开头大标题 - 只留服务器标题 -->
     <div class="header-stats-container">
         <div class="page-header-title">青沐晞服务器</div>
-        <!-- 打字机效果副标题容器 -->
         <div class="page-header-sub" id="typewriter-sub"></div>
     </div>
 
-    <!-- Hero区域 -->
     <div class="hero">
         <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 20px;">
             <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=VqKYt%2FZyzu9Q1kzmDklt6PbWKpLeQEMopmAaCgcnAvGlO2%2FEer19JXcbKXrfWETZ&busi_data=eyJncm91cENvZGUiOiIxMDU3Mjc5MTU4IiwidG9rZW4iOiIzU1FFakZKVVA2ZGd0N2ZoekZLM3ZPUXVOYkl3SnN5S2VDRVE1dlM5MHZDbEV4aC93ZGE0ZnlhdkxWZmtVSnBVIiwidWluIjoiMzIyNzM3NzI5NSJ9&data=gBUN5EqEJppWUzdrtxVthX27yn8GG1U8CgC3KNCyV4cE2RaZCsCBkzajyAZMaYyCe_zi3bL73Asbd6MuICErtw&svctype=4&tempid=h5_group_info" target="_blank" class="btn btn-outline">
@@ -634,7 +649,114 @@
         </div>
     </div>
     
-    <!-- 核心团队 - 添加滚动动画类 -->
+    <!-- ==================== 新增规则模块 ==================== -->
+    <section id="rules" class="rules-section scroll-reveal">
+        <h2 class="section-title">服务器 <b>守则</b></h2>
+        <p style="text-align: center; color: var(--text-muted); max-width: 700px; margin: 0 auto 20px;">
+            无规矩不成方圆，请每一位玩家共同维护这片安宁之地
+        </p>
+        <div class="rules-container">
+            <!-- 规则类 -->
+            <div class="rule-category scroll-reveal scroll-reveal-delay-1">
+                <div class="category-header">
+                    <span class="category-icon">📜</span>
+                    <span class="category-title">规则类 <span>· 底线不可触碰</span></span>
+                </div>
+                <div class="rules-list">
+                    <div class="rule-item">
+                        <div class="rule-number">1</div>
+                        <div class="rule-content">禁止一切<strong>卡服性的生电机器</strong>，影响服务器稳定运行的机器将被强制拆除</div>
+                    </div>
+                    <div class="rule-item">
+                        <div class="rule-number">2</div>
+                        <div class="rule-content">请使用<strong>漏斗矿车</strong>代替运输矿车，以减少服务器性能消耗</div>
+                    </div>
+                    <div class="rule-item">
+                        <div class="rule-number">3</div>
+                        <div class="rule-content">禁止一切<strong>刷沙机</strong>，发现后将直接拆除处理</div>
+                    </div>
+                    <div class="rule-item">
+                        <div class="rule-number">4</div>
+                        <div class="rule-content">禁止利用<strong>服务器漏洞刷物</strong>，一经发现严肃处理</div>
+                    </div>
+                    <div class="rule-item rule-highlight">
+                        <div class="rule-number">5</div>
+                        <div class="rule-content"><strong>禁止使用外挂</strong>（包括Toolbox快速建筑等任何辅助软件）<span class="reward-badge">举报奖励 1w</span><br>外挂使用者永久封号，绝不姑息</div>
+                    </div>
+                    <div class="rule-item">
+                        <div class="rule-number">6</div>
+                        <div class="rule-content"><strong>禁止偷家</strong>，被偷家者可通过截图证据举报，偷家者将没收全部财产(/clear)</div>
+                    </div>
+                    <div class="rule-item rule-danger">
+                        <div class="rule-number">7</div>
+                        <div class="rule-content"><strong>禁止卡服/炸服</strong>，参与者直接封号处理</div>
+                    </div>
+                    <div class="rule-item">
+                        <div class="rule-number">8</div>
+                        <div class="rule-content"><strong>禁止矿透</strong>，发现后根据具体情况处罚</div>
+                    </div>
+                    <div class="rule-item">
+                        <div class="rule-number">9</div>
+                        <div class="rule-content"><strong>严禁任何形式的现金交易</strong>，无论何种性质，抓到即查封</div>
+                    </div>
+                    <div class="rule-item">
+                        <div class="rule-number">10</div>
+                        <div class="rule-content">严禁在服内涉及与群规同样的底线问题，抓到给予禁言警告，再犯封禁</div>
+                    </div>
+                    <div class="rule-item">
+                        <div class="rule-number">11</div>
+                        <div class="rule-content">服务器丢入漏斗等容器的<strong>收纳袋会被清理</strong>，请妥善保管贵重物品</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 财产类 -->
+            <div class="rule-category scroll-reveal scroll-reveal-delay-2">
+                <div class="category-header">
+                    <span class="category-icon">💰</span>
+                    <span class="category-title">财产类 <span>· 保障你的心血</span></span>
+                </div>
+                <div class="rules-list">
+                    <div class="rule-item">
+                        <div class="rule-number">1</div>
+                        <div class="rule-content">被抄家/毁家者可通过<strong>截图证据举报</strong>，偷家者没收全部财产</div>
+                    </div>
+                    <div class="rule-item">
+                        <div class="rule-number">2</div>
+                        <div class="rule-content">被清理类插件清理的<strong>物品不予赔偿</strong>，请勿将贵重物品置于易被清理的位置</div>
+                    </div>
+                    <div class="rule-item">
+                        <div class="rule-number">3</div>
+                        <div class="rule-content">服务器有<strong>领地插件</strong>，未使用领地导致物品丢失，请提供坐标以便核查</div>
+                    </div>
+                    <div class="rule-item">
+                        <div class="rule-number">4</div>
+                        <div class="rule-content">Bug（如回档）导致的财产丢失，回档后5分钟内可提供背包数据覆盖，其他情况视情处理</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 政治类 -->
+            <div class="rule-category scroll-reveal scroll-reveal-delay-3">
+                <div class="category-header">
+                    <span class="category-icon">⚖️</span>
+                    <span class="category-title">政治类 <span>· 维护纯净环境</span></span>
+                </div>
+                <div class="rules-list">
+                    <div class="rule-item">
+                        <div class="rule-number">1</div>
+                        <div class="rule-content">禁止一切<strong>第三方宣传、邪教内容</strong>，发现将直接踢出服务器</div>
+                    </div>
+                    <div class="rule-item">
+                        <div class="rule-number">2</div>
+                        <div class="rule-content">禁止在服务器内<strong>辱骂他人</strong>，保持友好交流氛围</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 核心团队 -->
     <section id="team" class="team-section scroll-reveal">
         <h2 class="section-title">核心 <b>团队</b></h2>
         <div class="team-grid">
@@ -643,7 +765,7 @@
                     <img src="tp/null1442.jpg" alt="null1442" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=null1442&background=ffd700&color=fff&size=128'">
                 </div>
                 <span class="role-badge role-owner">OWNER / 服主</span>
-                <h3 style="margin-bottom: 5px;">null1442</h3>
+                <h3>null1442</h3>
                 <p style="font-size: 0.85rem; color: #94a3b8;">服务器的拥有者<br>致力打造稳定环境</p>
             </div>
             <div class="member-card scroll-reveal scroll-reveal-delay-2" onclick="openTeamModal(1)">
@@ -651,113 +773,78 @@
                     <img src="tp/扉.jpg" alt="扉" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=扉&background=00d2ff&color=fff&size=128&length=2'">
                 </div>
                 <span class="role-badge role-admin">ADMIN / 管理</span>
-                <h3 style="margin-bottom: 5px;">扉</h3>
+                <h3>扉</h3>
                 <p style="font-size: 0.85rem; color: #94a3b8;">社区维护<br>技术支持</p>
             </div>
         </div>
     </section>
 
-    <!-- 为什么选择我们 - 添加滚动动画 -->
+    <!-- 为什么选择我们 -->
     <section id="features" class="features scroll-reveal">
         <h2 class="section-title">为什么选择 <b>我们</b></h2>
         <div class="grid">
-            <div class="glass-card scroll-reveal scroll-reveal-delay-1" style="padding: 30px;" tabindex="0">
+            <div class="glass-card scroll-reveal scroll-reveal-delay-1" style="padding: 30px;">
                 <div class="card-content">
                     <h3>⚡ 纯粹生存 & 养老</h3>
                     <p>采用「纯生存 + 养老」模式。无 PVP、无交易税。你可以隐居深山研究红石科技，也可以呼朋引伴建造奇观。</p>
                 </div>
             </div>
-            <div class="glass-card scroll-reveal scroll-reveal-delay-2" style="padding: 30px;" tabindex="0">
+            <div class="glass-card scroll-reveal scroll-reveal-delay-2" style="padding: 30px;">
                 <div class="card-content">
                     <h3>🏰 永久不删档</h3>
                     <p>承诺永不换周目。你留下的每一个方块、每一座建筑，都将成为服务器历史的一部分。</p>
                 </div>
             </div>
-            <div class="glass-card scroll-reveal scroll-reveal-delay-3" style="padding: 30px;" tabindex="0">
+            <div class="glass-card scroll-reveal scroll-reveal-delay-3" style="padding: 30px;">
                 <div class="card-content">
                     <h3>📱 全端互通</h3>
                     <p>支持离线登录。手机和电脑都能一起玩。无论你身在何处，使用什么设备，家一直都在。</p>
                 </div>
             </div>
-            <div class="glass-card scroll-reveal scroll-reveal-delay-4" style="padding: 30px;" tabindex="0">
+            <div class="glass-card scroll-reveal scroll-reveal-delay-4" style="padding: 30px;">
                 <div class="card-content">
                     <h3>🧩 优质原创模组</h3>
-                    <p>独家定制轻量模组：更多乐器、家具、装饰，保留原版体验的同时增添养老趣味。由团队精心调校，稳定不卡顿。</p>
+                    <p>独家定制轻量模组：更多乐器、家具、装饰，保留原版体验的同时增添养老趣味。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 截图画廊 - 添加滚动动画 -->
+    <!-- 截图画廊 -->
     <section id="gallery" class="screenshot-gallery scroll-reveal">
         <h2 class="section-title">服务器 <b>精美截图</b></h2>
-        <p style="text-align: center; color: var(--text-muted); max-width: 800px; margin-left: auto; margin-right: auto; margin-bottom: 30px;">
-            点击图片查看详细信息和建造者。
-        </p>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">点击图片查看详细信息和建造者。</p>
         <div class="gallery-grid">
-            <div class="gallery-item scroll-reveal scroll-reveal-delay-1" onclick="openLightbox(0)">
-                <img src="tp/jz1.png" alt="雪黎的玩偶" onerror="this.src='https://picsum.photos/320/220?random=10'">
-            </div>
-            <div class="gallery-item scroll-reveal scroll-reveal-delay-2" onclick="openLightbox(1)">
-                <img src="tp/jz2.png" alt="天使的摇篮" onerror="this.src='https://picsum.photos/320/220?random=11'">
-            </div>
-            <div class="gallery-item scroll-reveal scroll-reveal-delay-3" onclick="openLightbox(2)">
-                <img src="tp/jz3.png" alt="玩家合影" onerror="this.src='https://picsum.photos/320/220?random=12'">
-            </div>
-            <div class="gallery-item scroll-reveal scroll-reveal-delay-4" onclick="openLightbox(3)">
-                <img src="tp/jz4.png" alt="生电基地" onerror="this.src='https://picsum.photos/320/220?random=13'">
-            </div>
-            <div class="gallery-item scroll-reveal scroll-reveal-delay-1" onclick="openLightbox(4)">
-                <img src="tp/jz5.png" alt="沐晞商业街" onerror="this.src='https://picsum.photos/320/220?random=14'">
-            </div>
-            <div class="gallery-item scroll-reveal scroll-reveal-delay-2" onclick="openLightbox(5)">
-                <img src="tp/jz6.png" alt="沐晞城" onerror="this.src='https://picsum.photos/320/220?random=15'">
-            </div>
+            <div class="gallery-item scroll-reveal scroll-reveal-delay-1" onclick="openLightbox(0)"><img src="tp/jz1.png" alt="雪黎的玩偶"></div>
+            <div class="gallery-item scroll-reveal scroll-reveal-delay-2" onclick="openLightbox(1)"><img src="tp/jz2.png" alt="天使的摇篮"></div>
+            <div class="gallery-item scroll-reveal scroll-reveal-delay-3" onclick="openLightbox(2)"><img src="tp/jz3.png" alt="玩家合影"></div>
+            <div class="gallery-item scroll-reveal scroll-reveal-delay-4" onclick="openLightbox(3)"><img src="tp/jz4.png" alt="生电基地"></div>
+            <div class="gallery-item scroll-reveal scroll-reveal-delay-1" onclick="openLightbox(4)"><img src="tp/jz5.png" alt="沐晞商业街"></div>
+            <div class="gallery-item scroll-reveal scroll-reveal-delay-2" onclick="openLightbox(5)"><img src="tp/jz6.png" alt="沐晞城"></div>
         </div>
     </section>
 
-    <!-- 下载板块 - 添加滚动动画 -->
+    <!-- 下载板块 -->
     <div id="download" class="download-bar scroll-reveal">
         <div class="glass-card server-status-box">
-            <div style="display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--text-muted); font-size: 0.9rem;">
-                <div class="status-dot" style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981;"></div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="status-dot" id="status-dot" style="background: #ef4444;"></div>
                 <span id="server-status-text">正在连接服务器...</span>
             </div>
-            
-            <div class="ip-display" onclick="copyIP()" title="点击复制" style="font-size: 1.8rem; font-weight: 600; margin: 5px 0 5px; cursor: pointer; color: #fff; letter-spacing: 1px; background: rgba(0,0,0,0.3); padding: 8px 20px; border-radius: 40px; display: inline-block;">
-                es912.top:20100
-            </div>
-            <div id="copy-hint" style="font-size: 0.8rem; color: #64748b; margin-bottom: 5px;">点击上方 IP 复制</div>
-            
-            <div style="width: 80%; height: 1px; background: rgba(255,255,255,0.1); margin: 8px auto;"></div>
-            
-            <div style="display: flex; gap: 40px; justify-content: center; margin-top: 0;">
-                <div>
-                    <div style="font-size: 1.5rem; font-weight: bold; color: #fff;" id="player-count">57</div>
-                    <div style="font-size: 0.8rem; color: #64748b;">在线人数</div>
-                </div>
-                <div>
-                    <div style="font-size: 1.5rem; font-weight: bold; color: #fff;">20</div>
-                    <div style="font-size: 0.8rem; color: #64748b;">TPS状态</div>
-                </div>
+            <div class="ip-display" onclick="copyIP()">es912.top:20100</div>
+            <div id="copy-hint" style="font-size: 0.8rem; color: #64748b;">点击 IP 复制</div>
+            <div style="display: flex; gap: 40px;">
+                <div><div style="font-size: 1.5rem; font-weight: bold;" id="player-count">--</div><div style="font-size: 0.8rem;">在线人数</div></div>
+                <div><div style="font-size: 1.5rem; font-weight: bold;">20</div><div style="font-size: 0.8rem;">TPS状态</div></div>
             </div>
         </div>
-        
-        <h2 style="font-size: 2rem; margin-bottom: 20px; margin-top: 20px;">准备好开始冒险了吗？</h2>
-        <p style="color: #cbd5e1; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
-            喵喵喵<br>
-        </p>
-        
-        <a href="https://mc.minebbs.com/" target="_blank" class="btn btn-primary" style="padding: 15px 40px; font-size: 1.2rem;">
-            立即下载客户端 (Minecraft)
-        </a>
-        <p style="margin-top: 15px; font-size: 0.9rem; color: #64748b;">支持 Windows / IOS / Android </p>
+        <h2 style="font-size: 2rem; margin: 20px 0;">准备好开始冒险了吗？</h2>
+        <a href="https://mc.minebbs.com/" target="_blank" class="btn btn-primary" style="padding: 15px 40px;">⬇ 立即下载客户端</a>
     </div>
 
-    <!-- 硬件配置 - 添加滚动动画 -->
     <section id="specs" class="specs-section scroll-reveal">
-        <div style="flex: 1; min-width: 300px;">
-            <h2 class="section-title" style="text-align: left; margin-bottom: 30px;">硬核 <b>配置</b></h2>
+        <div style="flex:1">
+            <h2 class="section-title" style="text-align: left;">硬核 <b>配置</b></h2>
             <ul class="specs-list">
                 <li><strong>CPU：</strong> AMD 9950X (5.7Ghz 超频)</li>
                 <li><strong>内存：</strong> 128G DDR5 极速内存</li>
@@ -766,220 +853,69 @@
                 <li><strong>备份：</strong> 每天全量热备份</li>
             </ul>
         </div>
-        <div class="glass-card scroll-reveal scroll-reveal-delay-2" style="flex: 1; min-width: 300px; padding: 40px; text-align: center;">
-            <h3 style="font-size: 2rem; color: #fff; margin-bottom: 10px;">QQ 群</h3>
-            <div style="font-size: 3rem; color: var(--primary); font-family: 'Consolas', monospace; margin-bottom: 20px;">1057279158</div>
-            <p style="color: #94a3b8;">进群获取最新公告</p>
+        <div class="glass-card scroll-reveal scroll-reveal-delay-2" style="flex:1; padding: 40px; text-align: center;">
+            <h3 style="font-size: 2rem;">QQ 群</h3>
+            <div style="font-size: 3rem; color: var(--primary);">1057279158</div>
+            <p>进群获取最新公告</p>
         </div>
     </section>
 
     <footer class="scroll-reveal">
-        <p style="margin-bottom: 5px;">Copyright © 2025. 青沐晞</p>
-        <p style="margin-bottom: 15px;">沪ICP备2024041436号-2</p>
-        <p class="footer-disclaimer">
-            "Minecraft" 以及 "我的世界" 为 Mojang Synergies AB 的商标，本站与 Mojang 以及 Microsoft 没有从属关系。
-        </p>
+        <p>Copyright © 2025. 青沐晞</p>
+        <p>沪ICP备2024041436号-2</p>
+        <p class="footer-disclaimer">"Minecraft" 为 Mojang AB 的商标，本站与 Mojang 及 Microsoft 没有从属关系。</p>
     </footer>
 
-    <!-- 截图灯箱 -->
+    <!-- 模态框 -->
     <div id="lightbox-modal" class="modal" onclick="closeModal(event, 'lightbox-modal')">
         <div class="modal-content" onclick="event.stopPropagation()">
             <span class="close-btn" onclick="closeModal(null, 'lightbox-modal')">&times;</span>
-            <div class="lightbox-image-container">
-                <img id="lightbox-image" src="" alt="">
-            </div>
-            <div class="lightbox-info">
-                <h2 id="lightbox-title"></h2>
-                <p id="lightbox-description"></p>
-                <div id="lightbox-builder-info">
-                    <strong>建造者/参与者：</strong><span id="lightbox-builder"></span>
-                </div>
-            </div>
+            <div class="lightbox-image-container"><img id="lightbox-image" src=""></div>
+            <div class="lightbox-info"><h2 id="lightbox-title"></h2><p id="lightbox-description"></p><strong>建造者：</strong><span id="lightbox-builder"></span></div>
         </div>
     </div>
-    
-    <!-- 团队简介弹窗 -->
     <div id="team-modal" class="modal" onclick="closeModal(event, 'team-modal')">
         <div class="modal-content team-bio-content" onclick="event.stopPropagation()">
             <span class="close-btn" onclick="closeModal(null, 'team-modal')">&times;</span>
-            <div class="team-info-left">
-                <img id="team-avatar" src="" alt="头像">
-                <div id="team-role"></div>
-                <h2 id="team-name"></h2>
-            </div>
-            <div class="team-info-right">
-                <div style="font-weight: bold; margin-bottom: 15px; color: var(--primary); font-size: 1.2rem;">个人简介</div>
-                <div id="team-description-area">
-                    <p id="team-description-text"></p>
-                </div>
-            </div>
+            <div class="team-info-left"><img id="team-avatar" src=""><div id="team-role"></div><h2 id="team-name"></h2></div>
+            <div class="team-info-right"><div style="font-weight: bold; margin-bottom: 15px; color: var(--primary);">个人简介</div><div id="team-description-area"><p id="team-description-text"></p></div></div>
         </div>
     </div>
 
     <script>
         const galleryData = [
-            { src: 'tp/jz1.png', title: '雪黎的玩偶', builder: 'null1442', desc: '玩偶不仅可佩戴于头顶、抱在怀中，还具有右键粒子互动效果，赋予装饰性物品生动的陪伴功能，提升游戏体验。支持通过替换皮肤文件自由更改玩偶外观，方便玩家与整合包作者进行个性化适配。支持 1.21.20 及以上主流版本，不依赖其他模组，性能友好，适合各类生存服务器与整合包。可爱治愈的风格符合当前模组社区流行趋势，同时具备实用性，适合录制视频、截图分享。' },
-            { src: 'tp/jz2.png', title: '天使的摇篮', builder: 'OORT', desc: '服务器主城，作者是OORT,是服务器的独特象征。' }, 
-            { src: 'tp/jz3.png', title: '玩家合影', builder: '全体玩家', desc: '非常具有个人特色。' },
-            { src: 'tp/jz4.png', title: '生电基地', builder: 'null1442', desc: '肝~' },
-            { src: 'tp/jz5.png', title: '沐晞商业街', builder: '全体玩家', desc: '玩家们共同努力打造的商业街，设施完备，展现了集体智慧与纯粹生存的社区精神。' },
-            { src: 'tp/jz6.png', title: '沐晞城', builder: 'null1442', desc: '结构精巧，充满想象力，是服务器中的一处奇景。' }
+            { src: 'tp/jz1.png', title: '雪黎的玩偶', builder: 'null1442', desc: '玩偶可佩戴于头顶、抱在怀中，具有右键粒子互动效果。' },
+            { src: 'tp/jz2.png', title: '天使的摇篮', builder: 'OORT', desc: '服务器主城，独特象征。' },
+            { src: 'tp/jz3.png', title: '玩家合影', builder: '全体玩家', desc: '充满回忆的瞬间。' },
+            { src: 'tp/jz4.png', title: '生电基地', builder: 'null1442', desc: '科技与肝的结晶。' },
+            { src: 'tp/jz5.png', title: '沐晞商业街', builder: '全体玩家', desc: '集体智慧的结晶。' },
+            { src: 'tp/jz6.png', title: '沐晞城', builder: 'null1442', desc: '服务器中的奇景。' }
         ];
-
         const teamData = [
-            { 
-                src: 'tp/null1442.jpg',
-                role: 'OWNER / 服主', 
-                name: 'null1442', 
-                desc: '我是青沐晞的 服主，null1442。\n\n我的主要职责是 硬件运维、技术架构与重大决策 。我致力于提供一个永不删档、高配置、纯净的服务器环境，确保每一位玩家都能在这里找到真正的“家”。\n\n欢迎大家随时提出建议，让我们一起建设这个自由的方块世界！' 
-            },
-            { 
-                src: 'tp/扉.jpg', 
-                role: 'ADMIN / 管理', 
-                name: '扉', 
-                desc: '我是 扉，服务器的 管理 。\n\n我主要负责处理日常社区事务、提供 玩家支持 以及维护社区秩序。如果你在游戏内外遇到任何问题，或者对服务器发展有任何想法，都可以随时私信我。' 
-            }
+            { src: 'tp/null1442.jpg', role: 'OWNER / 服主', name: 'null1442', desc: '我是青沐晞的服主，负责硬件运维、技术架构与重大决策。致力于提供永不删档、高配置、纯净的服务器环境。' },
+            { src: 'tp/扉.jpg', role: 'ADMIN / 管理', name: '扉', desc: '我是扉，服务器的管理。负责日常社区事务、玩家支持及维护社区秩序。有任何问题欢迎随时联系。' }
         ];
 
         function closeModal(event, id) {
             const modal = document.getElementById(id);
-            if (event === null || event.target === modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = ''; 
-            }
+            if (event === null || event.target === modal) modal.classList.remove('active');
         }
-        
-        function openLightbox(index) {
-            const data = galleryData[index];
-            const modal = document.getElementById('lightbox-modal');
-            document.getElementById('lightbox-image').src = data.src;
-            document.getElementById('lightbox-title').innerText = data.title;
-            document.getElementById('lightbox-description').innerText = data.desc;
-            document.getElementById('lightbox-builder').innerText = data.builder;
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function openTeamModal(index) {
-            const data = teamData[index];
-            const modal = document.getElementById('team-modal');
-            document.getElementById('team-avatar').src = data.src;
-            document.getElementById('team-role').innerText = data.role;
-            document.getElementById('team-name').innerText = data.name;
-            document.getElementById('team-description-text').innerText = data.desc; 
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal(null, 'lightbox-modal');
-                closeModal(null, 'team-modal');
-            }
-        });
-
-        function copyIP() {
-            const ip = "es912.top:20100";
-            navigator.clipboard.writeText(ip).then(() => {
-                const hint = document.getElementById('copy-hint');
-                const originalText = hint.innerText;
-                hint.innerText = "✅ 复制成功！";
-                hint.style.color = "#3b82f6";
-                setTimeout(() => {
-                    hint.innerText = originalText;
-                    hint.style.color = "#64748b";
-                }, 2000);
-            });
-        }
-
+        function openLightbox(i) { let d=galleryData[i]; document.getElementById('lightbox-image').src=d.src; document.getElementById('lightbox-title').innerText=d.title; document.getElementById('lightbox-description').innerText=d.desc; document.getElementById('lightbox-builder').innerText=d.builder; document.getElementById('lightbox-modal').classList.add('active'); }
+        function openTeamModal(i) { let d=teamData[i]; document.getElementById('team-avatar').src=d.src; document.getElementById('team-role').innerText=d.role; document.getElementById('team-name').innerText=d.name; document.getElementById('team-description-text').innerText=d.desc; document.getElementById('team-modal').classList.add('active'); }
+        document.addEventListener('keydown', e=>{if(e.key==='Escape'){closeModal(null,'lightbox-modal');closeModal(null,'team-modal');}});
+        function copyIP() { navigator.clipboard.writeText("es912.top:20100").then(()=>{ let h=document.getElementById('copy-hint'); let o=h.innerText; h.innerText="✅ 复制成功！"; h.style.color="#3b82f6"; setTimeout(()=>{h.innerText=o;h.style.color="#64748b";},2000);});}
         async function fetchStatus() {
-            const ip = "es912.top";
-            const port = "20100";
-            const apiUrl = `https://api.mcsrvstat.us/2/${ip}:${port}`;
-            const dot = document.querySelector('.status-dot');
-            const text = document.getElementById('server-status-text');
-            const count = document.getElementById('player-count');
-            try {
-                const res = await fetch(apiUrl);
-                const data = await res.json();
-                if(data.online) {
-                    dot.style.backgroundColor = "#10b981"; 
-                    dot.style.boxShadow = "0 0 15px #10b981";
-                    text.innerText = "服务器运行中";
-                    count.innerText = data.players.online + " / " + data.players.max;
-                } else {
-                    dot.style.backgroundColor = "#ef4444"; 
-                    dot.style.boxShadow = "0 0 15px #ef4444";
-                    text.innerText = "服务器离线";
-                    count.innerText = "0";
-                }
-            } catch (e) {
-                console.error(e);
-                text.innerText = "状态未知";
-            }
+            try{ let r=await fetch("https://api.mcsrvstat.us/2/es912.top:20100"); let d=await r.json(); let dot=document.getElementById('status-dot'),txt=document.getElementById('server-status-text'),cnt=document.getElementById('player-count'); if(d.online){ dot.style.background="#10b981"; dot.style.boxShadow="0 0 15px #10b981"; txt.innerText="✨ 服务器运行中"; cnt.innerText=d.players.online+"/"+d.players.max;} else{ dot.style.background="#ef4444"; txt.innerText="服务器离线"; cnt.innerText="0/0";}} catch(e){ console.log(e);}
         }
-
-        fetchStatus();
-        setInterval(fetchStatus, 30000);
+        fetchStatus(); setInterval(fetchStatus,30000);
         
-        // ==================== 打字机效果 ====================
-        function typewriterEffect(element, text, speed = 80) {
-            let i = 0;
-            element.innerHTML = '';
-            const cursor = document.createElement('span');
-            cursor.className = 'typewriter-cursor';
-            cursor.innerHTML = '▌';
-            
-            function type() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                } else {
-                    // 打字完成后，光标继续闪烁一会儿再隐藏
-                    cursor.style.animation = 'blink 0.8s step-end infinite';
-                    element.appendChild(cursor);
-                }
-            }
-            type();
-        }
+        // 打字机效果
+        function typewriterEffect(el, text, speed=70) { let i=0; el.innerHTML=''; let cursor=document.createElement('span'); cursor.className='typewriter-cursor'; cursor.innerHTML='▌'; function type(){ if(i<text.length){ el.innerHTML+=text.charAt(i); i++; setTimeout(type,speed);} else el.appendChild(cursor);} type();}
+        window.addEventListener('DOMContentLoaded',()=>{ typewriterEffect(document.getElementById('typewriter-sub'),'QingMuXi · 湛蓝安宁之所',70); });
         
-        // 页面加载完成后启动打字机效果
-        window.addEventListener('DOMContentLoaded', () => {
-            const subElement = document.getElementById('typewriter-sub');
-            const fullText = 'QingMuXi · 湛蓝安宁之所';
-            typewriterEffect(subElement, fullText, 70);
-        });
-        
-        // ==================== 滚动渐现动画 ====================
-        function initScrollReveal() {
-            const revealElements = document.querySelectorAll('.scroll-reveal');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('revealed');
-                        observer.unobserve(entry.target); // 只触发一次
-                    }
-                });
-            }, {
-                threshold: 0.15,
-                rootMargin: '0px 0px -20px 0px'
-            });
-            
-            revealElements.forEach(el => observer.observe(el));
-        }
-        
-        // 页面加载完成后初始化滚动动画
-        window.addEventListener('load', () => {
-            initScrollReveal();
-            // 确保所有滚动元素初始状态
-            document.querySelectorAll('.scroll-reveal').forEach(el => {
-                if (el.getBoundingClientRect().top < window.innerHeight - 100) {
-                    el.classList.add('revealed');
-                }
-            });
-        });
+        // 滚动动画
+        function initScrollReveal(){ new IntersectionObserver((e)=>{ e.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('revealed'); observer.unobserve(entry.target);}});},{threshold:0.15}).observe; const observer=new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('revealed'); observer.unobserve(e.target);}});},{threshold:0.15}); document.querySelectorAll('.scroll-reveal').forEach(el=>observer.observe(el));}
+        window.addEventListener('load',()=>{ initScrollReveal(); document.querySelectorAll('.scroll-reveal').forEach(el=>{ if(el.getBoundingClientRect().top<window.innerHeight-100) el.classList.add('revealed');}); });
     </script>
 </body>
 </html>
