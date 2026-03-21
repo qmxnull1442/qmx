@@ -16,8 +16,9 @@
             --accent-blue: #2563eb;       
             --blue-glow: rgba(37, 99, 235, 0.5);
             --rule-warning: #f59e0b;
-            --rule-danger: #ef4444;
-            --rule-success: #10b981;
+            --discord: #5865F2;
+            --youtube: #FF0000;
+            --twitter: #1DA1F2;
         }
 
         * {
@@ -37,7 +38,6 @@
             position: relative;
         }
 
-        /* 中间固定的背景装饰图片 */
         body::before {
             content: '';
             position: fixed;
@@ -56,9 +56,9 @@
             filter: drop-shadow(0 0 20px rgba(59,130,246,0.3));
         }
 
-        /* 主要内容区域提升层级 */
         .header-stats-container,
         .hero,
+        .community-section,
         .rules-section,
         .team-section,
         .features,
@@ -70,7 +70,6 @@
             z-index: 2;
         }
 
-        /* 最开头大标题 */
         .header-stats-container {
             padding: 20px 20px 0 20px;
             text-align: center;
@@ -89,7 +88,6 @@
             line-height: 1.1;
         }
         
-        /* 打字机效果副标题 */
         .page-header-sub {
             color: var(--text-muted);
             font-size: 1.1rem;
@@ -99,7 +97,6 @@
             font-family: 'Segoe UI', monospace;
         }
         
-        /* 打字机光标闪烁 */
         .typewriter-cursor {
             display: inline-block;
             width: 2px;
@@ -113,7 +110,6 @@
             50% { opacity: 0; }
         }
 
-        /* 滚动渐现动画基础类 */
         .scroll-reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -153,11 +149,6 @@
             transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
         }
         
-        .glass-card:focus-within,
-        .glass-card:active {
-            border-color: var(--accent-blue) !important;
-            box-shadow: 0 0 25px var(--blue-glow) !important;
-        }
         .glass-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
@@ -197,18 +188,219 @@
             border-color: #fff;
         }
 
-        /* ==================== 规则模块样式 ==================== */
-        .rules-section {
-            padding: 60px 8%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(59,130,246,0.05) 100%);
-            margin-top: 20px;
+        /* ==================== 统一模块样式 ==================== */
+        .module-section {
+            padding: 70px 8%;
         }
         
+        .module-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .module-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        
+        .module-title {
+            font-size: 2.2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        .module-title b {
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .module-sub {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-top: 12px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* 团队网格 */
+        .team-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .member-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0,0,0,0));
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            width: 260px;
+            cursor: pointer;
+            transition: all 0.4s;
+        }
+        
+        .member-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .avatar-box {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 20px auto;
+            border-radius: 50%;
+            padding: 3px;
+        }
+        
+        .owner-glow {
+            background: linear-gradient(45deg, #ffd700, #ffaa00);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+        }        
+        .admin-glow {
+            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--bg-dark);
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+        
+        .role-owner { background: rgba(255, 215, 0, 0.2); color: #ffd700; border: 1px solid rgba(255,215,0,0.3); }
+        .role-admin { background: rgba(0, 210, 255, 0.15); color: #00d2ff; border: 1px solid rgba(0,210,255,0.3); }
+        
+        .member-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+        
+        .member-card p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* 特性网格 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 32px 28px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        
+        .feature-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* 截图网格 */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.4s;
+            aspect-ratio: 16/10;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        .gallery-overlay h4 {
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        
+        .gallery-overlay p {
+            color: #94a3b8;
+            font-size: 0.8rem;
+        }
+
+        /* 规则网格 */
         .rules-container {
             display: flex;
             flex-direction: column;
             gap: 30px;
-            margin-top: 40px;
         }
         
         .rule-category {
@@ -239,13 +431,12 @@
         }
         
         .category-title {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            letter-spacing: 1px;
         }
         
         .category-title span {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 400;
             color: var(--text-muted);
             margin-left: 10px;
@@ -255,16 +446,15 @@
             padding: 20px 28px;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
         }
         
         .rule-item {
             display: flex;
             align-items: flex-start;
             gap: 14px;
-            padding: 10px 0;
+            padding: 8px 0;
             border-bottom: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.2s;
         }
         
         .rule-item:last-child {
@@ -272,8 +462,8 @@
         }
         
         .rule-number {
-            min-width: 36px;
-            height: 36px;
+            min-width: 32px;
+            height: 32px;
             background: rgba(59,130,246,0.2);
             border-radius: 50%;
             display: flex;
@@ -281,7 +471,7 @@
             justify-content: center;
             font-weight: bold;
             color: var(--primary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         
         .rule-content {
@@ -296,29 +486,14 @@
         
         .rule-highlight {
             background: linear-gradient(120deg, rgba(245,158,11,0.15), transparent);
-            border-left: 3px solid var(--rule-warning);
+            border-left: 3px solid #f59e0b;
             padding-left: 12px;
             margin-left: -15px;
         }
         
         .rule-highlight .rule-number {
             background: rgba(245,158,11,0.3);
-            color: var(--rule-warning);
-        }
-        
-        .rule-danger {
-            border-left-color: var(--rule-danger);
-        }
-        
-        .rule-badge {
-            display: inline-block;
-            background: rgba(239,68,68,0.2);
-            color: #ef4444;
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 20px;
-            margin-left: 8px;
-            font-weight: normal;
+            color: #f59e0b;
         }
         
         .reward-badge {
@@ -329,96 +504,77 @@
             border-radius: 20px;
             font-size: 0.7rem;
             margin-left: 10px;
-        }
-        
-        @media (max-width: 768px) {
-            .rules-section { padding: 40px 5%; }
-            .category-header { padding: 14px 20px; }
-            .category-title { font-size: 1.3rem; }
-            .rules-list { padding: 16px 20px; }
-            .rule-item { gap: 10px; }
-            .rule-number { min-width: 28px; height: 28px; font-size: 0.8rem; }
+            display: inline-block;
         }
 
-        /* 团队展示 */
-        .team-section {
-            padding: 60px 10%;
-        }
-        
-        .team-grid {
+        /* 社区模块 */
+        .community-grid {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 40px;
-            margin-top: 30px;
+            gap: 30px;
         }
         
-        .member-card {
-            background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0,0,0,0));
+        .community-card {
+            flex: 1;
+            min-width: 240px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(0,0,0,0.2));
+            backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
-            padding: 30px;
-            border-radius: 20px;
+            border-radius: 28px;
+            padding: 32px 24px;
             text-align: center;
-            width: 250px;
-            cursor: pointer;
             transition: all 0.4s;
+            cursor: pointer;
         }
         
-        .member-card:hover {
+        .community-card:hover {
             transform: translateY(-10px);
-            border-color: var(--accent-blue);
-        }
-
-        .avatar-box {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 20px auto;
-            border-radius: 50%;
-            padding: 3px;
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
         
-        .owner-glow {
-            background: linear-gradient(45deg, #ffd700, #ffaa00);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-        }        
-        .admin-glow {
-            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
-        }
-
-        .avatar-img {
-            width: 100%;
-            height: 100%;
+        .community-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            background: rgba(255,255,255,0.1);
             border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--bg-dark);
         }
-
-        .role-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 12px;
+        
+        .community-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .community-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .community-desc {
+            margin-top: 12px;
             font-size: 0.8rem;
-            margin-bottom: 10px;
-            font-weight: bold;
+            color: #64748b;
         }
         
-        .role-owner { background: rgba(255, 215, 0, 0.2); color: #ffd700; }
-        .role-admin { background: rgba(0, 210, 255, 0.15); color: #00d2ff; }
-
-        .section-title {
+        .community-note {
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 300;
+            margin-top: 35px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 40px;
+            display: inline-block;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
         }
-        .section-title b { font-weight: 700; color: #fff; }
-
-        .features { padding: 60px 10%; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
-        
-        .card-content h3 { font-size: 1.5rem; color: var(--primary); margin-bottom: 10px; }
-        .card-content p { color: var(--text-muted); }
 
         /* 下载板块 */
         .download-bar {
@@ -427,7 +583,6 @@
             border-bottom: 1px solid rgba(59, 130, 246, 0.2);
             padding: 40px 20px;
             text-align: center;
-            margin-top: 30px;
         }
         
         .server-status-box {
@@ -464,7 +619,7 @@
 
         /* 硬件配置 */
         .specs-section {
-            padding: 60px 10%;
+            padding: 70px 10%;
             display: flex;
             flex-wrap: wrap;
             gap: 40px;
@@ -481,42 +636,6 @@
             width: 8px; height: 8px; background: var(--primary);
             border-radius: 50%; margin-right: 15px;
             box-shadow: 0 0 10px var(--primary);
-        }
-
-        /* 截图画廊 */
-        .screenshot-gallery {
-            padding: 60px 5%;
-            background-color: rgba(0,0,0,0.2); 
-            margin-top: 30px;
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 20px;
-        }
-        
-        .gallery-item {
-            overflow: hidden;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        
-        .gallery-item:hover {
-            transform: translateY(-8px) scale(1.02);
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 220px; 
-            object-fit: cover; 
-            display: block;
-            transition: transform 0.4s;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1); 
         }
 
         /* 模态框 */
@@ -625,6 +744,14 @@
         
         @media (max-width: 768px) {
             .page-header-title { font-size: 2.8rem; }
+            .module-section { padding: 50px 5%; }
+            .module-title { font-size: 1.8rem; }
+            .member-card { width: 100%; max-width: 280px; }
+            .feature-card { padding: 24px 20px; }
+            .gallery-grid { gap: 15px; }
+            .category-header { padding: 14px 20px; }
+            .category-title { font-size: 1.2rem; }
+            .rules-list { padding: 16px 20px; }
             #lightbox-modal .modal-content,
             #team-modal .team-bio-content {
                 flex-direction: column;
@@ -649,183 +776,139 @@
         </div>
     </div>
     
-    <!-- ==================== 新增规则模块 ==================== -->
-    <section id="rules" class="rules-section scroll-reveal">
-        <h2 class="section-title">服务器 <b>守则</b></h2>
-        <p style="text-align: center; color: var(--text-muted); max-width: 700px; margin: 0 auto 20px;">
-            无规矩不成方圆，请每一位玩家共同维护这片安宁之地
-        </p>
+    <!-- 社区模块 -->
+    <section class="module-section scroll-reveal">
+        <div class="module-header">
+            <div class="module-icon">🌐</div>
+            <h2 class="module-title">加入我们的<b>社区</b></h2>
+            <div class="module-sub">与数千名玩家一起探索、建造和冒险，获取最新消息和活动信息</div>
+        </div>
+        <div class="community-grid">
+            <div class="community-card scroll-reveal scroll-reveal-delay-1">
+                <div class="community-icon">💬</div>
+                <h3>Discord</h3>
+                <p>加入我们的 Discord 服务器</p>
+                <div class="community-desc">与其他玩家实时交流 · 获取最新公告 · 参与社区活动</div>
+            </div>
+            <div class="community-card scroll-reveal scroll-reveal-delay-2">
+                <div class="community-icon">📺</div>
+                <h3>YouTube</h3>
+                <p>订阅我们的频道</p>
+                <div class="community-desc">游戏教程 · 服务器精彩视频 · 建造过程记录</div>
+            </div>
+            <div class="community-card scroll-reveal scroll-reveal-delay-3">
+                <div class="community-icon">🐦</div>
+                <h3>Twitter</h3>
+                <p>关注我们的推特</p>
+                <div class="community-desc">服务器最新动态 · 开发进展 · 活动预告</div>
+            </div>
+        </div>
+        <div class="community-note">🌟 社区链接即将开放，敬请期待！</div>
+    </section>
+    
+    <!-- 服务器守则模块 -->
+    <section class="module-section scroll-reveal" style="background: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(59,130,246,0.05) 100%);">
+        <div class="module-header">
+            <div class="module-icon">📜</div>
+            <h2 class="module-title">服务器<b>守则</b></h2>
+            <div class="module-sub">无规矩不成方圆，请每一位玩家共同维护这片安宁之地</div>
+        </div>
         <div class="rules-container">
-            <!-- 规则类 -->
             <div class="rule-category scroll-reveal scroll-reveal-delay-1">
                 <div class="category-header">
-                    <span class="category-icon">📜</span>
+                    <span class="category-icon">⚙️</span>
                     <span class="category-title">规则类 <span>· 底线不可触碰</span></span>
                 </div>
                 <div class="rules-list">
-                    <div class="rule-item">
-                        <div class="rule-number">1</div>
-                        <div class="rule-content">禁止一切<strong>卡服性的生电机器</strong>，影响服务器稳定运行的机器将被强制拆除</div>
-                    </div>
-                    <div class="rule-item">
-                        <div class="rule-number">2</div>
-                        <div class="rule-content">请使用<strong>漏斗矿车</strong>代替运输矿车，以减少服务器性能消耗</div>
-                    </div>
-                    <div class="rule-item">
-                        <div class="rule-number">3</div>
-                        <div class="rule-content">禁止一切<strong>刷沙机</strong>，发现后将直接拆除处理</div>
-                    </div>
-                    <div class="rule-item">
-                        <div class="rule-number">4</div>
-                        <div class="rule-content">禁止利用<strong>服务器漏洞刷物</strong>，一经发现严肃处理</div>
-                    </div>
-                    <div class="rule-item rule-highlight">
-                        <div class="rule-number">5</div>
-                        <div class="rule-content"><strong>禁止使用外挂</strong>（包括Toolbox快速建筑等任何辅助软件）<span class="reward-badge">举报奖励 1w</span><br>外挂使用者永久封号，绝不姑息</div>
-                    </div>
-                    <div class="rule-item">
-                        <div class="rule-number">6</div>
-                        <div class="rule-content"><strong>禁止偷家</strong>，被偷家者可通过截图证据举报，偷家者将没收全部财产(/clear)</div>
-                    </div>
-                    <div class="rule-item rule-danger">
-                        <div class="rule-number">7</div>
-                        <div class="rule-content"><strong>禁止卡服/炸服</strong>，参与者直接封号处理</div>
-                    </div>
-                    <div class="rule-item">
-                        <div class="rule-number">8</div>
-                        <div class="rule-content"><strong>禁止矿透</strong>，发现后根据具体情况处罚</div>
-                    </div>
-                    <div class="rule-item">
-                        <div class="rule-number">9</div>
-                        <div class="rule-content"><strong>严禁任何形式的现金交易</strong>，无论何种性质，抓到即查封</div>
-                    </div>
-                    <div class="rule-item">
-                        <div class="rule-number">10</div>
-                        <div class="rule-content">严禁在服内涉及与群规同样的底线问题，抓到给予禁言警告，再犯封禁</div>
-                    </div>
-                    <div class="rule-item">
-                        <div class="rule-number">11</div>
-                        <div class="rule-content">服务器丢入漏斗等容器的<strong>收纳袋会被清理</strong>，请妥善保管贵重物品</div>
-                    </div>
+                    <div class="rule-item"><div class="rule-number">1</div><div class="rule-content">禁止一切<strong>卡服性的生电机器</strong>，影响服务器稳定运行的机器将被强制拆除</div></div>
+                    <div class="rule-item"><div class="rule-number">2</div><div class="rule-content">请使用<strong>漏斗矿车</strong>代替运输矿车，以减少服务器性能消耗</div></div>
+                    <div class="rule-item"><div class="rule-number">3</div><div class="rule-content">禁止一切<strong>刷沙机</strong>，发现后将直接拆除处理</div></div>
+                    <div class="rule-item"><div class="rule-number">4</div><div class="rule-content">禁止利用<strong>服务器漏洞刷物</strong>，一经发现严肃处理</div></div>
+                    <div class="rule-item rule-highlight"><div class="rule-number">5</div><div class="rule-content"><strong>禁止使用外挂</strong>（包括Toolbox快速建筑等任何辅助软件）<span class="reward-badge">举报奖励 1w</span><br>外挂使用者永久封号，绝不姑息</div></div>
+                    <div class="rule-item"><div class="rule-number">6</div><div class="rule-content"><strong>禁止偷家</strong>，被偷家者可通过截图证据举报，偷家者将没收全部财产(/clear)</div></div>
+                    <div class="rule-item"><div class="rule-number">7</div><div class="rule-content"><strong>禁止卡服/炸服</strong>，参与者直接封号处理</div></div>
+                    <div class="rule-item"><div class="rule-number">8</div><div class="rule-content"><strong>禁止矿透</strong>，发现后根据具体情况处罚</div></div>
+                    <div class="rule-item"><div class="rule-number">9</div><div class="rule-content"><strong>严禁任何形式的现金交易</strong>，无论何种性质，抓到即查封</div></div>
+                    <div class="rule-item"><div class="rule-number">10</div><div class="rule-content">严禁在服内涉及与群规同样的底线问题，抓到给予禁言警告，再犯封禁</div></div>
+                    <div class="rule-item"><div class="rule-number">11</div><div class="rule-content">服务器丢入漏斗等容器的<strong>收纳袋会被清理</strong>，请妥善保管贵重物品</div></div>
                 </div>
             </div>
-            
-            <!-- 财产类 -->
             <div class="rule-category scroll-reveal scroll-reveal-delay-2">
-                <div class="category-header">
-                    <span class="category-icon">💰</span>
-                    <span class="category-title">财产类 <span>· 保障你的心血</span></span>
-                </div>
+                <div class="category-header"><span class="category-icon">💰</span><span class="category-title">财产类 <span>· 保障你的心血</span></span></div>
                 <div class="rules-list">
-                    <div class="rule-item">
-                        <div class="rule-number">1</div>
-                        <div class="rule-content">被抄家/毁家者可通过<strong>截图证据举报</strong>，偷家者没收全部财产</div>
-                    </div>
-                    <div class="rule-item">
-                        <div class="rule-number">2</div>
-                        <div class="rule-content">被清理类插件清理的<strong>物品不予赔偿</strong>，请勿将贵重物品置于易被清理的位置</div>
-                    </div>
-                    <div class="rule-item">
-                        <div class="rule-number">3</div>
-                        <div class="rule-content">服务器有<strong>领地插件</strong>，未使用领地导致物品丢失，请提供坐标以便核查</div>
-                    </div>
-                    <div class="rule-item">
-                        <div class="rule-number">4</div>
-                        <div class="rule-content">Bug（如回档）导致的财产丢失，回档后5分钟内可提供背包数据覆盖，其他情况视情处理</div>
-                    </div>
+                    <div class="rule-item"><div class="rule-number">1</div><div class="rule-content">被抄家/毁家者可通过<strong>截图证据举报</strong>，偷家者没收全部财产</div></div>
+                    <div class="rule-item"><div class="rule-number">2</div><div class="rule-content">被清理类插件清理的<strong>物品不予赔偿</strong>，请勿将贵重物品置于易被清理的位置</div></div>
+                    <div class="rule-item"><div class="rule-number">3</div><div class="rule-content">服务器有<strong>领地插件</strong>，未使用领地导致物品丢失，请提供坐标以便核查</div></div>
+                    <div class="rule-item"><div class="rule-number">4</div><div class="rule-content">Bug（如回档）导致的财产丢失，回档后5分钟内可提供背包数据覆盖，其他情况视情处理</div></div>
                 </div>
             </div>
-            
-            <!-- 政治类 -->
             <div class="rule-category scroll-reveal scroll-reveal-delay-3">
-                <div class="category-header">
-                    <span class="category-icon">⚖️</span>
-                    <span class="category-title">政治类 <span>· 维护纯净环境</span></span>
-                </div>
+                <div class="category-header"><span class="category-icon">⚖️</span><span class="category-title">政治类 <span>· 维护纯净环境</span></span></div>
                 <div class="rules-list">
-                    <div class="rule-item">
-                        <div class="rule-number">1</div>
-                        <div class="rule-content">禁止一切<strong>第三方宣传、邪教内容</strong>，发现将直接踢出服务器</div>
-                    </div>
-                    <div class="rule-item">
-                        <div class="rule-number">2</div>
-                        <div class="rule-content">禁止在服务器内<strong>辱骂他人</strong>，保持友好交流氛围</div>
-                    </div>
+                    <div class="rule-item"><div class="rule-number">1</div><div class="rule-content">禁止一切<strong>第三方宣传、邪教内容</strong>，发现将直接踢出服务器</div></div>
+                    <div class="rule-item"><div class="rule-number">2</div><div class="rule-content">禁止在服务器内<strong>辱骂他人</strong>，保持友好交流氛围</div></div>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- 核心团队 -->
-    <section id="team" class="team-section scroll-reveal">
-        <h2 class="section-title">核心 <b>团队</b></h2>
+    <!-- 核心团队模块 -->
+    <section class="module-section scroll-reveal">
+        <div class="module-header">
+            <div class="module-icon">👥</div>
+            <h2 class="module-title">核心<b>团队</b></h2>
+            <div class="module-sub">用心守护这片湛蓝世界，为每一位玩家提供最佳体验</div>
+        </div>
         <div class="team-grid">
             <div class="member-card scroll-reveal scroll-reveal-delay-1" onclick="openTeamModal(0)">
-                <div class="avatar-box owner-glow">
-                    <img src="tp/null1442.jpg" alt="null1442" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=null1442&background=ffd700&color=fff&size=128'">
-                </div>
+                <div class="avatar-box owner-glow"><img src="tp/null1442.jpg" alt="null1442" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=null1442&background=ffd700&color=fff&size=128'"></div>
                 <span class="role-badge role-owner">OWNER / 服主</span>
                 <h3>null1442</h3>
-                <p style="font-size: 0.85rem; color: #94a3b8;">服务器的拥有者<br>致力打造稳定环境</p>
+                <p>服务器的拥有者<br>致力打造稳定环境</p>
             </div>
             <div class="member-card scroll-reveal scroll-reveal-delay-2" onclick="openTeamModal(1)">
-                <div class="avatar-box admin-glow">
-                    <img src="tp/扉.jpg" alt="扉" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=扉&background=00d2ff&color=fff&size=128&length=2'">
-                </div>
+                <div class="avatar-box admin-glow"><img src="tp/扉.jpg" alt="扉" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=扉&background=00d2ff&color=fff&size=128&length=2'"></div>
                 <span class="role-badge role-admin">ADMIN / 管理</span>
                 <h3>扉</h3>
-                <p style="font-size: 0.85rem; color: #94a3b8;">社区维护<br>技术支持</p>
+                <p>社区维护<br>技术支持</p>
             </div>
         </div>
     </section>
-
-    <!-- 为什么选择我们 -->
-    <section id="features" class="features scroll-reveal">
-        <h2 class="section-title">为什么选择 <b>我们</b></h2>
-        <div class="grid">
-            <div class="glass-card scroll-reveal scroll-reveal-delay-1" style="padding: 30px;">
-                <div class="card-content">
-                    <h3>⚡ 纯粹生存 & 养老</h3>
-                    <p>采用「纯生存 + 养老」模式。无 PVP、无交易税。你可以隐居深山研究红石科技，也可以呼朋引伴建造奇观。</p>
-                </div>
-            </div>
-            <div class="glass-card scroll-reveal scroll-reveal-delay-2" style="padding: 30px;">
-                <div class="card-content">
-                    <h3>🏰 永久不删档</h3>
-                    <p>承诺永不换周目。你留下的每一个方块、每一座建筑，都将成为服务器历史的一部分。</p>
-                </div>
-            </div>
-            <div class="glass-card scroll-reveal scroll-reveal-delay-3" style="padding: 30px;">
-                <div class="card-content">
-                    <h3>📱 全端互通</h3>
-                    <p>支持离线登录。手机和电脑都能一起玩。无论你身在何处，使用什么设备，家一直都在。</p>
-                </div>
-            </div>
-            <div class="glass-card scroll-reveal scroll-reveal-delay-4" style="padding: 30px;">
-                <div class="card-content">
-                    <h3>🧩 优质原创模组</h3>
-                    <p>独家定制轻量模组：更多乐器、家具、装饰，保留原版体验的同时增添养老趣味。</p>
-                </div>
-            </div>
+    
+    <!-- 为什么选择我们模块 -->
+    <section class="module-section scroll-reveal" style="background: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(59,130,246,0.05) 100%);">
+        <div class="module-header">
+            <div class="module-icon">✨</div>
+            <h2 class="module-title">为什么选择<b>我们</b></h2>
+            <div class="module-sub">纯粹、稳定、长久，这就是青沐晞</div>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card scroll-reveal scroll-reveal-delay-1"><div class="feature-icon">⚡</div><h3>纯粹生存 & 养老</h3><p>采用「纯生存 + 养老」模式。无 PVP、无交易税。你可以隐居深山研究红石科技，也可以呼朋引伴建造奇观。</p></div>
+            <div class="feature-card scroll-reveal scroll-reveal-delay-2"><div class="feature-icon">🏰</div><h3>永久不删档</h3><p>承诺永不换周目。你留下的每一个方块、每一座建筑，都将成为服务器历史的一部分。</p></div>
+            <div class="feature-card scroll-reveal scroll-reveal-delay-3"><div class="feature-icon">📱</div><h3>全端互通</h3><p>支持离线登录。手机和电脑都能一起玩。无论你身在何处，使用什么设备，家一直都在。</p></div>
+            <div class="feature-card scroll-reveal scroll-reveal-delay-4"><div class="feature-icon">🧩</div><h3>优质原创模组</h3><p>独家定制轻量模组：更多乐器、家具、装饰，保留原版体验的同时增添养老趣味。</p></div>
         </div>
     </section>
-
-    <!-- 截图画廊 -->
-    <section id="gallery" class="screenshot-gallery scroll-reveal">
-        <h2 class="section-title">服务器 <b>精美截图</b></h2>
-        <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">点击图片查看详细信息和建造者。</p>
+    
+    <!-- 服务器截图模块 -->
+    <section class="module-section scroll-reveal">
+        <div class="module-header">
+            <div class="module-icon">📸</div>
+            <h2 class="module-title">服务器<b>截图</b></h2>
+            <div class="module-sub">记录每一个精彩瞬间，见证我们的成长</div>
+        </div>
         <div class="gallery-grid">
-            <div class="gallery-item scroll-reveal scroll-reveal-delay-1" onclick="openLightbox(0)"><img src="tp/jz1.png" alt="雪黎的玩偶"></div>
-            <div class="gallery-item scroll-reveal scroll-reveal-delay-2" onclick="openLightbox(1)"><img src="tp/jz2.png" alt="天使的摇篮"></div>
-            <div class="gallery-item scroll-reveal scroll-reveal-delay-3" onclick="openLightbox(2)"><img src="tp/jz3.png" alt="玩家合影"></div>
-            <div class="gallery-item scroll-reveal scroll-reveal-delay-4" onclick="openLightbox(3)"><img src="tp/jz4.png" alt="生电基地"></div>
-            <div class="gallery-item scroll-reveal scroll-reveal-delay-1" onclick="openLightbox(4)"><img src="tp/jz5.png" alt="沐晞商业街"></div>
-            <div class="gallery-item scroll-reveal scroll-reveal-delay-2" onclick="openLightbox(5)"><img src="tp/jz6.png" alt="沐晞城"></div>
+            <div class="gallery-item scroll-reveal scroll-reveal-delay-1" onclick="openLightbox(0)"><img src="tp/jz1.png" alt="雪黎的玩偶"><div class="gallery-overlay"><h4>雪黎的玩偶</h4><p>null1442</p></div></div>
+            <div class="gallery-item scroll-reveal scroll-reveal-delay-2" onclick="openLightbox(1)"><img src="tp/jz2.png" alt="天使的摇篮"><div class="gallery-overlay"><h4>天使的摇篮</h4><p>OORT</p></div></div>
+            <div class="gallery-item scroll-reveal scroll-reveal-delay-3" onclick="openLightbox(2)"><img src="tp/jz3.png" alt="玩家合影"><div class="gallery-overlay"><h4>玩家合影</h4><p>全体玩家</p></div></div>
+            <div class="gallery-item scroll-reveal scroll-reveal-delay-4" onclick="openLightbox(3)"><img src="tp/jz4.png" alt="生电基地"><div class="gallery-overlay"><h4>生电基地</h4><p>null1442</p></div></div>
+            <div class="gallery-item scroll-reveal scroll-reveal-delay-1" onclick="openLightbox(4)"><img src="tp/jz5.png" alt="沐晞商业街"><div class="gallery-overlay"><h4>沐晞商业街</h4><p>全体玩家</p></div></div>
+            <div class="gallery-item scroll-reveal scroll-reveal-delay-2" onclick="openLightbox(5)"><img src="tp/jz6.png" alt="沐晞城"><div class="gallery-overlay"><h4>沐晞城</h4><p>null1442</p></div></div>
         </div>
     </section>
 
     <!-- 下载板块 -->
-    <div id="download" class="download-bar scroll-reveal">
+    <div class="download-bar scroll-reveal">
         <div class="glass-card server-status-box">
             <div style="display: flex; align-items: center; gap: 10px;">
                 <div class="status-dot" id="status-dot" style="background: #ef4444;"></div>
@@ -842,9 +925,9 @@
         <a href="https://mc.minebbs.com/" target="_blank" class="btn btn-primary" style="padding: 15px 40px;">⬇ 立即下载客户端</a>
     </div>
 
-    <section id="specs" class="specs-section scroll-reveal">
+    <section class="specs-section scroll-reveal">
         <div style="flex:1">
-            <h2 class="section-title" style="text-align: left;">硬核 <b>配置</b></h2>
+            <h2 class="module-title" style="text-align: left; font-size: 2rem;">硬核 <b>配置</b></h2>
             <ul class="specs-list">
                 <li><strong>CPU：</strong> AMD 9950X (5.7Ghz 超频)</li>
                 <li><strong>内存：</strong> 128G DDR5 极速内存</li>
@@ -909,12 +992,10 @@
         }
         fetchStatus(); setInterval(fetchStatus,30000);
         
-        // 打字机效果
         function typewriterEffect(el, text, speed=70) { let i=0; el.innerHTML=''; let cursor=document.createElement('span'); cursor.className='typewriter-cursor'; cursor.innerHTML='▌'; function type(){ if(i<text.length){ el.innerHTML+=text.charAt(i); i++; setTimeout(type,speed);} else el.appendChild(cursor);} type();}
         window.addEventListener('DOMContentLoaded',()=>{ typewriterEffect(document.getElementById('typewriter-sub'),'QingMuXi · 湛蓝安宁之所',70); });
         
-        // 滚动动画
-        function initScrollReveal(){ new IntersectionObserver((e)=>{ e.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('revealed'); observer.unobserve(entry.target);}});},{threshold:0.15}).observe; const observer=new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('revealed'); observer.unobserve(e.target);}});},{threshold:0.15}); document.querySelectorAll('.scroll-reveal').forEach(el=>observer.observe(el));}
+        function initScrollReveal(){ const observer=new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('revealed'); observer.unobserve(e.target);}});},{threshold:0.15}); document.querySelectorAll('.scroll-reveal').forEach(el=>observer.observe(el));}
         window.addEventListener('load',()=>{ initScrollReveal(); document.querySelectorAll('.scroll-reveal').forEach(el=>{ if(el.getBoundingClientRect().top<window.innerHeight-100) el.classList.add('revealed');}); });
     </script>
 </body>
